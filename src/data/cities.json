@@ -1,0 +1,267 @@
+[
+  {
+    "id": "1",
+    "slug": "ramla",
+    "name": "רמלה",
+    "tier": 1,
+    "district": "מרכז",
+    "priorityScore": 98,
+    "injectionPhrase": "פתרון מהיר לבעיות חולדות ועכברים בבנייה צמודת קרקע ובאזורי תעשייה ברמלה."
+  },
+  {
+    "id": "2",
+    "slug": "bat-yam",
+    "name": "בת ים",
+    "tier": 1,
+    "district": "מרכז",
+    "priorityScore": 95,
+    "injectionPhrase": "הדברה בבת ים המתמחה בתיקן גרמני וחולדות בבניינים משותפים ובקרבת החוף."
+  },
+  {
+    "id": "3",
+    "slug": "tel-aviv",
+    "name": "תל אביב",
+    "tier": 1,
+    "district": "מרכז",
+    "priorityScore": 95,
+    "injectionPhrase": "שירות אקספרס בתל אביב: זמינות מיידית למסעדות, דירות וחדרי מדרגות בכל השכונות."
+  },
+  {
+    "id": "4",
+    "slug": "holon",
+    "name": "חולון",
+    "tier": 1,
+    "district": "מרכז",
+    "priorityScore": 92,
+    "injectionPhrase": "מדביר בחולון עם התמחות בטיפול בתשתיות ביוב למניעת חולדות וג'וקים."
+  },
+  {
+    "id": "5",
+    "slug": "petah-tikva",
+    "name": "פתח תקווה",
+    "tier": 1,
+    "district": "מרכז",
+    "priorityScore": 90,
+    "injectionPhrase": "הדברה בפתח תקווה לשכונות החדשות והוותיקות, טיפול מונע לנמלי אש ולטרמיטים."
+  },
+  {
+    "id": "6",
+    "slug": "ashdod",
+    "name": "אשדוד",
+    "tier": 1,
+    "district": "דרום",
+    "priorityScore": 88,
+    "injectionPhrase": "מדביר באשדוד המתמחה במזיקי לחות, ג'וקים ונמלים בבניינים רבי קומות."
+  },
+  {
+    "id": "7",
+    "slug": "rishon-lezion",
+    "name": "ראשון לציון",
+    "tier": 1,
+    "district": "מרכז",
+    "priorityScore": 87,
+    "injectionPhrase": "הדברה בראשון לציון (מזרח ומערב), פתרונות מתקדמים להרחקת יונים ומכרסמים."
+  },
+  {
+    "id": "8",
+    "slug": "gedera",
+    "name": "גדרה",
+    "tier": 2,
+    "district": "שפלה",
+    "priorityScore": 85,
+    "injectionPhrase": "שירותי הדברה בגדרה לבתים פרטיים, דגש על מניעת מזיקים בחצרות ובגינות."
+  },
+  {
+    "id": "9",
+    "slug": "beer-yaakov",
+    "name": "באר יעקב",
+    "tier": 2,
+    "district": "שפלה",
+    "priorityScore": 84,
+    "injectionPhrase": "הדברה בבאר יעקב המותאמת לאזורי פיתוח חדשים, טיפול בחרקי אבק (פסוקאים) ומכרסמים."
+  },
+  {
+    "id": "10",
+    "slug": "lod",
+    "name": "לוד",
+    "tier": 1,
+    "district": "מרכז",
+    "priorityScore": 95,
+    "injectionPhrase": "הדברה בלוד והסביבה, טיפול שורש בבעיות פרעושים ופשפשים בדירות ובתים.",
+    "conversionRate": 0.64
+  },
+  {
+    "id": "11",
+    "slug": "elad",
+    "name": "אלעד",
+    "tier": 2,
+    "district": "מרכז",
+    "priorityScore": 80,
+    "injectionPhrase": "מדביר מוסמך באלעד, שירות רגיש ובטיחותי המותאם למשפחות ברוכות ילדים."
+  },
+  {
+    "id": "12",
+    "slug": "rehovot",
+    "name": "רחובות",
+    "tier": 2,
+    "district": "מרכז",
+    "priorityScore": 79,
+    "injectionPhrase": "הדברה ברחובות למגוון מזיקים, כולל טיפול בטרמיטים וצרעות בבתים ומוסדות."
+  },
+  {
+    "id": "13",
+    "slug": "kiryat-ono",
+    "name": "קריית אונו",
+    "tier": 2,
+    "district": "בקעת אונו",
+    "priorityScore": 78,
+    "injectionPhrase": "שירותי הדברה בקריית אונו, התמחות בהדברה ירוקה לבניינים חדשים ולסביבת מגורים."
+  },
+  {
+    "id": "14",
+    "slug": "ramat-gan",
+    "name": "רמת גן",
+    "tier": 2,
+    "district": "מרכז",
+    "priorityScore": 77,
+    "injectionPhrase": "הדברה ברמת גן בדגש על חולדות ומכרסמים באזורי תמ\"א ובנייה צפופה."
+  },
+  {
+    "id": "15",
+    "slug": "shoham",
+    "name": "שוהם",
+    "tier": 3,
+    "district": "מרכז",
+    "priorityScore": 75,
+    "injectionPhrase": "הדברה בשוהם והסביבה, פתרונות אסתטיים ובטוחים לבתים צמודי קרקע."
+  },
+  {
+    "id": "16",
+    "slug": "yavne",
+    "name": "יבנה",
+    "tier": 1,
+    "district": "שפלה",
+    "priorityScore": 94,
+    "injectionPhrase": "מדביר ביבנה הירוקה והוותיקה, טיפול מהיר בנמלים ומעופפים בדירות גן.",
+    "conversionRate": 0.42
+  },
+  {
+    "id": "17",
+    "slug": "ness-ziona",
+    "name": "נס ציונה",
+    "tier": 3,
+    "district": "שפלה",
+    "priorityScore": 72,
+    "injectionPhrase": "הדברה בנס ציונה, שירות אישי לטיפול במזיקי חצר ובית עם חומרים מאושרים."
+  },
+  {
+    "id": "18",
+    "slug": "rosh-haayin",
+    "name": "ראש העין",
+    "tier": 1,
+    "district": "מרכז",
+    "priorityScore": 92,
+    "injectionPhrase": "הדברה בראש העין (כולל פסגות אפק), התמחות במניעת כניסת מזיקים מהשטחים הפתוחים.",
+    "conversionRate": 0.41
+  },
+  {
+    "id": "19",
+    "slug": "yehud-monosson",
+    "name": "יהוד מונוסון",
+    "tier": 3,
+    "district": "בקעת אונו",
+    "priorityScore": 69,
+    "injectionPhrase": "שירותי הדברה ביהוד מונוסון, פתרון יעיל לבעיות צרעות ומכרסמים בגגות."
+  },
+  {
+    "id": "20",
+    "slug": "or-yehuda",
+    "name": "אור יהודה",
+    "tier": 3,
+    "district": "בקעת אונו",
+    "priorityScore": 68,
+    "injectionPhrase": "מדביר באור יהודה, זמינות גבוהה לטיפול בג'וקים ונמלים במסעדות ובבתים."
+  },
+  {
+    "id": "21",
+    "slug": "kfar-yona",
+    "name": "כפר יונה",
+    "tier": 3,
+    "district": "שרון",
+    "priorityScore": 65,
+    "injectionPhrase": "הדברה בכפר יונה והסביבה, טיפול יסודי בבתים פרטיים מפני מזיקי שדה."
+  },
+  {
+    "id": "22",
+    "slug": "mazkeret-batya",
+    "name": "מזכרת בתיה",
+    "tier": 3,
+    "district": "שפלה",
+    "priorityScore": 64,
+    "injectionPhrase": "הדברה במזכרת בתיה, שמירה על אופי כפרי נקי ממזיקים ומכרסמים."
+  },
+  {
+    "id": "23",
+    "slug": "herzliya",
+    "name": "הרצליה",
+    "tier": 2,
+    "district": "שרון",
+    "priorityScore": 63,
+    "injectionPhrase": "הדברה בהרצליה ופיתוח, שירות דיסקרטי ומקצועי למניעת מזיקים בסטנדרט גבוה."
+  },
+  {
+    "id": "24",
+    "slug": "raanana",
+    "name": "רעננה",
+    "tier": 1,
+    "district": "שרון",
+    "priorityScore": 93,
+    "injectionPhrase": "הדברה ירוקה ברעננה, בטיחות מקסימלית לילדים וחיות מחמד בבית ובחצר.",
+    "conversionRate": 0.59
+  },
+  {
+    "id": "25",
+    "slug": "kfar-saba",
+    "name": "כפר סבא",
+    "tier": 2,
+    "district": "שרון",
+    "priorityScore": 61,
+    "injectionPhrase": "מדביר בכפר סבא הירוקה והמרכז, טיפול ממוקד בנמלי אש ותיקנים."
+  },
+  {
+    "id": "26",
+    "slug": "hod-hasharon",
+    "name": "הוד השרון",
+    "tier": 3,
+    "district": "שרון",
+    "priorityScore": 60,
+    "injectionPhrase": "הדברה בהוד השרון, מומחיות בטיפול בבתים צמודי קרקע וגינות נוי."
+  },
+  {
+    "id": "27",
+    "slug": "givat-shmuel",
+    "name": "גבעת שמואל",
+    "tier": 3,
+    "district": "בקעת אונו",
+    "priorityScore": 59,
+    "injectionPhrase": "הדברה בגבעת שמואל לדירות סטודנטים ומשפחות, מחירים הוגנים ושירות אמין."
+  },
+  {
+    "id": "28",
+    "slug": "savyon",
+    "name": "סביון",
+    "tier": 3,
+    "district": "בקעת אונו",
+    "priorityScore": 58,
+    "injectionPhrase": "שירותי הדברה בסביון, טיפול מקיף ויסודי לאחוזות ושטחי חוץ נרחבים."
+  },
+  {
+    "id": "29",
+    "slug": "bnei-brak",
+    "name": "בני ברק",
+    "tier": 2,
+    "district": "מרכז",
+    "priorityScore": 57,
+    "injectionPhrase": "הדברה בבני ברק בהתאמה לזמני המשפחה, טיפול יסודי למניעת חזרת מזיקים."
+  }
+]

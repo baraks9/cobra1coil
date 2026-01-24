@@ -1,0 +1,182 @@
+[
+  {
+    "id": "p_worms_ceiling",
+    "slug": "white-worms-ceiling",
+    "title": "תולעים לבנות על התקרה",
+    "serviceId": "moths",
+    "urgency": "high",
+    "description": "זחלי עש המזון המטפסים לתקרה לפני התגלמות.",
+    "injectionPhrase": "חיסול מוקד התולעים הלבנות בתקרה (זחלי עש) במטבח."
+  },
+  {
+    "id": "p_ants_car",
+    "slug": "ants-in-car",
+    "title": "נמלים ברכב",
+    "serviceId": "ants",
+    "urgency": "medium",
+    "description": "נמלים שהקימו קן בתוך רכב פרטי.",
+    "injectionPhrase": "ריסוס ושאיבה של נמלים מתוך ריפודים ודשבורד הרכב."
+  },
+  {
+    "id": "p_tami4",
+    "slug": "roaches-in-tami4",
+    "title": "ג'וקים בבר מים (תמי 4)",
+    "serviceId": "german-roach",
+    "urgency": "critical",
+    "description": "תיקנים קטנים בתוך המכשיר. דורש טיפול עדין בג'ל.",
+    "injectionPhrase": "טיפול בג'ל מיוחד לתיקן גרמני בתוך בר המים (ללא רעילות למים)."
+  },
+  {
+    "id": "p_termites_doorframe",
+    "slug": "termites-in-doorframe",
+    "title": "טרמיטים במשקוף",
+    "serviceId": "termites",
+    "urgency": "high",
+    "description": "טרמיטים שאוכלים את משקוף הדלת. דורש טיפול ללא קידוח.",
+    "injectionPhrase": "טיפול בטרמיטים במשקוף הדלת ללא קידוח וללא הרס."
+  },
+  {
+    "id": "p_mouse_ac",
+    "slug": "mouse-in-ac",
+    "title": "עכבר במזגן",
+    "serviceId": "rat-catcher",
+    "urgency": "critical",
+    "description": "עכבר או חולדה שנכנסו לתעלות המזגן.",
+    "injectionPhrase": "חילוץ עכבר מהמזגן וחיטוי התעלות מריחות רעים."
+  },
+  {
+    "id": "p_dead_pigeon",
+    "slug": "pinuy-yona-meta",
+    "title": "פינוי יונה מתה",
+    "serviceId": "carcass-removal",
+    "urgency": "critical",
+    "description": "פינוי פגר יונה ממסתור כביסה או מרפסת.",
+    "injectionPhrase": "פינוי יונה מתה (כולל חיטוי מקום הפגר) - הגעה מידית"
+  },
+  {
+    "id": "p2",
+    "slug": "rat-in-toilet",
+    "title": "חולדה באסלה",
+    "serviceId": "rat-catcher",
+    "urgency": "critical",
+    "description": "חילוץ וטיפול בחולדות המגיעות דרך צנרת הביוב והאסלה.",
+    "injectionPhrase": "טיפול חירום לחולדה שיצאה מהאסלה - כולל חסימת גישה בצנרת (אל-חוזר)."
+  },
+  {
+    "id": "p3",
+    "slug": "roaches-in-ac",
+    "title": "ג'וקים במזגן",
+    "serviceId": "cockroaches",
+    "urgency": "high",
+    "description": "הדברה ייעודית לתיקנים המסתתרים בתוך המזגן ומערכת המיזוג.",
+    "injectionPhrase": "הדברה ייעודית לתיקנים המקננים בתוך המזגן ללא פגיעה במכשיר."
+  },
+  {
+    "id": "p5",
+    "slug": "wasp-nest-shutter",
+    "title": "קן צרעות בארגז תריס",
+    "serviceId": "wasps",
+    "urgency": "critical",
+    "description": "פינוי והדברת קן צרעות שהוקם בתוך ארגז התריס או החלון.",
+    "injectionPhrase": "הסרה בטוחה של קן צרעות מארגז התריס ללא סיכון לדיירי הבית."
+  },
+  {
+    "id": "p6",
+    "slug": "fire-ants-bed",
+    "title": "נמלי אש במיטה",
+    "serviceId": "fire-ants",
+    "urgency": "critical",
+    "description": "טיפול מיידי בנמלי אש עוקצות בחדר השינה ובמיטות.",
+    "injectionPhrase": "הדברת נמלי אש בחדר השינה בחומרים בטוחים - הגעה תוך שעה."
+  },
+  {
+    "id": "p7",
+    "slug": "mice-in-walls",
+    "title": "עכברים בקירות גבס",
+    "serviceId": "rat-catcher",
+    "urgency": "high",
+    "description": "איתור ולכידת מכרסמים הרצים בתוך קירות גבס ותקרות אקוסטיות.",
+    "injectionPhrase": "מומחים בשליפת עכברים וחולדות מתוך קירות גבס ותקרות צפות."
+  },
+  {
+    "id": "p8",
+    "slug": "fleas-sofa",
+    "title": "פרעושים בספה",
+    "serviceId": "fleas",
+    "urgency": "high",
+    "description": "הדברת פרעושים שהתבססו בספות, שטיחים וריהוט בד.",
+    "injectionPhrase": "ניקוי והדברה של פרעושים מספות וריהוט בד - חזרה לשגרה עוד באותו היום."
+  },
+  {
+    "id": "p9",
+    "slug": "booklice-new-house",
+    "title": "חרקים לבנים קטנים (פסוקאים)",
+    "serviceId": "general",
+    "urgency": "medium",
+    "description": "טיפול בפסוקאים (חרקי עובש/אבק) האופייניים לדירות חדשות.",
+    "injectionPhrase": "פתרון לחרקי לחות ופסוקאים (חרקים לבנים קטנים) בקירות ופאנלים."
+  },
+  {
+    "id": "p10",
+    "slug": "pigeon-mites",
+    "title": "כיני יונים",
+    "serviceId": "pigeon-lice",
+    "urgency": "high",
+    "description": "טיפול בכיני יונים החודרות לבית ממסתורי כביסה וגגות.",
+    "injectionPhrase": "חיסול כיני יונים וטיפול במקור הבעיה (סילוק הקן)."
+  },
+  {
+    "id": "p12",
+    "slug": "maggots-kitchen",
+    "title": "רימות במטבח",
+    "serviceId": "flies",
+    "urgency": "high",
+    "description": "טיפול בהתפרצות רימות זבובים בפחי אשפה ומקומות מסתור במטבח.",
+    "injectionPhrase": "חיסול מיידי של רימות ותולעים במטבח ומניעת התפתחות זבובים."
+  },
+  {
+    "id": "p13",
+    "slug": "german-roach-kitchen",
+    "title": "ג'וקים קטנים במטבח (תיקן גרמני)",
+    "serviceId": "cockroaches",
+    "urgency": "high",
+    "description": "הדברת ג'וקים קטנים במכונת הקפה, תמי 4, ומנועי מקרר.",
+    "injectionPhrase": "הדברת תיקן גרמני (ג'וקים קטנים) במכשירי חשמל ומטבחים באמצעות ג'ל וריסוס."
+  },
+  {
+    "id": "p15",
+    "slug": "roaches-coffee-machine",
+    "title": "ג'וקים במכונת קפה",
+    "serviceId": "cockroaches",
+    "urgency": "high",
+    "description": "טיפול בג'וקים שהתנחלו במכונת הקפה ללא פגיעה במכשיר.",
+    "injectionPhrase": "טיפול בג'וקים שהתנחלו במכונת הקפה ללא פגיעה במכשיר."
+  },
+  {
+    "id": "p_mosquitoes_garden",
+    "slug": "mosquitoes-in-garden",
+    "title": "מתקפת יתושים בגינה",
+    "serviceId": "mosquitoes",
+    "urgency": "high",
+    "description": "להקות יתושים בחצר שמונעות ישיבה בחוץ. כולל יתוש הנמר האסייתי.",
+    "injectionPhrase": "ריסוס מקצועי לחצר נגד יתושים המחזיק מעמד."
+  },
+  {
+    "id": "p_moths_kitchen",
+    "slug": "moths-in-pantry",
+    "title": "פרפרים בארון המטבח (עש המזון)",
+    "serviceId": "moths",
+    "urgency": "medium",
+    "description": "פרפרים קטנים וקורים בתוך אריזות מזון יבש.",
+    "injectionPhrase": "חיסול מוקד עש המזון במזווה ללא רעלים על האוכל."
+  },
+  {
+    "id": "p_safety_baby",
+    "slug": "safe-pest-control-baby",
+    "title": "הדברה בטוחה לתינוקות ובעלי חיים",
+    "serviceId": "cockroaches",
+    "urgency": "high",
+    "description": "דף מידע ושירות להורים מודאגים - ריסוס ללא ריח ועם כניסה מהירה הביתה.",
+    "injectionPhrase": "הדברה ירוקה המאושרת לסביבת תינוקות וכלבים."
+  }
+]

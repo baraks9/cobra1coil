@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { getServiceBySlug, getServices, getCities, getPestsByServiceId, getRandomSuffix } from '@/lib/data';
 import HeroSection from '@/components/HeroSection';
 import DynamicPricingCard from '@/components/DynamicPricingCard';
@@ -155,8 +156,13 @@ export default async function ServicePage({ params }: PageProps) {
                     <Link 
                       key={pest.id} 
                       href={`/pest-id/${pest.slug}`}
-                      className="group p-4 border rounded-xl hover:border-blue-500 hover:bg-blue-50 transition-all"
+                      className="block group p-4 border rounded-xl hover:border-blue-500 hover:bg-blue-50 transition-all"
                     >
+                      {pest.imageUrl && (
+                        <div className="relative w-full aspect-video mb-2 rounded-lg overflow-hidden bg-gray-100">
+                          <Image src={pest.imageUrl} alt={pest.name} fill className="object-cover" />
+                        </div>
+                      )}
                       <h3 className="font-bold text-lg group-hover:text-blue-700">{pest.name}</h3>
                       <p className="text-sm text-gray-500 italic mb-2">{pest.scientificName}</p>
                       <p className="text-sm text-gray-600 line-clamp-2">{pest.identificationSigns}</p>

@@ -246,8 +246,13 @@ export default async function ServiceCityPage({ params }: PageProps) {
                     <Link 
                       key={problem.slug} 
                       href={`/problem/${problem.slug}/${city.slug}`}
-                      className="p-4 border border-gray-100 rounded-xl hover:border-blue-200 hover:bg-blue-50 transition-all group"
+                      className="block p-4 border border-gray-100 rounded-xl hover:border-blue-200 hover:bg-blue-50 transition-all group"
                     >
+                      {problem.url && (
+                        <div className="relative w-full aspect-video mb-2 rounded-lg overflow-hidden bg-gray-100">
+                          <Image src={problem.url} alt={problem.title} fill className="object-cover" />
+                        </div>
+                      )}
                       <h3 className="font-bold text-blue-900 group-hover:text-blue-700">{problem.title}</h3>
                       <p className="text-sm text-gray-600 mt-1 line-clamp-2">{problem.description}</p>
                     </Link>

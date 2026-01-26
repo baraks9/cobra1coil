@@ -35,6 +35,7 @@ export interface Problem {
   urgency: 'critical' | 'high' | 'medium' | 'low';
   description: string;
   injectionPhrase: string;
+  url?: string;
   source?: number;
 }
 

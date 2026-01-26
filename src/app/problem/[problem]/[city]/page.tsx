@@ -123,10 +123,10 @@ export default async function ProblemCityPage({ params }: PageProps) {
       />
 
       <div className="max-w-4xl mx-auto px-4 py-12">
-        {featuredPest && (
+        {(problem.url || featuredPest) && (
           <div className="relative w-full h-64 md:h-96 mb-8 rounded-2xl overflow-hidden shadow-lg border border-gray-200">
             <Image
-              src={featuredPest.imageUrl}
+              src={problem.url ?? featuredPest!.imageUrl}
               alt={`תמונה של ${problem.title} - איתור וטיפול ב${city.name}`}
               fill
               className="object-cover"

@@ -9,7 +9,7 @@
     "identificationSigns": "שני פסים כהים על הראש, נמצאים במטבח או במכשירים חשמליים, פעילים בעיקר בלילה.",
     "relatedServiceId": "cockroaches",
     "urgency": "high",
-    "imageUrl": "/pests/german-roach.jpg"
+    "imageUrl": "/pests/german-roach.webp"
   },
   {
     "id": "pest_american_roach",
@@ -21,7 +21,7 @@
     "identificationSigns": "גדולים (3-5 ס\"מ), צבע אדמדם, יוצאים מפתחי ביוב או ניקוז, מעופפים.",
     "relatedServiceId": "cockroaches",
     "urgency": "medium",
-    "imageUrl": "/pests/american-roach.jpg"
+    "imageUrl": "/pests/american-roach.webp"
   },
   {
     "id": "pest_bed_bug",
@@ -33,7 +33,7 @@
     "identificationSigns": "כתמי דם קטנים על הסדין, עקיצות בשורות, ריח מתקתק בחדר, חרקים שטוחים בצבע חלודה.",
     "relatedServiceId": "bed-bugs",
     "urgency": "critical",
-    "imageUrl": "/pests/bed-bug.jpg"
+    "imageUrl": "/pests/bed-bug.webp"
   },
   {
     "id": "pest_roof_rat",
@@ -45,7 +45,7 @@
     "identificationSigns": "זנב ארוך מהגוף, אוזניים גדולות, נמצאת בגובה (גגות, מזגנים, פרגולות).",
     "relatedServiceId": "rat-catcher",
     "urgency": "critical",
-    "imageUrl": "/pests/roof-rat.jpg"
+    "imageUrl": "/pests/roof-rat.webp"
   },
   {
     "id": "pest_sewer_rat",
@@ -57,7 +57,7 @@
     "identificationSigns": "גוף כבד ומגושם, זנב קצר מהגוף, נמצאת בקרבת מקורות מים וביוב.",
     "relatedServiceId": "rat-catcher",
     "urgency": "critical",
-    "imageUrl": "/pests/sewer-rat.jpg"
+    "imageUrl": "/pests/sewer-rat.webp"
   },
   {
     "id": "pest_pigeon_lice",
@@ -69,7 +69,7 @@
     "identificationSigns": "נקודות זעירות שחורות/אדומות זזות לאט, לרוב מופיעות ליד חלונות ומזגנים.",
     "relatedServiceId": "pigeon-lice",
     "urgency": "high",
-    "imageUrl": "/pests/bird-mite.jpg"
+    "imageUrl": "/pests/bird-mite.webp"
   },
   {
     "id": "pest_fire_ant",
@@ -81,7 +81,7 @@
     "identificationSigns": "נמלים קטנות מאוד (1.5 מ\"מ), צבע ג'ינג'י, עקיצה כואבת שנשארת ימים.",
     "relatedServiceId": "fire-ants",
     "urgency": "high",
-    "imageUrl": "/pests/fire-ant.jpg"
+    "imageUrl": "/pests/fire-ant.webp"
   },
   {
     "id": "pest_oriental_hornet",
@@ -93,7 +93,7 @@
     "identificationSigns": "גוף גדול (2-3 ס\"מ), צבע אדום וצהוב, זמזום חזק, נמשכת לבשר ומתוק.",
     "relatedServiceId": "wasps",
     "urgency": "critical",
-    "imageUrl": "/pests/hornet.jpg"
+    "imageUrl": "/pests/hornet.webp"
   },
   {
     "id": "pest_plaster_bagworm",
@@ -105,7 +105,7 @@
     "identificationSigns": "זחלים בתוך 'שק' אפור קטן, תלויים מהתקרה או מטפסים על קירות לבנים.",
     "relatedServiceId": "moths",
     "urgency": "medium",
-    "imageUrl": "/pests/plaster-bagworm.jpg"
+    "imageUrl": "/pests/plaster-bagworm.webp"
   },
   {
     "id": "pest_booklice",
@@ -117,7 +117,7 @@
     "identificationSigns": "נראים כמו נקודות אבק זזות, נמצאים על פאנלים, קירות לחים ובתוך ספרים ישנים.",
     "relatedServiceId": "general",
     "urgency": "low",
-    "imageUrl": "/pests/booklice.jpg"
+    "imageUrl": "/pests/booklice.webp"
   },
   {
     "id": "pest_silverfish",
@@ -129,7 +129,7 @@
     "identificationSigns": "צבע כסוף, צורת דמעה, מחושים ארוכים, בורח כשמדליקים אור.",
     "relatedServiceId": "silverfish",
     "urgency": "low",
-    "imageUrl": "/pests/silverfish.jpg"
+    "imageUrl": "/pests/silverfish.webp"
   },
   {
     "id": "pest_drain_fly",
@@ -141,6 +141,6 @@
     "identificationSigns": "נראים כמו לבבות שחורים קטנים, עומדים על קרמיקה במקלחת ובשירותים, לא עוקצים.",
     "relatedServiceId": "flies",
     "urgency": "medium",
-    "imageUrl": "/pests/drain-fly.jpg"
+    "imageUrl": "/pests/drain-fly.webp"
   }
 ]

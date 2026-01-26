@@ -189,7 +189,7 @@ export default async function ServiceCityPage({ params }: PageProps) {
       />
 
       <div className="max-w-4xl mx-auto px-4 py-12">
-        {featuredPest && (
+        {featuredPest && featuredPest.imageUrl ? (
           <div className="relative w-full h-64 md:h-96 mb-8 rounded-2xl overflow-hidden shadow-lg border border-gray-200">
             <Image
               src={featuredPest.imageUrl}
@@ -201,6 +201,18 @@ export default async function ServiceCityPage({ params }: PageProps) {
             <div className="absolute bottom-0 right-0 bg-black/50 text-white px-4 py-1 text-sm backdrop-blur-sm">
               תמונה להמחשה: {featuredPest.name}
             </div>
+          </div>
+        ) : null}
+        {service.url && !featuredPest?.imageUrl && (
+          <div className="relative w-full h-64 md:h-96 mb-8 rounded-2xl overflow-hidden shadow-lg border border-gray-200">
+            <Image
+              src={service.url}
+              alt={`${service.name} ב${city.name}`}
+              fill
+              className="object-cover"
+              priority
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+            />
           </div>
         )}
         {openingHook && (

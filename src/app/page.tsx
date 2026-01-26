@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { getServices, getCities } from '@/lib/data';
 import HeroSection from '@/components/HeroSection';
 
@@ -18,11 +19,23 @@ export default function Home() {
               <Link
                 key={service.id}
                 href={`/${service.slug}`}
-                className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md border border-gray-100 hover:border-blue-500 transition-all text-center group"
+                className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md border border-gray-100 hover:border-blue-500 transition-all text-center group overflow-hidden"
               >
-                <div className="text-5xl mb-4 group-hover:scale-110 transition-transform">
-                  {service.icon}
-                </div>
+                {service.url ? (
+                  <div className="relative w-full aspect-video mb-4 rounded-lg overflow-hidden bg-gray-100 group-hover:scale-105 transition-transform">
+                    <Image 
+                      src={service.url} 
+                      alt={service.name}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    />
+                  </div>
+                ) : (
+                  <div className="text-5xl mb-4 group-hover:scale-110 transition-transform">
+                    {service.icon}
+                  </div>
+                )}
                 <h3 className="text-xl font-bold text-gray-800">{service.name}</h3>
                 <p className="text-gray-500 mt-2">החל מ-{service.avgPrice.split('-')[0]} ₪</p>
               </Link>

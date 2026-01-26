@@ -14,6 +14,7 @@ export interface Service {
   icon: string;
   description?: string;
   source?: number;
+  url?: string;
 }
 
 export interface City {

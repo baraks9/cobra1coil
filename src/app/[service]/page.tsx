@@ -124,6 +124,20 @@ export default async function ServicePage({ params }: PageProps) {
       />
 
       <div className="max-w-4xl mx-auto px-4 py-12">
+        {service.url && (
+          <div className="relative w-full h-64 md:h-96 mb-8 rounded-2xl overflow-hidden shadow-lg border border-gray-200">
+            <Image
+              src={service.url}
+              alt={service.name}
+              fill
+              className="object-cover"
+              priority
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+              unoptimized={false}
+            />
+          </div>
+        )}
+        
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="md:col-span-2 space-y-8">
             {isApplianceProblem && (

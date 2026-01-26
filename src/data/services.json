@@ -5,6 +5,7 @@
     "name": "לוכד חולדות",
     "avgPrice": "350-700",
     "urgency": "high",
+    "url": "/services/rat-catcher.webp",
     "icon": "🐀"
   },
   {
@@ -13,6 +14,7 @@
     "name": "לוכד עכברים",
     "avgPrice": "300-600",
     "urgency": "high",
+    "url": "/services/mouse-catcher.webp",
     "icon": "🐭"
   },
   {
@@ -21,6 +23,7 @@
     "name": "ריסוס לבית",
     "avgPrice": "250-500",
     "urgency": "medium",
+    "url": "/services/home-spraying.webp",
     "icon": "🚿"
   },
   {
@@ -29,6 +32,7 @@
     "name": "נמלי אש",
     "avgPrice": "400-800",
     "urgency": "high",
+    "url": "/services/fire-ants.webp",
     "icon": "🐜"
   },
   {
@@ -37,6 +41,7 @@
     "name": "פשפש המיטה",
     "avgPrice": "500-1500",
     "urgency": "high",
+    "url": "/services/bed-bugs.webp",
     "icon": "🛏️"
   },
   {
@@ -45,6 +50,7 @@
     "name": "צרעות",
     "avgPrice": "300-600",
     "urgency": "medium",
+    "url": "/services/wasps.webp",
     "icon": "🐝"
   },
   {
@@ -54,6 +60,7 @@
     "urgency": "critical",
     "avgPrice": "350-600",
     "description": "פינוי סטרילי של פגרי חולדות, יונים וחתולים כולל חיטוי המקום למניעת ריחות ומחלות.",
+    "url": "/services/carcass-removal.webp",
     "icon": "Biohazard",
     "source": 6
   },
@@ -64,6 +71,7 @@
     "urgency": "high",
     "avgPrice": "350-600",
     "description": "הדברה מקיפה נגד כיני יונים (קרציונים) כולל פינוי קנים וחיטוי.",
+    "url": "/services/pigeon-lice.webp",
     "icon": "🐜",
     "source": 11
   },
@@ -74,6 +82,7 @@
     "description": "טיפול בטרמיטים במשקופים ומתחת לריצוף עם אחריות ל-5 שנים.",
     "urgency": "high",
     "avgPrice": "400-2500",
+    "url": "/services/termites.webp",
     "icon": "🏠"
   },
   {
@@ -83,6 +92,7 @@
     "description": "ריסוס נגד פרעושים לבית ולחצר (כולל טיפול בביצים).",
     "urgency": "high",
     "avgPrice": "350-650",
+    "url": "/services/fleas.webp",
     "icon": "🦟"
   },
   {
@@ -92,6 +102,7 @@
     "description": "טיפול בחרקי לחות, דג הכסף ופסוקאים (חרקי עובש) בדירות חדשות.",
     "urgency": "low",
     "avgPrice": "300-500",
+    "url": "/services/silverfish.webp",
     "icon": "🐟"
   },
   {
@@ -101,6 +112,7 @@
     "description": "טיפול בתיקן גרמני במטבח באמצעות פיתיונות ג'ל ללא ריסוס וללא יציאה מהבית.",
     "urgency": "high",
     "avgPrice": "350-550",
+    "url": "/services/german-roach.webp",
     "icon": "🪳"
   },
   {
@@ -110,6 +122,7 @@
     "description": "ריסוס נגד יתושים בגינה ובחצר, כולל טיפול ביתוש הנמר האסייתי ומקורות מים עומדים.",
     "urgency": "medium",
     "avgPrice": "350-700",
+    "url": "/services/mosquitoes.webp",
     "icon": "🦟"
   },
   {
@@ -119,6 +132,7 @@
     "description": "טיפול משולב בעש המזון במטבח ועש הבגדים בארונות באמצעות מלכודות פרומון וריסוס.",
     "urgency": "medium",
     "avgPrice": "400-600",
+    "url": "/services/moths.webp",
     "icon": "🦋"
   },
   {
@@ -128,6 +142,7 @@
     "description": "טיפול בחרקים לבנים קטנים (פסוקאים) המופיעים על קירות חדשים עקב רטיבות.",
     "urgency": "low",
     "avgPrice": "400-800",
+    "url": "/services/psocids.webp",
     "icon": "🔬"
   }
 ]

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Service } from '@/lib/data';
 
 interface RelatedServicesProps {
@@ -15,9 +16,20 @@ export default function RelatedServices({ services, currentCitySlug }: RelatedSe
           <Link
             key={service.id}
             href={currentCitySlug ? `/${service.slug}/${currentCitySlug}` : `/${service.slug}`}
-            className="flex items-center p-4 border rounded-xl hover:border-blue-500 hover:bg-blue-50 transition-all group"
+            className="flex items-center p-4 border rounded-xl hover:border-blue-500 hover:bg-blue-50 transition-all group overflow-hidden"
           >
-            <span className="text-2xl mr-3">{service.icon}</span>
+            {service.url ? (
+              <div className="relative w-16 h-16 mr-3 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
+                <Image 
+                  src={service.url} 
+                  alt={service.name}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            ) : (
+              <span className="text-2xl mr-3">{service.icon}</span>
+            )}
             <span className="font-medium group-hover:text-blue-700">{service.name}</span>
           </Link>
         ))}

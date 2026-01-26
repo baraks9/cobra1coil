@@ -30,16 +30,6 @@
     "url": "/problems/roaches-in-tami4.webp"
   },
   {
-    "id": "p_termites_doorframe",
-    "slug": "termites-in-doorframe",
-    "title": "טרמיטים במשקוף",
-    "serviceId": "termites",
-    "urgency": "high",
-    "description": "טרמיטים שאוכלים את משקוף הדלת. דורש טיפול ללא קידוח.",
-    "injectionPhrase": "טיפול בטרמיטים במשקוף הדלת ללא קידוח וללא הרס.",
-    "url": "/problems/termites-in-doorframe.webp"
-  },
-  {
     "id": "p_mouse_ac",
     "slug": "mouse-in-ac",
     "title": "עכבר במזגן",
@@ -129,16 +119,7 @@
     "injectionPhrase": "פתרון לחרקי לחות ופסוקאים (חרקים לבנים קטנים) בקירות ופאנלים.",
     "url": "/problems/booklice-new-house.webp"
   },
-  {
-    "id": "p10",
-    "slug": "pigeon-mites",
-    "title": "כיני יונים",
-    "serviceId": "pigeon-lice",
-    "urgency": "high",
-    "description": "טיפול בכיני יונים החודרות לבית ממסתורי כביסה וגגות.",
-    "injectionPhrase": "חיסול כיני יונים וטיפול במקור הבעיה (סילוק הקן).",
-    "url": "/problems/pigeon-mites.webp"
-  },
+ 
   {
     "id": "p12",
     "slug": "maggots-kitchen",

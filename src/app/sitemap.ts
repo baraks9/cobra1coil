@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { getServices, getCities, getPests, getVenues } from '@/lib/data';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://www.pest-control.co.il';
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://cobra1.co.il';
 
   const getCityPriority = (city: any, basePriority: number) => {
     if (city.conversionRate && city.conversionRate > 0.4) {

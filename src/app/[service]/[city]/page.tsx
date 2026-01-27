@@ -12,6 +12,7 @@ import {
   getPestsByServiceId,
   getWhyChooseUsTitle
 } from '@/lib/data';
+import { getUniqueFAQ } from '@/lib/faqUtils';
 import HeroSection from '@/components/HeroSection';
 import DynamicPricingCard from '@/components/DynamicPricingCard';
 import UrgencyBanner from '@/components/UrgencyBanner';
@@ -19,6 +20,8 @@ import StickyMobileCTA from '@/components/StickyMobileCTA';
 import NearbyCities from '@/components/NearbyCities';
 import RelatedServices from '@/components/RelatedServices';
 import InternalLinksSection from '@/components/InternalLinksSection';
+import FAQSection from '@/components/FAQSection';
+import LocalBusinessSchema from '@/components/LocalBusinessSchema';
 import { createComprehensiveInternalLinks } from '@/lib/internalLinks';
 
 interface PageProps {
@@ -133,6 +136,10 @@ export default async function ServiceCityPage({ params }: PageProps) {
     notFound();
   }
 
+  const internalLinks = createComprehensiveInternalLinks('serviceCity', service, city);
+  const breadcrumbs = internalLinks.find(s => s.variant === 'breadcrumbs');
+  const otherInternalLinks = internalLinks.filter(s => s.variant !== 'breadcrumbs');
+
   const isEmergency = serviceSlug.includes('24-hours') || serviceSlug.includes('emergency') || serviceSlug.includes('24-7') || service.urgency === 'critical';
 
   const allServices = getServices();
@@ -186,6 +193,7 @@ export default async function ServiceCityPage({ params }: PageProps) {
   };
 
   const relatedProblems = getPrioritizedProblems();
+  const faqs = getUniqueFAQ(service, city);
 
   const h1Title = `${service.name} ב${city.name}${getDeterministicSuffix(city.name, service.id)}`;
 
@@ -209,6 +217,7 @@ export default async function ServiceCityPage({ params }: PageProps) {
 
   return (
     <main className={`min-h-screen ${isEmergency ? 'bg-red-50' : 'bg-gray-50'} pb-24 md:pb-12`} dir="rtl">
+      <LocalBusinessSchema service={service} city={city} />
       <UrgencyBanner urgency={isEmergency ? 'critical' : service.urgency} cityName={city.name} />
       
       <HeroSection 
@@ -216,6 +225,7 @@ export default async function ServiceCityPage({ params }: PageProps) {
         cityName={city.name} 
         isEmergency={isEmergency}
         title={h1Title}
+        breadcrumbs={breadcrumbs}
       />
 
       <div className="max-w-4xl mx-auto px-4 py-12">
@@ -349,7 +359,7 @@ export default async function ServiceCityPage({ params }: PageProps) {
                 המומחים שלנו זמינים עבורכם ב{city.name} לכל שאלה או הזמנה.
               </p>
               <a 
-                href="tel:0500000000" 
+                href={`tel:${process.env.NEXT_PUBLIC_PHONE?.replace(/-/g, '') || '0502138028'}`}
                 className={`block w-full ${isEmergency ? 'bg-yellow-400 text-red-700' : 'bg-blue-600 text-white'} text-center font-black py-4 rounded-xl hover:scale-105 transition-transform text-xl`}
               >
                 התקשרו עכשיו
@@ -361,11 +371,17 @@ export default async function ServiceCityPage({ params }: PageProps) {
         </div>
 
         <RelatedServices services={otherServices} currentCitySlug={city.slug} />
+        
+        <FAQSection 
+          faqs={faqs} 
+          serviceName={service.name} 
+          cityName={city.name} 
+        />
       </div>
 
       {/* קישורים פנימיים ל-SEO */}
       <div className="max-w-4xl mx-auto px-4 pb-12 space-y-8">
-        {createComprehensiveInternalLinks('serviceCity', service, city).map((section, idx) => (
+        {otherInternalLinks.map((section, idx) => (
           <InternalLinksSection key={idx} section={section} />
         ))}
       </div>

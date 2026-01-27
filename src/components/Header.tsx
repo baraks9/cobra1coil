@@ -29,7 +29,7 @@ export default function Header() {
 
           <div className="flex items-center">
             <a
-              href="tel:0500000000"
+              href={`tel:${process.env.NEXT_PUBLIC_PHONE?.replace(/-/g, '') || '0502138028'}`}
               className="bg-blue-600 text-white px-5 py-2 rounded-full font-bold hover:bg-blue-700 transition-colors"
             >
               התקשרו עכשיו

@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
+import LocalBusinessSchema from '@/components/LocalBusinessSchema';
 import { getPestBySlug, getPests, getServiceById, getRandomSuffix } from '@/lib/data';
 import StickyMobileCTA from '@/components/StickyMobileCTA';
 import InternalLinksSection from '@/components/InternalLinksSection';
@@ -73,6 +74,7 @@ export default async function PestPage({ params }: PageProps) {
 
   return (
     <main className="min-h-screen bg-gray-50 pb-24 md:pb-12" dir="rtl">
+      <LocalBusinessSchema service={relatedService} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import LocalBusinessSchema from '@/components/LocalBusinessSchema';
 import { getServices, getCities } from '@/lib/data';
 import HeroSection from '@/components/HeroSection';
 import { routes } from '@/lib/routes';
@@ -10,6 +11,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gray-50 pb-12" dir="rtl">
+      <LocalBusinessSchema />
       <HeroSection serviceName="הדברה מקצועית" />
 
       <div className="max-w-6xl mx-auto px-4 py-16">

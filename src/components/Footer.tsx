@@ -80,19 +80,29 @@ export default function Footer() {
               <span className="bg-blue-600 p-2 rounded-lg group-hover:scale-110 transition-transform">📞</span>
               <div className="flex flex-col">
                 <span className="text-xs text-gray-400">התקשרו עכשיו:</span>
-                <a href="tel:0500000000" className="text-xl font-black text-white hover:text-blue-400 tracking-wider">050-000-0000</a>
+                <a 
+                  href={`tel:${process.env.NEXT_PUBLIC_PHONE?.replace(/-/g, '') || '0502138028'}`} 
+                  className="text-xl font-black text-white hover:text-blue-400 tracking-wider"
+                >
+                  {process.env.NEXT_PUBLIC_PHONE || '050-2138028'}
+                </a>
               </div>
             </li>
             <li className="flex items-center gap-3">
               <span className="bg-gray-800 p-2 rounded-lg">✉️</span>
-              <a href="mailto:contact@example.com" className="hover:text-blue-400 transition-colors">contact@example.com</a>
+              <a 
+                href={`mailto:${process.env.NEXT_PUBLIC_EMAIL || 'office@cobra1.co.il'}`} 
+                className="hover:text-blue-400 transition-colors"
+              >
+                {process.env.NEXT_PUBLIC_EMAIL || 'office@cobra1.co.il'}
+              </a>
             </li>
           </ul>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
-        <p>© {new Date().getFullYear()} הדברה מקצועית. כל הזכויות שמורות. הדברה באישור המשרד להגנת הסביבה (רישיון מס' 1234).</p>
+        <p>© {new Date().getFullYear()} הדברה מקצועית. כל הזכויות שמורות. הדברה באישור המשרד להגנת הסביבה (רישיון מס' 3042).</p>
         <div className="flex gap-6">
           <Link href="/privacy" className="hover:text-white transition-colors">מדיניות פרטיות</Link>
           <Link href="/terms" className="hover:text-white transition-colors">תנאי שימוש</Link>

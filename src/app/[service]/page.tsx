@@ -10,6 +10,7 @@ import {
   getRandomSuffix,
   getWhyChooseUsTitle
 } from '@/lib/data';
+import { getUniqueFAQ } from '@/lib/faqUtils';
 import HeroSection from '@/components/HeroSection';
 import DynamicPricingCard from '@/components/DynamicPricingCard';
 import UrgencyBanner from '@/components/UrgencyBanner';
@@ -17,6 +18,7 @@ import StickyMobileCTA from '@/components/StickyMobileCTA';
 import NearbyCities from '@/components/NearbyCities';
 import RelatedServices from '@/components/RelatedServices';
 import InternalLinksSection from '@/components/InternalLinksSection';
+import FAQSection from '@/components/FAQSection';
 import { createComprehensiveInternalLinks } from '@/lib/internalLinks';
 
 interface PageProps {
@@ -107,6 +109,10 @@ export default async function ServicePage({ params }: PageProps) {
   if (!service) {
     notFound();
   }
+
+  const internalLinks = createComprehensiveInternalLinks('service', service);
+  const breadcrumbs = internalLinks.find(s => s.variant === 'breadcrumbs');
+  const otherInternalLinks = internalLinks.filter(s => s.variant !== 'breadcrumbs');
 
   const isApplianceProblem = serviceSlug === 'cockroaches'; // Cockroaches often involve appliances
   
@@ -243,6 +249,7 @@ export default async function ServicePage({ params }: PageProps) {
   };
 
   const servicePricing = getServicePricing(service.id);
+  const faqs = getUniqueFAQ(service);
 
   let h1Title = '';
   if (service.slug === 'risus-labayit') {
@@ -275,6 +282,7 @@ export default async function ServicePage({ params }: PageProps) {
       <HeroSection 
         serviceName={service.name} 
         title={h1Title}
+        breadcrumbs={breadcrumbs}
       />
 
       <div className="max-w-4xl mx-auto px-4 py-12">
@@ -429,11 +437,17 @@ export default async function ServicePage({ params }: PageProps) {
         </div>
 
         <RelatedServices services={otherServices} />
+        
+        <FAQSection 
+          faqs={faqs} 
+          serviceName={service.name} 
+          cityName="כל הארץ" 
+        />
       </div>
 
       {/* קישורים פנימיים ל-SEO */}
       <div className="max-w-4xl mx-auto px-4 pb-12 space-y-8">
-        {createComprehensiveInternalLinks('service', service).map((section, idx) => (
+        {otherInternalLinks.map((section, idx) => (
           <InternalLinksSection key={idx} section={section} />
         ))}
       </div>

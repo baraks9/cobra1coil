@@ -1,6 +1,7 @@
 import { getVenueBySlug, getServices } from '@/lib/data';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import LocalBusinessSchema from '@/components/LocalBusinessSchema';
 import InternalLinksSection from '@/components/InternalLinksSection';
 import { getRelatedServices, getNearbyCities } from '@/lib/internalLinks';
 import { routes } from '@/lib/routes';
@@ -32,6 +33,7 @@ export default async function CommercialVenuePage({ params }: Props) {
 
   return (
     <main className="min-h-screen bg-white" dir="rtl">
+      <LocalBusinessSchema />
       {/* Hero Section */}
       <section className="bg-slate-900 text-white py-20 px-4">
         <div className="max-w-5xl mx-auto text-center">

@@ -10,21 +10,37 @@ export default function InternalLinksSection({ section, className }: Props) {
   if (!section.links || section.links.length === 0) return null;
 
   if (section.variant === 'breadcrumbs') {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://cobra1.co.il';
+    const schema = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": section.links.map((link, idx) => ({
+        "@type": "ListItem",
+        "position": idx + 1,
+        "name": link.label,
+        "item": `${baseUrl}${link.href}`,
+      })),
+    };
+
     return (
       <nav aria-label={section.title} className={className}>
-        <ol className="flex flex-wrap items-center gap-2 text-sm text-gray-500">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+        <ol className={`flex items-center gap-2 text-sm overflow-x-auto scrollbar-hide whitespace-nowrap pb-2 md:pb-0 ${className?.includes('text-white') ? 'text-white/80 justify-center md:justify-start' : 'text-gray-500'}`}>
           {section.links.map((link, idx) => {
             const isLast = idx === section.links.length - 1;
             return (
-              <li key={link.href} className="flex items-center gap-2">
+              <li key={link.href} className="flex items-center gap-2 flex-shrink-0">
                 {isLast ? (
-                  <span className="text-gray-800">{link.label}</span>
+                  <span className={className?.includes('text-white') ? 'text-white font-bold' : 'text-gray-800'}>{link.label}</span>
                 ) : (
-                  <Link href={link.href} className="hover:text-blue-600">
+                  <Link href={link.href} className={className?.includes('text-white') ? 'hover:text-yellow-300 transition-colors' : 'hover:text-blue-600'}>
                     {link.label}
                   </Link>
                 )}
-                {!isLast && <span className="text-gray-300">/</span>}
+                {!isLast && <span className={className?.includes('text-white') ? 'text-white/30' : 'text-gray-300'}>/</span>}
               </li>
             );
           })}

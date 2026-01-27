@@ -1,3 +1,6 @@
+import { InternalLinkSection } from '@/lib/internalLinks';
+import InternalLinksSection from './InternalLinksSection';
+
 interface HeroSectionProps {
   serviceName: string;
   cityName?: string;
@@ -6,6 +9,7 @@ interface HeroSectionProps {
   isEmergency?: boolean;
   title?: string;
   subtitle?: string;
+  breadcrumbs?: InternalLinkSection;
 }
 
 export default function HeroSection({
@@ -16,10 +20,16 @@ export default function HeroSection({
   isEmergency = false,
   title,
   subtitle,
+  breadcrumbs,
 }: HeroSectionProps) {
   if (isEmergency) {
     return (
-      <section className="bg-red-700 text-white py-20 px-4 text-center border-b-8 border-yellow-400">
+      <section className="bg-red-700 text-white py-20 px-4 text-center border-b-8 border-yellow-400 relative">
+        {breadcrumbs && (
+          <div className="absolute top-4 right-4 left-4 opacity-80">
+            <InternalLinksSection section={breadcrumbs} className="text-white" />
+          </div>
+        )}
         <div className="max-w-4xl mx-auto">
           <div className="inline-block bg-yellow-400 text-red-700 px-6 py-2 rounded-full font-black text-xl mb-6 animate-bounce">
             צוות חירום פעיל עכשיו
@@ -35,11 +45,11 @@ export default function HeroSection({
             {subtitle || "אנחנו בדרך אליך. צוות כוננות זמין 24/7 לטיפול מיידי."}
           </p>
           <a 
-            href="tel:0500000000"
+            href={`tel:${process.env.NEXT_PUBLIC_PHONE?.replace(/-/g, '') || '0502138028'}`}
             className="inline-flex items-center gap-4 bg-yellow-400 text-red-700 font-black py-6 px-12 rounded-full text-3xl hover:bg-white transition-all shadow-[0_0_30px_rgba(250,204,21,0.5)] scale-110 hover:scale-115"
           >
             <span>📞</span>
-            <span>חייגו עכשיו: 050-000-0000</span>
+            <span>חייגו עכשיו: {process.env.NEXT_PUBLIC_PHONE || '050-2138028'}</span>
           </a>
         </div>
       </section>
@@ -47,7 +57,12 @@ export default function HeroSection({
   }
 
   return (
-    <section className="bg-blue-600 text-white py-16 px-4 text-center">
+    <section className="bg-blue-600 text-white py-16 px-4 text-center relative">
+      {breadcrumbs && (
+        <div className="absolute top-4 right-4 left-4 opacity-80">
+          <InternalLinksSection section={breadcrumbs} className="text-white" />
+        </div>
+      )}
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl md:text-6xl font-bold mb-4">
           {title || specificPainPoint || (

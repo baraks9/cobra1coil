@@ -1,6 +1,9 @@
-import { getVenueBySlug } from '@/lib/data';
+import { getVenueBySlug, getServices } from '@/lib/data';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import InternalLinksSection from '@/components/InternalLinksSection';
+import { getRelatedServices, getNearbyCities } from '@/lib/internalLinks';
+import { routes } from '@/lib/routes';
 
 interface Props {
   params: Promise<{
@@ -120,6 +123,22 @@ export default async function CommercialVenuePage({ params }: Props) {
           <div>
             <div className="text-4xl mb-2">🕒</div>
             <p className="font-bold text-slate-800">זמינות 24/7 לעסקים</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Internal Links for SEO */}
+      <section className="py-16 px-4 bg-white">
+        <div className="max-w-4xl mx-auto space-y-12">
+          <InternalLinksSection 
+            section={getRelatedServices(getServices()[0], undefined, 12)} 
+          />
+          <InternalLinksSection 
+            section={getNearbyCities({ id: 'none', district: 'מרכז' } as any, undefined, 24)} 
+          />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-8 border-t">
+            <Link href={routes.home()} className="text-blue-600 font-bold hover:underline">← חזרה לדף הבית</Link>
+            <Link href={routes.pestHub()} className="text-blue-600 font-bold hover:underline text-left">למדריך זיהוי מזיקים →</Link>
           </div>
         </div>
       </section>

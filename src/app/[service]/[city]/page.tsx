@@ -9,7 +9,8 @@ import {
   getProblems, 
   getDeterministicSuffix,
   getRotationSuffix,
-  getPestsByServiceId
+  getPestsByServiceId,
+  getWhyChooseUsTitle
 } from '@/lib/data';
 import HeroSection from '@/components/HeroSection';
 import DynamicPricingCard from '@/components/DynamicPricingCard';
@@ -17,7 +18,8 @@ import UrgencyBanner from '@/components/UrgencyBanner';
 import StickyMobileCTA from '@/components/StickyMobileCTA';
 import NearbyCities from '@/components/NearbyCities';
 import RelatedServices from '@/components/RelatedServices';
-import Link from 'next/link';
+import InternalLinksSection from '@/components/InternalLinksSection';
+import { createComprehensiveInternalLinks } from '@/lib/internalLinks';
 
 interface PageProps {
   params: Promise<{
@@ -56,9 +58,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const isEmergency = serviceSlug.includes('24-hours') || serviceSlug.includes('emergency') || serviceSlug.includes('24-7');
   
   const suffix = getRotationSuffix(city.name);
-  const title = isEmergency 
-    ? `מדביר חירום ב${city.name} 24/7 | הגעה תוך 20 דקות | ${service.name}`
-    : `${service.name} ב${city.name}${suffix}`;
+  
+  let title = "";
+  if (service.id === 'silverfish') {
+    title = `הדברת דג הכסף ב${city.name} | פתרון לחרקי לחות וספרים`;
+  } else if (service.id === 'psocids') {
+    title = `הדברת פסוקאים ב${city.name} | טיפול בחרקי עובש בדירות חדשות`;
+  } else if (isEmergency) {
+    title = `מדביר חירום ב${city.name} 24/7 | הגעה תוך 20 דקות | ${service.name}`;
+  } else {
+    title = `${service.name} ב${city.name}${suffix}`;
+  }
   
   // Intent-based description logic
   const descriptions = {
@@ -73,18 +83,35 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     trust: [
       `מחפשים מדביר ב${city.name} במחיר הוגן? אל תשלמו סתם. אצלנו תקבלו מחירון שקוף, תעודת אחריות בכתב ומדביר המופיע ב'יצאת צדיק'. ייעוץ טלפוני חינם.`,
       `הדברה מקצועית ב${city.name} עם 100% אחריות. אלפי לקוחות מרוצים לא טועים. טיפול יסודי בכל סוגי המזיקים במחירים משתלמים וללא הפתעות.`,
+    ],
+    silverfish: [
+      `הדברת דג הכסף ב${city.name}. טיפול מקצועי בחרקי לחות המזיקים לספרים ובגדים. שימוש בחומרים בטוחים לבית עם אחריות מלאה.`,
+      `סובלים מדג הכסף ב${city.name}? אנחנו כאן כדי לעזור. פתרון סופי לחרקי לחות בארונות ובחדרי רחצה. מדביר מוסמך זמין כעת.`
+    ],
+    psocids: [
+      `הדברת פסוקאים ב${city.name}. מומחים לטיפול בחרקי עובש המופיעים על קירות רטובים בדירות חדשות. פתרון יסודי המונע את חזרת החרקים.`,
+      `חרקים לבנים קטנים ב${city.name}? אלו כנראה פסוקאים. אנו מספקים טיפול ייעודי לחרקי עובש בדירות חדשות עם התחייבות לתוצאות.`
+    ],
+    fleas: [
+      `הדברת פרעושים ב${city.name} בשיטה ירוקה ובטוחה. טיפול יסודי הכולל השמדת פרעושים בוגרים ומניעת בקיעת ביצים. פתרון מושלם לבתים עם כלבים וחתולים.`,
+      `סובלים מפרעושים ב${city.name}? אנו מציעים ריסוס מקצועי לחצר ולבית עם אחריות מלאה. חומרים בטוחים לילדים וחיות מחמד המאפשרים חזרה מהירה לשגרה.`
     ]
   };
 
   let description = "";
-  if (isEmergency || ['rat-catcher', 'mouse-catcher', 'wasps', 'carcass-removal', 'snakes'].includes(service.id)) {
-    const variant = city.name.length % 2;
+  const variant = city.name.length % 2;
+
+  if (service.id === 'silverfish') {
+    description = descriptions.silverfish[variant];
+  } else if (service.id === 'psocids') {
+    description = descriptions.psocids[variant];
+  } else if (service.id === 'fleas') {
+    description = descriptions.fleas[variant];
+  } else if (isEmergency || ['rat-catcher', 'mouse-catcher', 'wasps', 'carcass-removal', 'snakes'].includes(service.id)) {
     description = descriptions.urgency[variant];
   } else if (['ants', 'cockroaches', 'fleas', 'home-spraying', 'bed-bugs'].includes(service.id)) {
-    const variant = city.name.length % 2;
     description = descriptions.safety[variant];
   } else {
-    const variant = city.name.length % 2;
     description = descriptions.trust[variant];
   }
 
@@ -111,8 +138,8 @@ export default async function ServiceCityPage({ params }: PageProps) {
   const allServices = getServices();
   const allCities = getCities();
   const allProblems = getProblems();
-  const otherCities = allCities.filter((c) => c.slug !== city.slug).slice(0, 6);
-  const otherServices = allServices.filter((s) => s.slug !== service.slug).slice(0, 6);
+  const otherCities = allCities.filter((c) => c.slug !== city.slug).slice(0, 12);
+  const otherServices = allServices.filter((s) => s.slug !== service.slug).slice(0, 12);
   const servicePests = getPestsByServiceId(service.id);
   const featuredPest = servicePests[0];
   
@@ -163,8 +190,11 @@ export default async function ServiceCityPage({ params }: PageProps) {
   const h1Title = `${service.name} ב${city.name}${getDeterministicSuffix(city.name, service.id)}`;
 
   const getOpeningHook = (serviceId: string, cityName: string) => {
-    if (['ants', 'cockroaches', 'fleas', 'home-spraying'].includes(serviceId)) {
+    if (['ants', 'cockroaches', 'home-spraying'].includes(serviceId)) {
       return `תושבי ${cityName}, מחפשים הדברה שלא מסכנת את הילדים והחיות? אנו משתמשים בתכשירים ירוקים (פירטרואידים) המאושרים על ידי המשרד להגנת הסביבה, המאפשרים חזרה לשגרה תוך שעה בלבד. ללא ריח וללא סכנה.`;
+    }
+    if (serviceId === 'fleas') {
+      return `סובלים מעקיצות פרעושים ב${cityName}? הטיפול שלנו משלב חומרים להשמדת הפרעושים הבוגרים יחד עם מעכבי גדילה (IGR) המונעים בקיעה של ביצים חדשות. פתרון בטוח לילדים וחיות מחמד עם אחריות מלאה.`;
     }
     if (['rat-catcher', 'mouse-catcher', 'wasps', 'snakes', 'rodents'].includes(serviceId)) {
       return `נתקלתם במזיק מסוכן ב${cityName}? אל תחכו! צוות כוננות שלנו נמצא כרגע באזור וזמין להגעה תוך 30 דקות. לכידה וטיפול במקום עם התחייבות לפתרון הבעיה.`;
@@ -252,22 +282,45 @@ export default async function ServiceCityPage({ params }: PageProps) {
 
             {!isEmergency && relatedProblems.length > 0 && (
               <section className="bg-white p-8 rounded-2xl shadow-sm">
-                <h2 className="text-2xl font-bold mb-6 text-blue-900">בעיות נפוצות ב{city.name}</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <h2 className="text-2xl font-bold mb-6 text-blue-900">
+                  {service.id === 'rat-catcher' 
+                    ? `בעיות חולדות נפוצות ב${city.name}`
+                    : service.id === 'mouse-catcher'
+                    ? `בעיות עכברים נפוצות ב${city.name}`
+                    : service.id === 'rodents' 
+                    ? `בעיות מכרסמים נפוצות ב${city.name}` 
+                    : service.id === 'cockroaches' || service.id === 'german-roach'
+                    ? `סוגי תיקנים נפוצים ב${city.name}`
+                    : `בעיות ${service.name} נפוצות ופתרונות ב${city.name}`}
+                </h2>
+                <div className="space-y-6">
                   {relatedProblems.map((problem) => (
-                    <Link 
+                    <div 
                       key={problem.slug} 
-                      href={`/problem/${problem.slug}/${city.slug}`}
-                      className="block p-4 border border-gray-100 rounded-xl hover:border-blue-200 hover:bg-blue-50 transition-all group"
+                      className="border border-gray-100 rounded-xl p-6 hover:border-blue-200 transition-all"
                     >
-                      {problem.url && (
-                        <div className="relative w-full aspect-video mb-2 rounded-lg overflow-hidden bg-gray-100">
-                          <Image src={problem.url} alt={problem.title} fill className="object-cover" />
+                      <div className="flex flex-col md:flex-row gap-4">
+                        {problem.url && (
+                          <div className="relative w-full md:w-48 h-48 flex-shrink-0 rounded-lg overflow-hidden bg-gray-100">
+                            <Image 
+                              src={problem.url} 
+                              alt={problem.title} 
+                              fill 
+                              className="object-cover" 
+                            />
+                          </div>
+                        )}
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold text-blue-900 mb-3">{problem.title}</h3>
+                          <p className="text-gray-700 leading-relaxed mb-3">
+                            {problem.description}
+                          </p>
+                          <p className="text-gray-600 text-sm">
+                            {problem.injectionPhrase}
+                          </p>
                         </div>
-                      )}
-                      <h3 className="font-bold text-blue-900 group-hover:text-blue-700">{problem.title}</h3>
-                      <p className="text-sm text-gray-600 mt-1 line-clamp-2">{problem.description}</p>
-                    </Link>
+                      </div>
+                    </div>
                   ))}
                 </div>
               </section>
@@ -282,7 +335,7 @@ export default async function ServiceCityPage({ params }: PageProps) {
             )}
 
             <section className="bg-white p-8 rounded-2xl shadow-sm">
-              <h2 className={`text-2xl font-bold mb-4 ${isEmergency ? 'text-red-900' : 'text-blue-900'}`}>למה לבחור בנו?</h2>
+              <h2 className={`text-2xl font-bold mb-4 ${isEmergency ? 'text-red-900' : 'text-blue-900'}`}>{getWhyChooseUsTitle(service)}</h2>
               <p className="text-gray-700">
                 אנו מבינים שנוכחות של מזיקים בבית או בעסק יכולה להיות מטרידה מאוד. לכן, אנו מציעים שירות מהיר, דיסקרטי ומקצועי. אנו לא רק מטפלים בבעיה הקיימת, אלא גם נותנים ייעוץ למניעת חזרת המזיקים בעתיד.
               </p>
@@ -308,6 +361,13 @@ export default async function ServiceCityPage({ params }: PageProps) {
         </div>
 
         <RelatedServices services={otherServices} currentCitySlug={city.slug} />
+      </div>
+
+      {/* קישורים פנימיים ל-SEO */}
+      <div className="max-w-4xl mx-auto px-4 pb-12 space-y-8">
+        {createComprehensiveInternalLinks('serviceCity', service, city).map((section, idx) => (
+          <InternalLinksSection key={idx} section={section} />
+        ))}
       </div>
 
       <StickyMobileCTA />

@@ -115,7 +115,7 @@
     "category": "חרקים זעירים",
     "description": "חרקים זעירים ושקופים האוהבים לחות ועובש. נפוצים מאוד בדירות חדשות מקבלן (בגלל רטיבות בבנייה).",
     "identificationSigns": "נראים כמו נקודות אבק זזות, נמצאים על פאנלים, קירות לחים ובתוך ספרים ישנים.",
-    "relatedServiceId": "general",
+    "relatedServiceId": "psocids",
     "urgency": "low",
     "imageUrl": "/pests/booklice.webp"
   },

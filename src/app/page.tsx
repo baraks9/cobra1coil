@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { getServices, getCities } from '@/lib/data';
 import HeroSection from '@/components/HeroSection';
+import { routes } from '@/lib/routes';
 
 export default function Home() {
   const services = getServices();
@@ -18,7 +19,7 @@ export default function Home() {
             {services.map((service) => (
               <Link
                 key={service.id}
-                href={`/${service.slug}`}
+                href={routes.service(service.slug)}
                 className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md border border-gray-100 hover:border-blue-500 transition-all text-center group overflow-hidden"
               >
                 {service.url ? (
@@ -49,10 +50,10 @@ export default function Home() {
             {cities.map((city) => (
               <Link
                 key={city.id}
-                href={`/risus-labayit/${city.slug}`}
-                className="bg-white px-6 py-3 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:text-blue-600 transition-all"
+                href={routes.serviceCity('risus-labayit', city.slug)}
+                className="bg-white px-6 py-3 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:text-blue-600 transition-all text-sm font-medium"
               >
-                {city.name}
+                הדברה ב{city.name}
               </Link>
             ))}
           </div>

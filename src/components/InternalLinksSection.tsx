@@ -33,10 +33,33 @@ export default function InternalLinksSection({ section, className }: Props) {
     );
   }
 
+  if (section.variant === 'compact') {
+    return (
+      <section className={className}>
+        <h2 className="text-xl font-bold text-blue-900 mb-4">{section.title}</h2>
+        <div className="flex flex-wrap gap-2">
+          {section.links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={[
+                'bg-gray-100 hover:bg-blue-100 text-gray-700 px-4 py-2 rounded-lg transition-colors text-sm',
+                link.isPrimary ? 'bg-blue-100 hover:bg-blue-200 font-semibold' : '',
+              ].join(' ')}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+      </section>
+    );
+  }
+
+  // Default and grid variants
   return (
     <section className={className}>
       <h2 className="text-xl font-bold text-blue-900 mb-4">{section.title}</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
         {section.links.map((link) => (
           <Link
             key={link.href}

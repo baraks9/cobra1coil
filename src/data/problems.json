@@ -113,10 +113,10 @@
     "id": "p9",
     "slug": "booklice-new-house",
     "title": "חרקים לבנים קטנים (פסוקאים)",
-    "serviceId": "general",
+    "serviceId": "psocids",
     "urgency": "medium",
     "description": "טיפול בפסוקאים (חרקי עובש/אבק) האופייניים לדירות חדשות.",
-    "injectionPhrase": "פתרון לחרקי לחות ופסוקאים (חרקים לבנים קטנים) בקירות ופאנלים.",
+    "injectionPhrase": "פתרון לחרקי עובש ופסוקאים (חרקים לבנים קטנים) בקירות ופאנלים.",
     "url": "/problems/booklice-new-house.webp"
   },
  

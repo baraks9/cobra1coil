@@ -2,7 +2,6 @@ import services from '@/data/services.json';
 import cities from '@/data/cities.json';
 import problems from '@/data/problems.json';
 import pests from '@/data/pests.json';
-import pricing from '@/data/pricing.json';
 import venues from '@/data/venues.json';
 
 export interface Service {
@@ -54,13 +53,6 @@ export interface Pest {
   dataInsight?: string;
 }
 
-export interface Pricing {
-  serviceId: string;
-  minPrice: number;
-  maxPrice: number;
-  averagePrice: number;
-}
-
 export interface Venue {
   id: string;
   slug: string;
@@ -84,10 +76,6 @@ export function getProblems(): Problem[] {
 
 export function getPests(): Pest[] {
   return pests as Pest[];
-}
-
-export function getPricing(): Pricing[] {
-  return pricing as Pricing[];
 }
 
 export function getVenues(): Venue[] {
@@ -116,10 +104,6 @@ export function getPestBySlug(slug: string): Pest | undefined {
 
 export function getPestsByServiceId(serviceId: string): Pest[] {
   return (pests as Pest[]).filter((p) => p.relatedServiceId === serviceId);
-}
-
-export function getPricingByServiceId(serviceId: string): Pricing | undefined {
-  return (pricing as Pricing[]).find((p) => p.serviceId === serviceId);
 }
 
 export function getRotationSuffix(cityName: string): string {
@@ -180,6 +164,31 @@ export function getRandomSuffix(urgencyLevel: 'critical' | 'high' | 'medium' | '
 
   const options = suffixes[urgencyLevel] || suffixes.medium;
   return options[Math.floor(Math.random() * options.length)];
+}
+
+export function getWhyChooseUsTitle(service: Service): string {
+  // Logic for dynamic title based on service
+  if (service.id === 'rat-catcher' || service.id === 'mouse-catcher' || service.id === 'rodents') {
+    return `למה להזמין לוכד ${service.name.replace('לוכד ', '')} מאיתנו?`;
+  }
+  if (service.id === 'bed-bugs') {
+    return `יתרונות הטיפול שלנו בפשפש המיטה`;
+  }
+  if (service.id === 'termites') {
+    return `למה לבחור במומחים שלנו להדברת טרמיטים?`;
+  }
+  if (service.id === 'home-spraying') {
+    return `למה להזמין ריסוס לבית מאיתנו?`;
+  }
+  if (service.id === 'wasps') {
+    return `למה להזמין הדברת צרעות מאיתנו?`;
+  }
+  
+  // Default fallback that's still better than the static one
+  if (service.name.includes('הדברת')) {
+    return `למה לבחור בנו ל${service.name}?`;
+  }
+  return `למה לבחור בנו לשירותי ${service.name}?`;
 }
 
 export function getVenueBySlug(slug: string): Venue | undefined {

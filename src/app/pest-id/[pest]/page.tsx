@@ -4,6 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getPestBySlug, getPests, getServiceById, getRandomSuffix } from '@/lib/data';
 import StickyMobileCTA from '@/components/StickyMobileCTA';
+import InternalLinksSection from '@/components/InternalLinksSection';
+import { createComprehensiveInternalLinks } from '@/lib/internalLinks';
 
 interface PageProps {
   params: Promise<{
@@ -143,26 +145,37 @@ export default async function PestPage({ params }: PageProps) {
               </div>
             )}
 
-            {/* The Pivot (CTA) */}
-            <div className="bg-white p-8 rounded-2xl shadow-lg border-2 border-blue-600 relative overflow-hidden">
+            {/* The Pivot (CTA) - Informational Intent with Commercial CTA */}
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl shadow-lg border-2 border-blue-600 relative overflow-hidden">
               <div className="absolute top-0 left-0 w-full h-1 bg-blue-600"></div>
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-2xl">🔗</span>
+                <span className="text-sm font-medium text-blue-600 uppercase tracking-wide">קישור לשירות מסחרי</span>
+              </div>
               <h3 className="text-2xl font-bold mb-4 text-blue-900">
                 זיהיתם את המזיק בבית?
               </h3>
-              <p className="text-gray-700 mb-6">
-                יש לנו טיפול ייעודי ומקצועי נגד {pest.name} שיפתור לכם את הבעיה לצמיתות עם אחריות מלאה.
+              <p className="text-gray-700 mb-6 leading-relaxed">
+                דף זה מיועד לזיהוי ומידע בלבד. לפתרון מקצועי של הבעיה, אנו מספקים שירותי {relatedService?.name || 'הדברה'} מקצועיים עם אחריות מלאה.
               </p>
               {relatedService && (
                 <Link
                   href={`/${relatedService.slug}`}
-                  className="block w-full py-4 bg-blue-600 text-white text-center rounded-xl font-bold text-lg hover:bg-blue-700 transition-colors shadow-md"
+                  className="block w-full py-4 bg-blue-600 text-white text-center rounded-xl font-bold text-lg hover:bg-blue-700 transition-all shadow-md hover:shadow-lg transform hover:scale-105"
                 >
-                  לפרטי השירות והזמנת מדביר
+                  לפרטי השירות והזמנת מדביר →
                 </Link>
               )}
             </div>
           </div>
         </div>
+      </div>
+
+      {/* קישורים פנימיים ל-SEO */}
+      <div className="max-w-4xl mx-auto px-4 pb-12 space-y-8">
+        {createComprehensiveInternalLinks('pest', undefined, undefined, pest).map((section, idx) => (
+          <InternalLinksSection key={idx} section={section} />
+        ))}
       </div>
 
       <StickyMobileCTA />

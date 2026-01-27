@@ -163,12 +163,35 @@ export default async function PestPage({ params }: PageProps) {
                 דף זה מיועד לזיהוי ומידע בלבד. לפתרון מקצועי של הבעיה, אנו מספקים שירותי {relatedService?.name || 'הדברה'} מקצועיים עם אחריות מלאה.
               </p>
               {relatedService && (
-                <Link
-                  href={`/${relatedService.slug}`}
-                  className="block w-full py-4 bg-blue-600 text-white text-center rounded-xl font-bold text-lg hover:bg-blue-700 transition-all shadow-md hover:shadow-lg transform hover:scale-105"
-                >
-                  לפרטי השירות והזמנת מדביר →
-                </Link>
+                <div className="space-y-4">
+                  <Link
+                    href={`/${relatedService.slug}`}
+                    className="block w-full py-4 bg-blue-600 text-white text-center rounded-xl font-bold text-lg hover:bg-blue-700 transition-all shadow-md hover:shadow-lg transform hover:scale-105"
+                  >
+                    לפרטי השירות והזמנת מדביר →
+                  </Link>
+                  
+                  {relatedService.preparation && relatedService.preparation.length > 0 && (
+                    <div className="mt-6 pt-6 border-t border-blue-200">
+                      <h4 className="font-bold text-blue-900 mb-3 flex items-center gap-2">
+                        📋 איך להתכונן לטיפול?
+                      </h4>
+                      <ul className="space-y-2">
+                        {relatedService.preparation.slice(0, 2).map((step, i) => (
+                          <li key={i} className="text-sm text-blue-800 flex items-start gap-2">
+                            <span className="text-blue-500">•</span>
+                            {step}
+                          </li>
+                        ))}
+                        {relatedService.preparation.length > 2 && (
+                          <li className="text-xs text-blue-600 italic">
+                            ועוד הנחיות ספציפיות בדף השירות...
+                          </li>
+                        )}
+                      </ul>
+                    </div>
+                  )}
+                </div>
               )}
             </div>
           </div>

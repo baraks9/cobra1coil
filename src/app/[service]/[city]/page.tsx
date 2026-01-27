@@ -294,6 +294,24 @@ export default async function ServiceCityPage({ params }: PageProps) {
                   <span>אחריות מלאה על כל עבודה</span>
                 </li>
               </ul>
+
+              {service.preparation && service.preparation.length > 0 && (
+                <div className="bg-orange-50 p-6 rounded-xl border border-orange-200 mt-8">
+                  <h3 className="text-xl font-bold text-orange-900 mb-4 flex items-center gap-2">
+                    📋 איך להתכונן להדברה ב{city.name}?
+                  </h3>
+                  <ul className="space-y-3">
+                    {service.preparation.map((step, i) => (
+                      <li key={i} className="flex items-start gap-3 text-orange-800">
+                        <span className="flex-shrink-0 w-6 h-6 bg-orange-200 text-orange-700 rounded-full flex items-center justify-center text-sm font-bold">
+                          {i + 1}
+                        </span>
+                        <span className="font-medium">{step}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </section>
 
             {!isEmergency && relatedProblems.length > 0 && (

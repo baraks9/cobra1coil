@@ -17,9 +17,21 @@ export async function generateMetadata({ params }: Props) {
   const venue = getVenueBySlug(venueSlug);
   if (!venue) return {};
 
+  const titles: Record<string, string> = {
+    'office': `הדברה למשרדים בשעות הערב | שירות דיסקרטי ללא ריח | קוברה הדברה`,
+    'restaurant': `הדברה למסעדות ועסקי מזון | אישור משרד הבריאות לביקורות | קוברה`,
+    'building': `הדברה לבניינים וועדי בתים | טיפול בבורות ביוב ושטחים משותפים`
+  };
+
+  const descriptions: Record<string, string> = {
+    'office': `שירותי הדברה למשרדים המותאמים לשעות הערב כדי לא להפריע למהלך העבודה. חומרים ירוקים ללא ריח, חשבונית מס ואחריות מלאה בכתב. התקשרו להצעת מחיר.`,
+    'restaurant': `פתרונות הדברה מקיפים למסעדות כולל תיק הדברה מסודר לביקורות משרד הבריאות. טיפול מונע, ניטור וזמינות 24/7 לכל תקלה. עמידה בתקנים המחמירים ביותר.`,
+    'building': `הדברה יסודית לבנייני מגורים: ריסוס בורות ביוב, חדרי מדרגות ומקלטים. מחירים מיוחדים לוועדי בתים ואפשרות להטבות לדיירי הבניין. מדביר מוסמך עם רישיון.`
+  };
+
   return {
-    title: `הדברה ל${venue.name} | שירות לעסקים ומוסדות | הדברה מקצועית`,
-    description: `שירותי הדברה מותאמים אישית ל${venue.name}. ${venue.focus.join(', ')}. עמידה בתקנים, רישיון משרד הבריאות ואחריות מלאה.`,
+    title: titles[venue.id] || `הדברה ל${venue.name} | שירות לעסקים ומוסדות | הדברה מקצועית`,
+    description: descriptions[venue.id] || `שירותי הדברה מותאמים אישית ל${venue.name}. ${venue.focus.join(', ')}. עמידה בתקנים, רישיון משרד הבריאות ואחריות מלאה.`,
   };
 }
 
@@ -45,7 +57,9 @@ export default async function CommercialVenuePage({ params }: Props) {
       {/* Hero Section */}
       <section className="bg-slate-900 text-white py-20 px-4">
         <div className="max-w-5xl mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-black mb-6">הדברה מקצועית ל{venue.name}</h1>
+          <h1 className="text-4xl md:text-6xl font-black mb-6">
+            {venue.h1Title || `הדברה מקצועית ל${venue.name}`}
+          </h1>
           <p className="text-xl md:text-2xl text-slate-300 mb-10 max-w-3xl mx-auto">
             {venue.description}
           </p>

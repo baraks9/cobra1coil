@@ -75,6 +75,7 @@ export interface Venue {
   focus: string[];
   description: string;
   features: string[];
+  h1Title?: string;
 }
 
 export function getServices(): Service[] {
@@ -181,8 +182,23 @@ export function getRandomSuffix(urgencyLevel: 'critical' | 'high' | 'medium' | '
   return options[Math.floor(Math.random() * options.length)];
 }
 
-export function getWhyChooseUsTitle(service: Service): string {
-  // Logic for dynamic title based on service
+export function getWhyChooseUsTitle(service: Service, cityName?: string): string {
+  // If cityName is provided, we use a more varied set of titles for city pages
+  if (cityName) {
+    const variations = [
+      `למה להזמין ${service.name} ב${cityName} מאיתנו?`,
+      `יתרונות הטיפול המקצועי שלנו ב${cityName}`,
+      `שירותי ${service.name} ב${cityName} - למה לבחור בנו?`,
+      `המומחיות שלנו ב${service.name} באזור ${cityName}`,
+      `מה הופך אותנו למובילים ב${service.name} ב${cityName}?`
+    ];
+    
+    // Deterministic selection based on city name and service id
+    const index = (cityName.length + service.id.length) % variations.length;
+    return variations[index];
+  }
+
+  // Fallback for national service pages
   if (service.id === 'rat-catcher' || service.id === 'mouse-catcher' || service.id === 'rodents') {
     return `למה להזמין לוכד ${service.name.replace('לוכד ', '')} מאיתנו?`;
   }

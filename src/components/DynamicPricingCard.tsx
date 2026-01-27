@@ -33,29 +33,29 @@ export default function DynamicPricingCard({
 
         <div className="grid grid-cols-1 gap-4">
           {warranty && (
-            <div className="flex items-center gap-3 text-gray-700">
+            <div className="flex items-center gap-3 text-gray-700 bg-blue-50/50 p-3 rounded-xl border border-blue-100/50">
               <span className="text-2xl">🛡️</span>
               <div>
-                <p className="text-xs text-gray-500 font-medium">אחריות בכתב</p>
-                <p className="font-bold">{warranty}</p>
+                <p className="text-xs text-blue-600 font-bold">אחריות בכתב</p>
+                <p className="font-bold text-blue-900">{warranty}</p>
               </div>
             </div>
           )}
           {safety && (
-            <div className="flex items-center gap-3 text-gray-700">
+            <div className="flex items-center gap-3 text-gray-700 bg-green-50/50 p-3 rounded-xl border border-green-100/50">
               <span className="text-2xl">🌿</span>
               <div>
-                <p className="text-xs text-gray-500 font-medium">רמת בטיחות</p>
-                <p className="font-bold">{safety}</p>
+                <p className="text-xs text-green-600 font-bold">רמת בטיחות</p>
+                <p className="font-bold text-green-900">{safety}</p>
               </div>
             </div>
           )}
           {duration && (
-            <div className="flex items-center gap-3 text-gray-700">
+            <div className="flex items-center gap-3 text-gray-700 bg-orange-50/50 p-3 rounded-xl border border-orange-100/50">
               <span className="text-2xl">⏱️</span>
               <div>
-                <p className="text-xs text-gray-500 font-medium">זמן עבודה משוער</p>
-                <p className="font-bold">{duration}</p>
+                <p className="text-xs text-orange-600 font-bold">זמן עבודה משוער</p>
+                <p className="font-bold text-orange-900">{duration}</p>
               </div>
             </div>
           )}

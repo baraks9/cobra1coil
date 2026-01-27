@@ -24,6 +24,7 @@ import RelatedServices from '@/components/RelatedServices';
 import InternalLinksSection from '@/components/InternalLinksSection';
 import FAQSection from '@/components/FAQSection';
 import JsonLdManager from '@/components/JsonLdManager';
+import LocalContext from '@/components/LocalContext';
 import { createComprehensiveInternalLinks } from '@/lib/internalLinks';
 import ReviewsSection from '@/components/ReviewsSection';
 
@@ -83,12 +84,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       `ריסוס לבית ב${city.name} מחומרים טבעיים בלבד (רמת רעילות נמוכה). פתרון מושלם למשפחות עם ילדים וכלבים. מדביר מוסמך עם רישיון המשרד להגנת הסביבה.`,
     ],
     urgency: [
-      `נתקלתם במזיק ב${city.name}? הגעה תוך 30 דקות! שירות חירום 24/7 ללכידת חולדות, עכברים וטיפול בקני צרעות. אל תחכו שהבעיה תחמיר - חייגו למדביר תורן.`,
-      `שירותי הדברה אקספרס ב${city.name}. אנו זמינים כעת לטיפול מיידי בבעיה. התחייבות לפתרון הבעיה או כספכם בחזרה. עבודה נקייה, מהירה ושקטה.`,
+      `נתקלתם במזיק ב${city.name}? הגעה תוך ${city.arrivalTime || '30 דקות'}! שירות חירום 24/7 ללכידת חולדות, עכברים וטיפול בקני צרעות. אל תחכו שהבעיה תחמיר - חייגו למדביר תורן.`,
+      `שירותי הדברה אקספרס ב${city.name}. אנו זמינים כעת לטיפול מיידי בבעיה ב${city.neighborhoods?.[0] || city.name}. התחייבות לפתרון הבעיה או כספכם בחזרה. עבודה נקייה ומהירה.`,
     ],
     trust: [
       `מחפשים מדביר ב${city.name} במחיר הוגן? אל תשלמו סתם. אצלנו תקבלו מחירון שקוף, תעודת אחריות בכתב ומדביר המופיע ב'יצאת צדיק'. ייעוץ טלפוני חינם.`,
-      `הדברה מקצועית ב${city.name} עם 100% אחריות. אלפי לקוחות מרוצים לא טועים. טיפול יסודי בכל סוגי המזיקים במחירים משתלמים וללא הפתעות.`,
+      `הדברה מקצועית ב${city.name} עם 100% אחריות. מעל ${city.completedJobs || '100'} עבודות בוצעו באזורכם. טיפול יסודי בכל סוגי המזיקים במחירים משתלמים וללא הפתעות.`,
+    ],
+    price: [
+      `${service.name} ב${city.name} החל מ-${service.avgPrice.split('-')[0]} ₪ בלבד. שירות מקצועי, אדיב ובטוח עם אחריות מלאה בכתב. בדקו את המחירון המעודכן שלנו לתושבי ${city.name}.`,
+      `צריכים ${service.name} ב${city.name}? קבלו הצעה משתלמת במיוחד. מחירים הוגנים, זמינות גבוהה ב${city.neighborhoods?.[1] || city.name} ותוצאות מובטחות. התקשרו עכשיו.`
     ],
     silverfish: [
       `הדברת דג הכסף ב${city.name}. טיפול מקצועי בחרקי לחות המזיקים לספרים ובגדים. שימוש בחומרים בטוחים לבית עם אחריות מלאה.`,
@@ -96,7 +101,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     ],
     psocids: [
       `הדברת פסוקאים ב${city.name}. מומחים לטיפול בחרקי עובש המופיעים על קירות רטובים בדירות חדשות. פתרון יסודי המונע את חזרת החרקים.`,
-      `חרקים לבנים קטנים ב${city.name}? אלו כנראה פסוקאים. אנו מספקים טיפול ייעודי לחרקי עובש בדירות חדשות עם התחייבות לתוצאות.`
+      `חרקים לבנים קטנים ב${city.name}? אלו כנראה פסוקאים. אנו מספקים טיפול ייעודי לחרקי עובש בדירות חדשות ב${city.name} עם התחייבות לתוצאות.`
     ],
     fleas: [
       `הדברת פרעושים ב${city.name} בשיטה ירוקה ובטוחה. טיפול יסודי הכולל השמדת פרעושים בוגרים ומניעת בקיעת ביצים. פתרון מושלם לבתים עם כלבים וחתולים.`,
@@ -105,6 +110,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 
   let description = "";
+  // Use a combination of city and service to rotate between 4 main strategies
+  const strategyIndex = (city.name.length + service.id.length) % 4;
   const variant = city.name.length % 2;
 
   if (service.id === 'silverfish') {
@@ -113,12 +120,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description = descriptions.psocids[variant];
   } else if (service.id === 'fleas') {
     description = descriptions.fleas[variant];
-  } else if (isEmergency || ['rat-catcher', 'mouse-catcher', 'wasps', 'carcass-removal', 'snakes'].includes(service.id)) {
-    description = descriptions.urgency[variant];
-  } else if (['ants', 'cockroaches', 'fleas', 'home-spraying', 'bed-bugs'].includes(service.id)) {
-    description = descriptions.safety[variant];
   } else {
-    description = descriptions.trust[variant];
+    // Rotate between safety, urgency, trust, and price
+    const strategies = ['safety', 'urgency', 'trust', 'price'];
+    const selectedStrategy = strategies[strategyIndex] as keyof typeof descriptions;
+    description = (descriptions[selectedStrategy] as string[])[variant];
   }
 
   return {
@@ -276,6 +282,9 @@ export default async function ServiceCityPage({ params }: PageProps) {
             </p>
           </div>
         )}
+        
+        <LocalContext city={city} service={service} />
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="md:col-span-2 space-y-8">
             <section className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
@@ -333,7 +342,9 @@ export default async function ServiceCityPage({ params }: PageProps) {
                     ? `בעיות מכרסמים נפוצות ב${city.name}` 
                     : service.id === 'cockroaches' || service.id === 'german-roach'
                     ? `סוגי תיקנים נפוצים ב${city.name}`
-                    : `בעיות ${service.name} נפוצות ופתרונות ב${city.name}`}
+                    : service.id === 'home-spraying'
+                    ? `מזיקים נפוצים המצריכים ריסוס ב${city.name}`
+                    : `אתגרי ${service.name} נפוצים ופתרונות ב${city.name}`}
                 </h2>
                 <div className="space-y-6">
                   {relatedProblems.map((problem) => (
@@ -380,10 +391,25 @@ export default async function ServiceCityPage({ params }: PageProps) {
             )}
 
             <section className="bg-white p-8 rounded-2xl shadow-sm">
-              <h2 className={`text-2xl font-bold mb-4 ${isEmergency ? 'text-red-900' : 'text-blue-900'}`}>{getWhyChooseUsTitle(service)}</h2>
-              <p className="text-gray-700">
+              <h2 className={`text-2xl font-bold mb-4 ${isEmergency ? 'text-red-900' : 'text-blue-900'}`}>
+                {getWhyChooseUsTitle(service, city.name)}
+              </h2>
+              <p className="text-gray-700 mb-6">
                 אנו מבינים שנוכחות של מזיקים בבית או בעסק יכולה להיות מטרידה מאוד. לכן, אנו מציעים שירות מהיר, דיסקרטי ומקצועי. אנו לא רק מטפלים בבעיה הקיימת, אלא גם נותנים ייעוץ למניעת חזרת המזיקים בעתיד.
               </p>
+              
+              {city.neighborhoods && city.neighborhoods.length > 0 && (
+                <div className="pt-6 border-t border-gray-100">
+                  <p className="text-sm font-bold text-gray-900 mb-3">📍 אנו מעניקים שירות בכל שכונות {city.name}, כולל:</p>
+                  <div className="flex flex-wrap gap-2">
+                    {city.neighborhoods.map((n, i) => (
+                      <span key={i} className="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full border border-gray-200">
+                        {n}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
             </section>
           </div>
 
@@ -402,6 +428,20 @@ export default async function ServiceCityPage({ params }: PageProps) {
             </div>
             
             <NearbyCities currentServiceSlug={service.slug} cities={otherCities} />
+            
+            {city.lat && city.lng && (
+              <div className="rounded-2xl overflow-hidden shadow-md border border-gray-200 h-64 relative">
+                <iframe
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="no-referrer-when-downgrade"
+                  src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY || ''}&q=${city.lat},${city.lng}&zoom=12`}
+                ></iframe>
+              </div>
+            )}
           </aside>
         </div>
 

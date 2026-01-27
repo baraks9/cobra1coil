@@ -426,6 +426,28 @@ export default async function ServicePage({ params }: PageProps) {
 
             <div className="bg-white border-2 border-blue-100 rounded-2xl p-8 shadow-sm">
               <h3 className="text-2xl font-bold mb-6 text-blue-900">מחירון {service.name} מעודכן</h3>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+                {service.warranty && (
+                  <div className="bg-blue-50 p-4 rounded-xl border border-blue-100 text-center">
+                    <p className="text-xs text-blue-600 font-bold mb-1">🛡️ אחריות בכתב</p>
+                    <p className="text-sm font-black text-blue-900">{service.warranty}</p>
+                  </div>
+                )}
+                {service.safety && (
+                  <div className="bg-green-50 p-4 rounded-xl border border-green-100 text-center">
+                    <p className="text-xs text-green-600 font-bold mb-1">🌿 רמת בטיחות</p>
+                    <p className="text-sm font-black text-green-900">{service.safety}</p>
+                  </div>
+                )}
+                {service.duration && (
+                  <div className="bg-orange-50 p-4 rounded-xl border border-orange-100 text-center">
+                    <p className="text-xs text-orange-600 font-bold mb-1">⏱️ זמן עבודה</p>
+                    <p className="text-sm font-black text-blue-900">{service.duration}</p>
+                  </div>
+                )}
+              </div>
+
               <div className="overflow-hidden rounded-xl border border-blue-100">
                 <table className="w-full text-right border-collapse">
                   <thead>

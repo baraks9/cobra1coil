@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# אתר שירותי הדברה
 
-## Getting Started
+אתר Next.js לשירותי הדברה מקצועיים – דפים דינמיים לפי שירות, עיר ומזיק, עם תמיכה מלאה ב-RTL ו-SEO.
 
-First, run the development server:
+## טכנולוגיות
+
+- **Next.js 16** (App Router)
+- **React 19**
+- **TypeScript**
+- **Tailwind CSS 4**
+
+## התחלה
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+פתח [http://localhost:3000](http://localhost:3000) בדפדפן.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### סקריפטים
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| סקריפט   | תיאור                          |
+|----------|---------------------------------|
+| `npm run dev`   | שרת פיתוח עם HMR             |
+| `npm run build` | בניית גרסה ל-production      |
+| `npm run start` | הרצת האפליקציה לאחר build   |
+| `npm run lint`  | הרצת ESLint                  |
 
-## Learn More
+## מבנה הפרויקט
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/                 # דפים (App Router)
+│   ├── page.tsx         # דף הבית
+│   ├── layout.tsx       # תבנית ראשית (Header, Footer)
+│   ├── [service]/       # דפי שירות (למשל /risus-labayit)
+│   │   └── [city]/      # שירות בעיר מסוימת
+│   ├── pest-id/         # זיהוי מזיקים
+│   │   └── [pest]/      # דף מזיק בודד
+│   ├── commercial/      # שירותים מסחריים
+│   │   └── [venue]/     # דף מקום/סוג עסק
+│   ├── about/           # אודות
+│   ├── privacy/         # פרטיות
+│   ├── terms/           # תנאי שימוש
+│   ├── sitemap.ts       # מפת אתר
+│   └── robots.ts        # robots.txt
+├── components/          # רכיבי React
+│   ├── Header.tsx, Footer.tsx
+│   ├── HeroSection.tsx, UrgencyBanner.tsx
+│   ├── DynamicPricingCard.tsx, RelatedServices.tsx
+│   ├── JsonLdManager.tsx, ReviewsSection.tsx, FAQSection.tsx
+│   └── ...
+├── data/                # נתונים (JSON)
+│   ├── services.json    # שירותי הדברה
+│   ├── cities.json     # ערים
+│   ├── pests.json      # מזיקים
+│   ├── problems.json   # בעיות נפוצות
+│   ├── venues.json     # מקומות מסחריים
+│   └── reviews.json   # ביקורות
+└── lib/
+    ├── data.ts         # פונקציות לטיפול בנתונים
+    └── routes.ts       # בניית URL לדפים
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## נתונים (Data)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+התוכן נשמר ב-`src/data/` כקבצי JSON. עדכון שירותים, ערים, מזיקים או בעיות נעשה שם; `src/lib/data.ts` מספק פונקציות כמו `getServices()`, `getCityBySlug()`, `getPestBySlug()` וכדומה.
 
-## Deploy on Vercel
+## משתני סביבה
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+קובץ `.env.local` משמש להגדרות מקומיות (אם קיימות). וודא שהוא לא נכלל ב-Git (מופיע ב-`.gitignore`).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## פריסה (Vercel)
+
+ניתן לפרוס ל-[Vercel](https://vercel.com) ישירות מה-repo. ראה [תיעוד הפריסה של Next.js](https://nextjs.org/docs/app/building-your-application/deploying).

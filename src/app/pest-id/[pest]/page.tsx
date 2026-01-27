@@ -183,13 +183,13 @@ export default async function PestPage({ params }: PageProps) {
               <div className="absolute top-0 left-0 w-full h-1 bg-blue-600"></div>
               <div className="flex items-center gap-2 mb-3">
                 <span className="text-2xl">🔗</span>
-                <span className="text-sm font-medium text-blue-600 uppercase tracking-wide">קישור לשירות מסחרי</span>
+                <span className="text-sm font-medium text-blue-600 uppercase tracking-wide">פתרון מקצועי</span>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-blue-900">
-                זיהיתם את המזיק בבית?
-              </h3>
+              <h2 className="text-2xl font-bold mb-4 text-blue-900">
+                זיהיתם {pest.name} בבית?
+              </h2>
               <p className="text-gray-700 mb-6 leading-relaxed">
-                דף זה מיועד לזיהוי ומידע בלבד. לפתרון מקצועי של הבעיה, אנו מספקים שירותי {relatedService?.name || 'הדברה'} מקצועיים עם אחריות מלאה.
+                דף זה מיועד לזיהוי ומידע בלבד. כדי להיפטר מהמפגע לצמיתות, אנו מספקים שירותי {relatedService?.name || 'הדברה'} מקצועיים עם התחייבות לתוצאות ואחריות מלאה בכתב.
               </p>
               {relatedService && (
                 <div className="space-y-4">
@@ -197,7 +197,7 @@ export default async function PestPage({ params }: PageProps) {
                     href={`/${relatedService.slug}`}
                     className="block w-full py-4 bg-blue-600 text-white text-center rounded-xl font-bold text-lg hover:bg-blue-700 transition-all shadow-md hover:shadow-lg transform hover:scale-105"
                   >
-                    לפרטי השירות והזמנת מדביר →
+                    להזמנת {relatedService.name} עכשיו ←
                   </Link>
                   
                   {relatedService.preparation && relatedService.preparation.length > 0 && (

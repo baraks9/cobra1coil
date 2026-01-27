@@ -30,6 +30,8 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://cobra1.co.il";
   const logoUrl = process.env.NEXT_PUBLIC_LOGO_URL || `${baseUrl}/logo.png`;
   const licenseNumber = process.env.NEXT_PUBLIC_LICENSE_NUMBER || "3042";
+  const ratingValue = process.env.NEXT_PUBLIC_RATING_VALUE || "4.9";
+  const reviewCount = process.env.NEXT_PUBLIC_REVIEW_COUNT || "987";
   
   const facebookUrl = process.env.NEXT_PUBLIC_FACEBOOK_URL;
   const youtubeUrl = process.env.NEXT_PUBLIC_YOUTUBE_URL;
@@ -46,11 +48,14 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
 
   const expertName = process.env.NEXT_PUBLIC_EXPERT_NAME || "שמואל יחזקאל";
   const expertId = `${baseUrl}/#expert`;
+  const brandId = `${baseUrl}/#brand`;
   const expertiseTopics = ["הדברת מזיקים", "לכידת חולדות", "הדברת טרמיטים", "הדברת פשפש המיטה", "הדברה ירוקה"];
+  
+  const today = new Date().toISOString().split('T')[0];
 
   const graph: any[] = [];
 
-  // Function to filter reviews by relevance to the current service
+  // Function to filter reviews by relevance
   const getRelevantReviews = (currentService?: Service, limit: number = 5) => {
     if (!currentService) return reviews.slice(0, limit);
     
@@ -70,10 +75,19 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
     return relevant.length > 0 ? relevant.slice(0, limit) : reviews.slice(0, limit);
   };
 
-  // 1. Organization & LocalBusiness
+  // 1. Brand Entity
+  graph.push({
+    "@type": "Brand",
+    "@id": brandId,
+    "name": businessName,
+    "logo": logoUrl,
+    "slogan": process.env.NEXT_PUBLIC_SLOGAN || "הדברה ירוקה ובטוחה בפריסה ארצית"
+  });
+
+  // 2. Organization & LocalBusiness
   const organizationId = `${baseUrl}/#organization`;
   const localBusiness: any = {
-    "@type": "LocalBusiness",
+    "@type": "HomeAndConstructionBusiness",
     "@id": organizationId,
     "name": businessName,
     "url": baseUrl,
@@ -82,6 +96,7 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
     "logo": logoUrl,
     "image": process.env.NEXT_PUBLIC_LOGO_URL || `${baseUrl}/logo.png`,
     "priceRange": "₪₪",
+    "brand": { "@id": brandId },
     "sameAs": sameAs,
     "founder": { "@id": expertId },
     "employee": { "@id": expertId },
@@ -107,6 +122,7 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
     "areaServed": type === 'home' ? (citiesData as City[]).map(c => ({
       "@type": "City",
       "name": c.name,
+      "sameAs": c.wikidata,
       "geo": {
         "@type": "GeoCircle",
         "geoMidpoint": {
@@ -145,10 +161,30 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
         "closes": saturdayClose
       }
     ],
+    "specialOpeningHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "validFrom": "2026-04-12",
+        "validThrough": "2026-04-19",
+        "opens": "00:00",
+        "closes": "00:00",
+        "description": "חג הפסח - שירות חירום בלבד"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "validFrom": "2026-09-11",
+        "validThrough": "2026-09-13",
+        "opens": "00:00",
+        "closes": "00:00",
+        "description": "ראש השנה - שירות חירום בלבד"
+      }
+    ],
     "aggregateRating": {
       "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "reviewCount": "987"
+      "ratingValue": ratingValue,
+      "reviewCount": reviewCount,
+      "bestRating": "5",
+      "worstRating": "1"
     },
     "review": getRelevantReviews(service, 5).map((r: any) => ({
       "@type": "Review",
@@ -166,26 +202,44 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
         "url": r.sourceUrl || googleMapsUrl
       }
     })),
-    "potentialAction": {
-      "@type": "CommunicateAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": `tel:${phone.replace(/-/g, '')}`,
-        "actionPlatform": [
-          "http://schema.org/DesktopWebPlatform",
-          "http://schema.org/MobileWebPlatform",
-          "http://schema.org/IOSPlatform",
-          "http://schema.org/AndroidPlatform"
-        ]
+    "potentialAction": [
+      {
+        "@type": "CommunicateAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": `tel:${phone.replace(/-/g, '')}`,
+          "actionPlatform": [
+            "http://schema.org/DesktopWebPlatform",
+            "http://schema.org/MobileWebPlatform",
+            "http://schema.org/IOSPlatform",
+            "http://schema.org/AndroidPlatform"
+          ]
+        },
+        "result": {
+          "@type": "PhoneCall",
+          "name": "שיחת ייעוץ עם מדביר"
+        }
       },
-      "result": {
-        "@type": "PhoneCall",
-        "name": "שיחת ייעוץ עם מדביר"
+      {
+        "@type": "MessageAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": `https://wa.me/${phone.replace(/-/g, '').replace(/^0/, '972')}`,
+          "actionPlatform": [
+            "http://schema.org/DesktopWebPlatform",
+            "http://schema.org/MobileWebPlatform",
+            "http://schema.org/IOSPlatform",
+            "http://schema.org/AndroidPlatform"
+          ]
+        },
+        "result": {
+          "@type": "Message",
+          "name": "הודעת WhatsApp למדביר"
+        }
       }
-    }
+    ]
   };
 
-  // OfferCatalog
   if (type === 'home') {
     localBusiness.hasOfferCatalog = {
       "@type": "OfferCatalog",
@@ -223,7 +277,7 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
     }
   });
 
-  // 1.2 WebPage Entity (The Glue)
+  // 1.2 WebPage Entity
   const currentUrl = type === 'home' ? baseUrl :
                     type === 'service' && service ? `${baseUrl}/${service.slug}` :
                     type === 'city' && service && city ? `${baseUrl}/${service.slug}/${city.slug}` :
@@ -235,13 +289,23 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
     "@type": "WebPage",
     "@id": `${currentUrl}/#webpage`,
     "url": currentUrl,
-    "name": businessName,
+    "name": type === 'home' ? businessName : service ? `${service.name} ב${city?.name || 'כל הארץ'}` : businessName,
     "isPartOf": { "@id": `${baseUrl}/#website` },
     "publisher": { "@id": organizationId },
     "description": process.env.NEXT_PUBLIC_EXPERT_DESCRIPTION,
     "breadcrumb": { "@id": `${baseUrl}/#breadcrumb` },
     "mainEntity": service ? { "@id": `${currentUrl}/#service` } : { "@id": organizationId },
     "reviewedBy": { "@id": expertId },
+    "lastReviewed": today,
+    "author": { "@id": expertId },
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "xpath": [
+        "/html/head/title",
+        "/html/body//h1",
+        "/html/body//p[1]"
+      ]
+    },
     "about": service ? { "@id": `${currentUrl}/#service` } : undefined,
     "mentions": city ? [
       {
@@ -277,8 +341,6 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
     const prices = service.avgPrice?.split('-') || ["250", "500"];
     const minPrice = prices[0]?.trim();
     const maxPrice = prices[1]?.trim();
-    
-    // Determine if service is 24/7 based on urgency
     const isEmergencyService = service.urgency === 'critical' || service.urgency === 'high';
 
     graph.push({
@@ -287,6 +349,7 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
       "name": service.name,
       "serviceType": service.name,
       "provider": { "@id": organizationId },
+      "brand": { "@id": brandId },
       "additionalType": service.wikidata,
       "areaServed": {
         "@type": "GeoCircle",
@@ -323,12 +386,16 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
       "image": service.url ? {
         "@type": "ImageObject",
         "url": service.url.startsWith('http') ? service.url : `${baseUrl}${service.url}`,
-        "caption": `${service.name} ב${city?.name || 'פריסה ארצית'} - ${businessName}`
+        "caption": `${service.name} ב${city?.name || 'פריסה ארצית'} - ${businessName}`,
+        "license": "https://cobra1.co.il/terms",
+        "acquireLicensePage": "https://cobra1.co.il/contact"
       } : undefined,
       "aggregateRating": {
         "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "987"
+        "ratingValue": ratingValue,
+        "reviewCount": reviewCount,
+        "bestRating": "5",
+        "worstRating": "1"
       },
       "review": getRelevantReviews(service, 3).map((r: any) => ({
         "@type": "Review",
@@ -375,7 +442,7 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
     });
   }
 
-  // 6. Pest ID (Article/Taxon)
+  // 6. Pest ID
   if (type === 'pest' && pest) {
     graph.push({
       "@type": "Article",
@@ -385,9 +452,11 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
       "image": {
         "@type": "ImageObject",
         "url": pest.imageUrl.startsWith('http') ? pest.imageUrl : `${baseUrl}${pest.imageUrl}`,
-        "caption": `זיהוי ${pest.name} - ${pest.scientificName}`
+        "caption": `זיהוי ${pest.name} - ${pest.scientificName}`,
+        "license": "https://cobra1.co.il/terms",
+        "acquireLicensePage": "https://cobra1.co.il/contact"
       },
-      "author": { "@id": organizationId },
+      "author": { "@id": expertId },
       "publisher": { "@id": organizationId },
       "mainEntity": {
         "@type": "Taxon",

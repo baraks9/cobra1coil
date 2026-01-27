@@ -9,7 +9,8 @@
     "identificationSigns": "שני פסים כהים על הראש, נמצאים במטבח או במכשירים חשמליים, פעילים בעיקר בלילה.",
     "relatedServiceId": "cockroaches",
     "urgency": "high",
-    "imageUrl": "/pests/german-roach.webp"
+    "imageUrl": "/pests/german-roach.webp",
+    "wikidata": "https://www.wikidata.org/wiki/Q466194"
   },
   {
     "id": "pest_american_roach",
@@ -21,7 +22,8 @@
     "identificationSigns": "גדולים (3-5 ס\"מ), צבע אדמדם, יוצאים מפתחי ביוב או ניקוז, מעופפים.",
     "relatedServiceId": "cockroaches",
     "urgency": "medium",
-    "imageUrl": "/pests/american-roach.webp"
+    "imageUrl": "/pests/american-roach.webp",
+    "wikidata": "https://www.wikidata.org/wiki/Q690123"
   },
   {
     "id": "pest_bed_bug",
@@ -33,7 +35,8 @@
     "identificationSigns": "כתמי דם קטנים על הסדין, עקיצות בשורות, ריח מתקתק בחדר, חרקים שטוחים בצבע חלודה.",
     "relatedServiceId": "bed-bugs",
     "urgency": "critical",
-    "imageUrl": "/pests/bed-bug.webp"
+    "imageUrl": "/pests/bed-bug.webp",
+    "wikidata": "https://www.wikidata.org/wiki/Q48385308"
   },
   {
     "id": "pest_roof_rat",
@@ -45,7 +48,8 @@
     "identificationSigns": "זנב ארוך מהגוף, אוזניים גדולות, נמצאת בגובה (גגות, מזגנים, פרגולות).",
     "relatedServiceId": "rat-catcher",
     "urgency": "critical",
-    "imageUrl": "/pests/roof-rat.webp"
+    "imageUrl": "/pests/roof-rat.webp",
+    "wikidata": "https://www.wikidata.org/wiki/Q106133"
   },
   {
     "id": "pest_sewer_rat",
@@ -57,7 +61,8 @@
     "identificationSigns": "גוף כבד ומגושם, זנב קצר מהגוף, נמצאת בקרבת מקורות מים וביוב.",
     "relatedServiceId": "rat-catcher",
     "urgency": "critical",
-    "imageUrl": "/pests/sewer-rat.webp"
+    "imageUrl": "/pests/sewer-rat.webp",
+    "wikidata": "https://www.wikidata.org/wiki/Q184224"
   },
   {
     "id": "pest_pigeon_lice",
@@ -69,7 +74,8 @@
     "identificationSigns": "נקודות זעירות שחורות/אדומות זזות לאט, לרוב מופיעות ליד חלונות ומזגנים.",
     "relatedServiceId": "pigeon-lice",
     "urgency": "high",
-    "imageUrl": "/pests/bird-mite.webp"
+    "imageUrl": "/pests/bird-mite.webp",
+    "wikidata": "https://www.wikidata.org/wiki/Q7193353"
   },
   {
     "id": "pest_fire_ant",
@@ -81,7 +87,8 @@
     "identificationSigns": "נמלים קטנות מאוד (1.5 מ\"מ), צבע ג'ינג'י, עקיצה כואבת שנשארת ימים.",
     "relatedServiceId": "fire-ants",
     "urgency": "high",
-    "imageUrl": "/pests/fire-ant.webp"
+    "imageUrl": "/pests/fire-ant.webp",
+    "wikidata": "https://www.wikidata.org/wiki/Q1075697"
   },
   {
     "id": "pest_oriental_hornet",
@@ -93,7 +100,8 @@
     "identificationSigns": "גוף גדול (2-3 ס\"מ), צבע אדום וצהוב, זמזום חזק, נמשכת לבשר ומתוק.",
     "relatedServiceId": "wasps",
     "urgency": "critical",
-    "imageUrl": "/pests/hornet.webp"
+    "imageUrl": "/pests/hornet.webp",
+    "wikidata": "https://www.wikidata.org/wiki/Q302467"
   },
   {
     "id": "pest_plaster_bagworm",
@@ -105,7 +113,8 @@
     "identificationSigns": "זחלים בתוך 'שק' אפור קטן, תלויים מהתקרה או מטפסים על קירות לבנים.",
     "relatedServiceId": "moths",
     "urgency": "medium",
-    "imageUrl": "/pests/plaster-bagworm.webp"
+    "imageUrl": "/pests/plaster-bagworm.webp",
+    "wikidata": "https://www.wikidata.org/wiki/Q7185451"
   },
   {
     "id": "pest_booklice",
@@ -117,7 +126,8 @@
     "identificationSigns": "נראים כמו נקודות אבק זזות, נמצאים על פאנלים, קירות לחים ובתוך ספרים ישנים.",
     "relatedServiceId": "psocids",
     "urgency": "low",
-    "imageUrl": "/pests/booklice.webp"
+    "imageUrl": "/pests/booklice.webp",
+    "wikidata": "https://www.wikidata.org/wiki/Q271623"
   },
   {
     "id": "pest_silverfish",
@@ -129,7 +139,8 @@
     "identificationSigns": "צבע כסוף, צורת דמעה, מחושים ארוכים, בורח כשמדליקים אור.",
     "relatedServiceId": "silverfish",
     "urgency": "low",
-    "imageUrl": "/pests/silverfish.webp"
+    "imageUrl": "/pests/silverfish.webp",
+    "wikidata": "https://www.wikidata.org/wiki/Q26842"
   },
   {
     "id": "pest_drain_fly",
@@ -141,6 +152,7 @@
     "identificationSigns": "נראים כמו לבבות שחורים קטנים, עומדים על קרמיקה במקלחת ובשירותים, לא עוקצים.",
     "relatedServiceId": "flies",
     "urgency": "medium",
-    "imageUrl": "/pests/drain-fly.webp"
+    "imageUrl": "/pests/drain-fly.webp",
+    "wikidata": "https://www.wikidata.org/wiki/Q135615"
   }
 ]

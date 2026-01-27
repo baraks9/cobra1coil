@@ -11,6 +11,7 @@ export interface Service {
   avgPrice: string;
   urgency: 'critical' | 'high' | 'medium' | 'low';
   icon: string;
+  wikidata?: string;
   description?: string;
   source?: number;
   url?: string;

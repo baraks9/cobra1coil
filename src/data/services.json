@@ -6,7 +6,8 @@
     "avgPrice": "350-700",
     "urgency": "high",
     "url": "/services/rat-catcher.webp",
-    "icon": "🐀"
+    "icon": "🐀",
+    "wikidata": "https://www.wikidata.org/wiki/Q26018"
   },
   {
     "id": "mouse-catcher",
@@ -15,7 +16,8 @@
     "avgPrice": "300-600",
     "urgency": "high",
     "url": "/services/mouse-catcher.webp",
-    "icon": "🐭"
+    "icon": "🐭",
+    "wikidata": "https://www.wikidata.org/wiki/Q83310"
   },
   {
     "id": "home-spraying",
@@ -24,7 +26,8 @@
     "avgPrice": "250-500",
     "urgency": "medium",
     "url": "/services/home-spraying.webp",
-    "icon": "🚿"
+    "icon": "🚿",
+    "wikidata": "https://www.wikidata.org/wiki/Q2306047"
   },
   {
     "id": "fire-ants",
@@ -33,7 +36,8 @@
     "avgPrice": "400-800",
     "urgency": "high",
     "url": "/services/fire-ants.webp",
-    "icon": "🐜"
+    "icon": "🐜",
+    "wikidata": "https://www.wikidata.org/wiki/Q1075697"
   },
   {
     "id": "bed-bugs",
@@ -42,7 +46,8 @@
     "avgPrice": "500-1500",
     "urgency": "high",
     "url": "/services/bed-bugs.webp",
-    "icon": "🛏️"
+    "icon": "🛏️",
+    "wikidata": "https://www.wikidata.org/wiki/Q48385308"
   },
   {
     "id": "wasps",
@@ -51,7 +56,8 @@
     "avgPrice": "300-600",
     "urgency": "medium",
     "url": "/services/wasps.webp",
-    "icon": "🐝"
+    "icon": "🐝",
+    "wikidata": "https://www.wikidata.org/wiki/Q9458574"
   },
   {
     "id": "carcass-removal",
@@ -62,7 +68,8 @@
     "description": "פינוי סטרילי של פגרי חולדות, יונים וחתולים כולל חיטוי המקום למניעת ריחות ומחלות.",
     "url": "/services/carcass-removal.webp",
     "icon": "Biohazard",
-    "source": 6
+    "source": 6,
+    "wikidata": "https://www.wikidata.org/wiki/Q2306047"
   },
   {
     "id": "pigeon-lice",
@@ -73,7 +80,8 @@
     "description": "הדברה מקיפה נגד כיני יונים (קרציונים) כולל פינוי קנים וחיטוי.",
     "url": "/services/pigeon-lice.webp",
     "icon": "🐜",
-    "source": 11
+    "source": 11,
+    "wikidata": "https://www.wikidata.org/wiki/Q13654502"
   },
   {
     "id": "termites",
@@ -83,7 +91,8 @@
     "urgency": "high",
     "avgPrice": "400-2500",
     "url": "/services/termites.webp",
-    "icon": "🏠"
+    "icon": "🏠",
+    "wikidata": "https://www.wikidata.org/wiki/Q546583"
   },
   {
     "id": "fleas",
@@ -93,7 +102,8 @@
     "urgency": "high",
     "avgPrice": "350-650",
     "url": "/services/fleas.webp",
-    "icon": "🦟"
+    "icon": "🦟",
+    "wikidata": "https://www.wikidata.org/wiki/Q388162"
   },
   {
     "id": "silverfish",
@@ -103,7 +113,8 @@
     "urgency": "low",
     "avgPrice": "300-500",
     "url": "/services/silverfish.webp",
-    "icon": "🐟"
+    "icon": "🐟",
+    "wikidata": "https://www.wikidata.org/wiki/Q26842"
   },
   {
     "id": "german-roach",
@@ -113,7 +124,8 @@
     "urgency": "high",
     "avgPrice": "350-550",
     "url": "/services/german-roach.webp",
-    "icon": "🪳"
+    "icon": "🪳",
+    "wikidata": "https://www.wikidata.org/wiki/Q466194"
   },
   {
     "id": "mosquitoes",
@@ -123,7 +135,8 @@
     "urgency": "medium",
     "avgPrice": "350-700",
     "url": "/services/mosquitoes.webp",
-    "icon": "🦟"
+    "icon": "🦟",
+    "wikidata": "https://www.wikidata.org/wiki/Q7367"
   },
   {
     "id": "moths",
@@ -133,7 +146,8 @@
     "urgency": "medium",
     "avgPrice": "400-600",
     "url": "/services/moths.webp",
-    "icon": "🦋"
+    "icon": "🦋",
+    "wikidata": "https://www.wikidata.org/wiki/Q1945889"
   },
   {
     "id": "psocids",
@@ -143,6 +157,7 @@
     "urgency": "low",
     "avgPrice": "400-800",
     "url": "/services/psocids.webp",
-    "icon": "🔬"
+    "icon": "🔬",
+    "wikidata": "https://www.wikidata.org/wiki/Q271623"
   }
 ]

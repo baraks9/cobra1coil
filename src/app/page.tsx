@@ -4,6 +4,7 @@ import JsonLdManager from '@/components/JsonLdManager';
 import { getServices, getCities } from '@/lib/data';
 import HeroSection from '@/components/HeroSection';
 import { routes } from '@/lib/routes';
+import ReviewsSection from '@/components/ReviewsSection';
 
 export default function Home() {
   const services = getServices();
@@ -45,6 +46,8 @@ export default function Home() {
             ))}
           </div>
         </section>
+
+        <ReviewsSection />
 
         <section>
           <h2 className="text-3xl font-bold mb-8 text-center text-blue-900">אזורי שירות מרכזיים</h2>

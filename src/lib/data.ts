@@ -15,6 +15,10 @@ export interface Service {
   description?: string;
   source?: number;
   url?: string;
+  warranty?: string;
+  safety?: string;
+  duration?: string;
+  preparation?: string[];
 }
 
 export interface City {
@@ -28,6 +32,10 @@ export interface City {
   conversionRate?: number;
   lat?: number;
   lng?: number;
+  arrivalTime?: string;
+  neighborhoods?: string[];
+  completedJobs?: number;
+  wikidata?: string;
 }
 
 export interface Problem {
@@ -54,6 +62,10 @@ export interface Pest {
   urgency: 'critical' | 'high' | 'medium' | 'low';
   imageUrl: string;
   dataInsight?: string;
+  dangerLevel?: number;
+  seasonality?: string[];
+  preventionTips?: string[];
+  wikidata?: string;
 }
 
 export interface Venue {

@@ -9,6 +9,13 @@
     "identificationSigns": "שני פסים כהים על הראש, נמצאים במטבח או במכשירים חשמליים, פעילים בעיקר בלילה.",
     "relatedServiceId": "cockroaches",
     "urgency": "high",
+    "dangerLevel": 3,
+    "seasonality": ["כל השנה", "קיץ"],
+    "preventionTips": [
+      "שמירה על ניקיון יסודי משאריות מזון ופירורים",
+      "איטום סדקים וחריצים בארונות המטבח",
+      "ייבוש מקורות מים ולחות מתחת לכיור"
+    ],
     "imageUrl": "/pests/german-roach.webp",
     "wikidata": "https://www.wikidata.org/wiki/Q466194"
   },
@@ -22,6 +29,13 @@
     "identificationSigns": "גדולים (3-5 ס\"מ), צבע אדמדם, יוצאים מפתחי ביוב או ניקוז, מעופפים.",
     "relatedServiceId": "cockroaches",
     "urgency": "medium",
+    "dangerLevel": 2,
+    "seasonality": ["קיץ", "אביב"],
+    "preventionTips": [
+      "התקנת רשתות בחלונות הבית",
+      "סגירת פתחי ניקוז בלילה",
+      "ריסוס תקופתי של בורות הביוב בחצר"
+    ],
     "imageUrl": "/pests/american-roach.webp",
     "wikidata": "https://www.wikidata.org/wiki/Q690123"
   },
@@ -35,6 +49,13 @@
     "identificationSigns": "כתמי דם קטנים על הסדין, עקיצות בשורות, ריח מתקתק בחדר, חרקים שטוחים בצבע חלודה.",
     "relatedServiceId": "bed-bugs",
     "urgency": "critical",
+    "dangerLevel": 5,
+    "seasonality": ["כל השנה"],
+    "preventionTips": [
+      "בדיקת מזוודות ובגדים לאחר חזרה מטיול בחו\"ל",
+      "הימנעות מהכנסת רהיטי יד שנייה ללא בדיקה יסודית",
+      "שאיבה תכופה של המזרן ובסיס המיטה"
+    ],
     "imageUrl": "/pests/bed-bug.webp",
     "wikidata": "https://www.wikidata.org/wiki/Q48385308"
   },
@@ -48,6 +69,13 @@
     "identificationSigns": "זנב ארוך מהגוף, אוזניים גדולות, נמצאת בגובה (גגות, מזגנים, פרגולות).",
     "relatedServiceId": "rat-catcher",
     "urgency": "critical",
+    "dangerLevel": 4,
+    "seasonality": ["חורף", "סתיו"],
+    "preventionTips": [
+      "גיזום ענפי עצים הנושקים לגג הבית",
+      "איטום פתחים וסדקים בגג ובעליית הגג",
+      "פינוי ערימות גרוטאות מהחצר"
+    ],
     "imageUrl": "/pests/roof-rat.webp",
     "wikidata": "https://www.wikidata.org/wiki/Q106133"
   },
@@ -61,6 +89,13 @@
     "identificationSigns": "גוף כבד ומגושם, זנב קצר מהגוף, נמצאת בקרבת מקורות מים וביוב.",
     "relatedServiceId": "rat-catcher",
     "urgency": "critical",
+    "dangerLevel": 4,
+    "seasonality": ["כל השנה"],
+    "preventionTips": [
+      "התקנת שסתום אל-חוזר בצנרת הביוב",
+      "שמירה על מכסי ביוב סגורים ותקינים",
+      "מניעת הצטברות מים עומדים בחצר"
+    ],
     "imageUrl": "/pests/sewer-rat.webp",
     "wikidata": "https://www.wikidata.org/wiki/Q184224"
   },
@@ -74,6 +109,13 @@
     "identificationSigns": "נקודות זעירות שחורות/אדומות זזות לאט, לרוב מופיעות ליד חלונות ומזגנים.",
     "relatedServiceId": "pigeon-lice",
     "urgency": "high",
+    "dangerLevel": 3,
+    "seasonality": ["אביב", "קיץ"],
+    "preventionTips": [
+      "התקנת רשתות להרחקת יונים ממסתורי כביסה",
+      "ניקוי וחיטוי לשלשת יונים מאדני חלונות",
+      "סגירת פתחים המאפשרים קינון יונים"
+    ],
     "imageUrl": "/pests/bird-mite.webp",
     "wikidata": "https://www.wikidata.org/wiki/Q7193353"
   },
@@ -87,6 +129,13 @@
     "identificationSigns": "נמלים קטנות מאוד (1.5 מ\"מ), צבע ג'ינג'י, עקיצה כואבת שנשארת ימים.",
     "relatedServiceId": "fire-ants",
     "urgency": "high",
+    "dangerLevel": 4,
+    "seasonality": ["קיץ", "אביב"],
+    "preventionTips": [
+      "בדיקת עציצים וצמחים חדשים לפני הכנסתם לגינה",
+      "מניעת רטיבות יתר בגינה (נמלי אש אוהבות לחות)",
+      "איטום סדקים בפאנלים ובכניסות לבית"
+    ],
     "imageUrl": "/pests/fire-ant.webp",
     "wikidata": "https://www.wikidata.org/wiki/Q1075697"
   },
@@ -100,6 +149,13 @@
     "identificationSigns": "גוף גדול (2-3 ס\"מ), צבע אדום וצהוב, זמזום חזק, נמשכת לבשר ומתוק.",
     "relatedServiceId": "wasps",
     "urgency": "critical",
+    "dangerLevel": 5,
+    "seasonality": ["קיץ", "סתיו"],
+    "preventionTips": [
+      "סגירת חורים וסדקים בקירות חיצוניים",
+      "התקנת רשתות צפופות בפתחי ארגזי תריס",
+      "פינוי שאריות מזון ופחי אשפה פתוחים בחצר"
+    ],
     "imageUrl": "/pests/hornet.webp",
     "wikidata": "https://www.wikidata.org/wiki/Q302467"
   },
@@ -113,6 +169,13 @@
     "identificationSigns": "זחלים בתוך 'שק' אפור קטן, תלויים מהתקרה או מטפסים על קירות לבנים.",
     "relatedServiceId": "moths",
     "urgency": "medium",
+    "dangerLevel": 1,
+    "seasonality": ["כל השנה"],
+    "preventionTips": [
+      "ניקוי קורי עכביש ואבק מהפינות והתקרה",
+      "אוורור הבית להפחתת רמת הלחות",
+      "שאיבת אבק יסודית מאחורי רהיטים"
+    ],
     "imageUrl": "/pests/plaster-bagworm.webp",
     "wikidata": "https://www.wikidata.org/wiki/Q7185451"
   },
@@ -126,6 +189,13 @@
     "identificationSigns": "נראים כמו נקודות אבק זזות, נמצאים על פאנלים, קירות לחים ובתוך ספרים ישנים.",
     "relatedServiceId": "psocids",
     "urgency": "low",
+    "dangerLevel": 1,
+    "seasonality": ["כל השנה"],
+    "preventionTips": [
+      "הפעלת מזגן על מצב ייבוש (Dry) להפחתת לחות",
+      "אוורור מסיבי של הבית בשעות היום",
+      "טיפול מיידי במוקדי עובש ורטיבות בקירות"
+    ],
     "imageUrl": "/pests/booklice.webp",
     "wikidata": "https://www.wikidata.org/wiki/Q271623"
   },
@@ -139,6 +209,13 @@
     "identificationSigns": "צבע כסוף, צורת דמעה, מחושים ארוכים, בורח כשמדליקים אור.",
     "relatedServiceId": "silverfish",
     "urgency": "low",
+    "dangerLevel": 1,
+    "seasonality": ["כל השנה"],
+    "preventionTips": [
+      "אחסון ספרים ומסמכים במקום יבש ומאוורר",
+      "ניקוי אבק יסודי מאחורי שידות ומדפים",
+      "הפחתת לחות בחדרי רחצה על ידי אוורור"
+    ],
     "imageUrl": "/pests/silverfish.webp",
     "wikidata": "https://www.wikidata.org/wiki/Q26842"
   },
@@ -152,6 +229,13 @@
     "identificationSigns": "נראים כמו לבבות שחורים קטנים, עומדים על קרמיקה במקלחת ובשירותים, לא עוקצים.",
     "relatedServiceId": "flies",
     "urgency": "medium",
+    "dangerLevel": 1,
+    "seasonality": ["קיץ", "אביב"],
+    "preventionTips": [
+      "ניקוי צנרת ופתחי ניקוז בחומרים ממיסי שומן",
+      "מניעת הצטברות מים עומדים בסיפונים",
+      "שפשוף דפנות הניקוז להסרת שכבת הריר (Biofilm)"
+    ],
     "imageUrl": "/pests/drain-fly.webp",
     "wikidata": "https://www.wikidata.org/wiki/Q135615"
   }

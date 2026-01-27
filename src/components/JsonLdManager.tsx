@@ -119,6 +119,7 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
       "addressRegion": city?.district || "ישראל",
       "addressCountry": "IL"
     },
+    "description": city ? `שירותי הדברה מקצועיים ב${city.name} והסביבה. הגעה תוך ${city.arrivalTime || '60 דקות'}.` : process.env.NEXT_PUBLIC_EXPERT_DESCRIPTION,
     "areaServed": type === 'home' ? (citiesData as City[]).map(c => ({
       "@type": "City",
       "name": c.name,
@@ -190,8 +191,7 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
       "@type": "Review",
       "author": { 
         "@type": "Person", 
-        "name": r.author,
-        "image": r.url 
+        "name": r.author
       },
       "datePublished": r.datePublished,
       "reviewBody": r.reviewBody,
@@ -379,7 +379,8 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
           "priceCurrency": "ILS"
         },
         "availability": "https://schema.org/InStock",
-        "url": serviceUrl
+        "url": serviceUrl,
+        "warranty": service.warranty
       },
       "description": service.description || `שירותי ${service.name} מקצועיים עם אחריות.`,
       "serviceOutput": "סביבה נקייה ממזיקים עם אחריות בכתב",
@@ -399,7 +400,7 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
       },
       "review": getRelevantReviews(service, 3).map((r: any) => ({
         "@type": "Review",
-        "author": { "@type": "Person", "name": r.author, "image": r.url },
+        "author": { "@type": "Person", "name": r.author },
         "datePublished": r.datePublished,
         "reviewBody": r.reviewBody,
         "reviewRating": { "@type": "Rating", "ratingValue": r.reviewRating },
@@ -413,11 +414,29 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
   }
 
   // 4. FAQ Schema
-  if (faqs && faqs.length > 0) {
+  const allFaqs = [...(faqs || [])];
+  
+  // Add dynamic FAQs from service preparation
+  if (service?.preparation && service.preparation.length > 0) {
+    allFaqs.push({
+      question: `איך להתכונן להדברת ${service.name}${city ? ` ב${city.name}` : ''}?`,
+      answer: `כדי להתכונן ל${service.name}, יש לבצע את הפעולות הבאות: ${service.preparation.join('. ')}`
+    });
+  }
+
+  // Add dynamic FAQs from pest prevention tips
+  if (pest?.preventionTips && pest.preventionTips.length > 0) {
+    allFaqs.push({
+      question: `איך מונעים את חזרת ${pest.name} לאחר ההדברה?`,
+      answer: `למניעת חזרת המזיק מומלץ: ${pest.preventionTips.join('. ')}`
+    });
+  }
+
+  if (allFaqs.length > 0) {
     graph.push({
       "@type": "FAQPage",
       "@id": `${baseUrl}/${service?.slug || ''}/${city?.slug || ''}/#faq`,
-      "mainEntity": faqs.map(faq => ({
+      "mainEntity": allFaqs.map(faq => ({
         "@type": "Question",
         "name": faq.question,
         "acceptedAnswer": {
@@ -464,7 +483,7 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
         "alternateName": pest.name,
         "description": pest.description,
         "image": pest.imageUrl.startsWith('http') ? pest.imageUrl : `${baseUrl}${pest.imageUrl}`,
-        "sameAs": `https://en.wikipedia.org/wiki/${pest.scientificName.replace(/ /g, '_')}`
+        "sameAs": pest.wikidata || `https://en.wikipedia.org/wiki/${pest.scientificName.replace(/ /g, '_')}`
       }
     });
   }

@@ -10,7 +10,9 @@ import {
   getDeterministicSuffix,
   getRotationSuffix,
   getPestsByServiceId,
-  getWhyChooseUsTitle
+  getWhyChooseUsTitle,
+  Service,
+  City
 } from '@/lib/data';
 import { getUniqueFAQ } from '@/lib/faqUtils';
 import HeroSection from '@/components/HeroSection';
@@ -23,6 +25,7 @@ import InternalLinksSection from '@/components/InternalLinksSection';
 import FAQSection from '@/components/FAQSection';
 import JsonLdManager from '@/components/JsonLdManager';
 import { createComprehensiveInternalLinks } from '@/lib/internalLinks';
+import ReviewsSection from '@/components/ReviewsSection';
 
 interface PageProps {
   params: Promise<{
@@ -129,8 +132,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ServiceCityPage({ params }: PageProps) {
   const { service: serviceSlug, city: citySlug } = await params;
-  const service = getServiceBySlug(serviceSlug);
-  const city = getCityBySlug(citySlug);
+  const service = getServiceBySlug(serviceSlug) as Service | undefined;
+  const city = getCityBySlug(citySlug) as City | undefined;
 
   if (!service || !city) {
     notFound();
@@ -224,7 +227,12 @@ export default async function ServiceCityPage({ params }: PageProps) {
         faqs={faqs} 
         breadcrumbs={breadcrumbs?.links} 
       />
-      <UrgencyBanner urgency={isEmergency ? 'critical' : service.urgency} cityName={city.name} />
+      <UrgencyBanner 
+        urgency={isEmergency ? 'critical' : service.urgency} 
+        cityName={city.name} 
+        arrivalTime={city.arrivalTime}
+        neighborhoods={city.neighborhoods}
+      />
       
       <HeroSection 
         serviceName={service.name} 
@@ -301,7 +309,7 @@ export default async function ServiceCityPage({ params }: PageProps) {
                     📋 איך להתכונן להדברה ב{city.name}?
                   </h3>
                   <ul className="space-y-3">
-                    {service.preparation.map((step, i) => (
+                    {service.preparation.map((step: string, i: number) => (
                       <li key={i} className="flex items-start gap-3 text-orange-800">
                         <span className="flex-shrink-0 w-6 h-6 bg-orange-200 text-orange-700 rounded-full flex items-center justify-center text-sm font-bold">
                           {i + 1}
@@ -365,6 +373,9 @@ export default async function ServiceCityPage({ params }: PageProps) {
                 serviceName={service.name} 
                 cityName={city.name} 
                 priceRange={service.avgPrice} 
+                warranty={service.warranty}
+                safety={service.safety}
+                duration={service.duration}
               />
             )}
 
@@ -395,6 +406,8 @@ export default async function ServiceCityPage({ params }: PageProps) {
         </div>
 
         <RelatedServices services={otherServices} currentCitySlug={city.slug} />
+        
+        <ReviewsSection serviceId={service.id} cityName={city.name} />
         
         <FAQSection 
           faqs={faqs} 

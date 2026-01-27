@@ -12,7 +12,10 @@
       "מומלץ לצלם את סימני הנזק או הגללים כדי לעזור ללוכד לזהות את מסלול התנועה.",
       "יש להרחיק מזון פתוח מהשיש (פירות, לחם) כדי שהחולדה תימשך לפיתיונות."
     ],
-    "wikidata": "https://www.wikidata.org/wiki/Q26018"
+    "wikidata": "https://www.wikidata.org/wiki/Q26018",
+    "warranty": "3 חודשים על חזרת מכרסמים",
+    "safety": "שימוש במלכודות הומניות ופיתיונות בטוחים",
+    "duration": "45-60 דקות"
   },
   {
     "id": "mouse-catcher",
@@ -27,7 +30,10 @@
       "מומלץ לסגור מזון פתוח בארונות נמוכים בתוך קופסאות פלסטיק קשיחות.",
       "יש להרחיק חיות מחמד מאזור הצבת המלכודות במידה ונעשה שימוש ברעל."
     ],
-    "wikidata": "https://www.wikidata.org/wiki/Q83310"
+    "wikidata": "https://www.wikidata.org/wiki/Q83310",
+    "warranty": "3 חודשים על חזרת מכרסמים",
+    "safety": "שימוש במלכודות דבק או קפיץ בטוחות",
+    "duration": "30-50 דקות"
   },
   {
     "id": "home-spraying",
@@ -42,7 +48,10 @@
       "יש לפנות את השיש במטבח ולהרחיק כלי אוכל.",
       "יש לתכנן יציאה מהבית ל-1-2 שעות (לפי הנחיות המדביר והתווית)."
     ],
-    "wikidata": "https://www.wikidata.org/wiki/Q2306047"
+    "wikidata": "https://www.wikidata.org/wiki/Q2306047",
+    "warranty": "6 חודשים לתיקן אמריקאי",
+    "safety": "הדברה ירוקה ללא ריח, מאושרת למגורים",
+    "duration": "20-40 דקות"
   },
   {
     "id": "fire-ants",
@@ -57,7 +66,10 @@
       "אין לבצע ריסוס עצמי בשבוע שלפני הטיפול כדי לא לדחות את הנמלים מהפיתיון.",
       "מומלץ לסמן מוקדי עקיצות ידועים בחצר (ליד בריכות, דשא, עצי פרי)."
     ],
-    "wikidata": "https://www.wikidata.org/wiki/Q1075697"
+    "wikidata": "https://www.wikidata.org/wiki/Q1075697",
+    "warranty": "3-6 חודשים",
+    "safety": "פיתיונות ג'ל וגרגירים בטוחים לסביבת הבית",
+    "duration": "30-50 דקות"
   },
   {
     "id": "bed-bugs",
@@ -72,7 +84,10 @@
       "יש לרוקן לחלוטין את ארגז המצעים ובסיס המיטה.",
       "אין להוציא חפצים מהחדר הנגוע לחדרים אחרים כדי למנוע הדבקה."
     ],
-    "wikidata": "https://www.wikidata.org/wiki/Q48385308"
+    "wikidata": "https://www.wikidata.org/wiki/Q48385308",
+    "warranty": "12 חודשים (שנה מלאה)",
+    "safety": "טיפול משולב בחום ושאיבה, מינימום רעלים",
+    "duration": "2-4 שעות"
   },
   {
     "id": "wasps",
@@ -87,7 +102,10 @@
       "יש להרחיק ילדים וחיות מחמד מאזור הטיפול בזמן הפעולה.",
       "במידה והקן בתוך ארגז תריס, יש לוודא גישה נוחה לפתיחת הארגז מבפנים."
     ],
-    "wikidata": "https://www.wikidata.org/wiki/Q9458574"
+    "wikidata": "https://www.wikidata.org/wiki/Q9458574",
+    "warranty": "עונה שלמה (על הקן שטופל)",
+    "safety": "טיפול ממוקד ומהיר בציוד מגן מלא",
+    "duration": "15-30 דקות"
   },
   {
     "id": "carcass-removal",
@@ -104,7 +122,10 @@
       "יש לפנות גישה למקומות צפופים כמו מאחורי ארונות או מתחת למטבח."
     ],
     "source": 6,
-    "wikidata": "https://www.wikidata.org/wiki/Q2306047"
+    "wikidata": "https://www.wikidata.org/wiki/Q2306047",
+    "warranty": "פינוי וחיטוי מלא",
+    "safety": "שימוש בציוד מיגון וחיטוי סטרילי",
+    "duration": "20-40 דקות"
   },
   {
     "id": "pigeon-lice",
@@ -116,7 +137,10 @@
     "url": "/services/pigeon-lice.webp",
     "icon": "🐜",
     "source": 11,
-    "wikidata": "https://www.wikidata.org/wiki/Q13654502"
+    "wikidata": "https://www.wikidata.org/wiki/Q13654502",
+    "warranty": "3 חודשים",
+    "safety": "חומרים ייעודיים לקרציונים, בטוח למגורים",
+    "duration": "30-50 דקות"
   },
   {
     "id": "termites",
@@ -132,7 +156,10 @@
       "במידה ויש רהיטי עץ נגועים, יש לרוקן אותם מתוכן.",
       "יש לוודא גישה לנקודות חשמל בקרבת מוקדי הנגיעות."
     ],
-    "wikidata": "https://www.wikidata.org/wiki/Q546583"
+    "wikidata": "https://www.wikidata.org/wiki/Q546583",
+    "warranty": "5 שנים (אחריות מורחבת)",
+    "safety": "הזרקה לתשתיות, מינימום חשיפה לדיירים",
+    "duration": "3-6 שעות"
   },
   {
     "id": "fleas",
@@ -148,7 +175,10 @@
       "יש לרוקן את שקית השואב לפח חיצוני מיד לאחר השאיבה.",
       "יש לטפל בחיות המחמד בתכשיר נגד פרעושים במקביל להדברה בבית."
     ],
-    "wikidata": "https://www.wikidata.org/wiki/Q388162"
+    "wikidata": "https://www.wikidata.org/wiki/Q388162",
+    "warranty": "3 חודשים",
+    "safety": "שילוב חומר מווסת גדילה (IGR) בטוח לחיות מחמד",
+    "duration": "30-45 דקות"
   },
   {
     "id": "silverfish",
@@ -164,7 +194,10 @@
       "מומלץ לפנות ספרים או מסמכים ישנים מאזורים נגועים.",
       "יש לנקות אבק מאחורי שידות ומדפים."
     ],
-    "wikidata": "https://www.wikidata.org/wiki/Q26842"
+    "wikidata": "https://www.wikidata.org/wiki/Q26842",
+    "warranty": "6 חודשים",
+    "safety": "הדברה ירוקה ללא ריח בסביבת מגורים",
+    "duration": "20-30 דקות"
   },
   {
     "id": "german-roach",
@@ -180,7 +213,10 @@
       "יש לפנות מכשירי חשמל חמים (תמי 4, מכונת קפה) מהשיש לגישה למנועים.",
       "מומלץ לנקות שאריות מזון ופירורים מאחורי המקרר והתנור."
     ],
-    "wikidata": "https://www.wikidata.org/wiki/Q466194"
+    "wikidata": "https://www.wikidata.org/wiki/Q466194",
+    "warranty": "3-6 חודשים",
+    "safety": "טיפול בג'ל - ללא רעלים באוויר, בטוח למטבחים",
+    "duration": "20-30 דקות"
   },
   {
     "id": "mosquitoes",
@@ -191,7 +227,10 @@
     "avgPrice": "350-700",
     "url": "/services/mosquitoes.webp",
     "icon": "🦟",
-    "wikidata": "https://www.wikidata.org/wiki/Q7367"
+    "wikidata": "https://www.wikidata.org/wiki/Q7367",
+    "warranty": "עונה שלמה (בכפוף לתנאי השטח)",
+    "safety": "ריסוס צמחייה בחומרים מאושרים, בטוח לגינה",
+    "duration": "30-60 דקות"
   },
   {
     "id": "moths",
@@ -202,7 +241,10 @@
     "avgPrice": "400-600",
     "url": "/services/moths.webp",
     "icon": "🦋",
-    "wikidata": "https://www.wikidata.org/wiki/Q1945889"
+    "wikidata": "https://www.wikidata.org/wiki/Q1945889",
+    "warranty": "3-6 חודשים",
+    "safety": "מלכודות פרומון ללא רעלים וריסוס ממוקד",
+    "duration": "30-45 דקות"
   },
   {
     "id": "psocids",
@@ -218,6 +260,9 @@
       "יש להרחיק רהיטים מהקירות כדי לאפשר אוורור וייבוש של הקיר.",
       "מומלץ לטפל במקורות רטיבות או נזילות לפני ביצוע ההדברה."
     ],
-    "wikidata": "https://www.wikidata.org/wiki/Q271623"
+    "wikidata": "https://www.wikidata.org/wiki/Q271623",
+    "warranty": "3 חודשים (בכפוף לייבוש הקירות)",
+    "safety": "הדברה ירוקה ללא ריח, בטוח לתינוקות",
+    "duration": "30-50 דקות"
   }
 ]

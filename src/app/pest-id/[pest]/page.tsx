@@ -3,10 +3,11 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import JsonLdManager from '@/components/JsonLdManager';
-import { getPestBySlug, getPests, getServiceById, getRandomSuffix } from '@/lib/data';
+import { getPestBySlug, getPests, getServiceById, getRandomSuffix, Pest, Service } from '@/lib/data';
 import StickyMobileCTA from '@/components/StickyMobileCTA';
 import InternalLinksSection from '@/components/InternalLinksSection';
 import { createComprehensiveInternalLinks } from '@/lib/internalLinks';
+import ReviewsSection from '@/components/ReviewsSection';
 
 interface PageProps {
   params: Promise<{
@@ -38,13 +39,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function PestPage({ params }: PageProps) {
   const { pest: slug } = await params;
-  const pest = getPestBySlug(slug);
+  const pest = getPestBySlug(slug) as Pest | undefined;
 
   if (!pest) {
     notFound();
   }
 
-  const relatedService = getServiceById(pest.relatedServiceId);
+  const relatedService = getServiceById(pest.relatedServiceId) as Service | undefined;
   const internalLinks = createComprehensiveInternalLinks('pest', undefined, undefined, pest);
   const breadcrumbs = internalLinks.find(s => s.variant === 'breadcrumbs');
 
@@ -99,6 +100,13 @@ export default async function PestPage({ params }: PageProps) {
               <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
               רמת ביטחון בזיהוי: גבוהה
             </span>
+            {pest.dangerLevel && (
+              <span className={`flex items-center gap-2 px-4 py-2 rounded-lg border ${
+                pest.dangerLevel >= 4 ? 'bg-red-50 text-red-700 border-red-100' : 'bg-orange-50 text-orange-700 border-orange-100'
+              }`}>
+                <span className="font-bold">רמת סיכון: {pest.dangerLevel}/5</span>
+              </span>
+            )}
           </div>
         </div>
       </section>
@@ -125,6 +133,22 @@ export default async function PestPage({ params }: PageProps) {
                 {pest.identificationSigns}
               </p>
             </div>
+
+            {pest.preventionTips && pest.preventionTips.length > 0 && (
+              <div className="bg-green-50 p-6 rounded-2xl border border-green-100">
+                <h3 className="text-xl font-bold mb-4 text-green-900 flex items-center gap-2">
+                  🛡️ איך למנוע את חזרת המזיק?
+                </h3>
+                <ul className="space-y-3">
+                  {pest.preventionTips.map((tip: string, i: number) => (
+                    <li key={i} className="flex items-start gap-3 text-green-800">
+                      <span className="text-green-500 mt-1">•</span>
+                      <span className="font-medium">{tip}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
 
           {/* Educational Content */}
@@ -134,6 +158,11 @@ export default async function PestPage({ params }: PageProps) {
               <p className="text-lg text-gray-700 leading-relaxed">
                 {pest.description}
               </p>
+              {pest.seasonality && (
+                <p className="mt-4 text-sm text-gray-500">
+                  <span className="font-bold">עונתיות:</span> {pest.seasonality.join(', ')}
+                </p>
+              )}
             </section>
 
             {/* Urgency Alert */}
@@ -177,7 +206,7 @@ export default async function PestPage({ params }: PageProps) {
                         📋 איך להתכונן לטיפול?
                       </h4>
                       <ul className="space-y-2">
-                        {relatedService.preparation.slice(0, 2).map((step, i) => (
+                        {relatedService.preparation.slice(0, 2).map((step: string, i: number) => (
                           <li key={i} className="text-sm text-blue-800 flex items-start gap-2">
                             <span className="text-blue-500">•</span>
                             {step}
@@ -205,7 +234,11 @@ export default async function PestPage({ params }: PageProps) {
         ))}
       </div>
 
-      <StickyMobileCTA />
-    </main>
+        <StickyMobileCTA />
+        
+        <div className="max-w-4xl mx-auto px-4">
+          <ReviewsSection serviceId={relatedService?.id} />
+        </div>
+      </main>
   );
 }

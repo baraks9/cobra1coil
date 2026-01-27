@@ -21,6 +21,7 @@ import InternalLinksSection from '@/components/InternalLinksSection';
 import FAQSection from '@/components/FAQSection';
 import JsonLdManager from '@/components/JsonLdManager';
 import { createComprehensiveInternalLinks } from '@/lib/internalLinks';
+import ReviewsSection from '@/components/ReviewsSection';
 
 interface PageProps {
   params: Promise<{
@@ -462,6 +463,8 @@ export default async function ServicePage({ params }: PageProps) {
         </div>
 
         <RelatedServices services={otherServices} />
+        
+        <ReviewsSection serviceId={service.id} />
         
         <FAQSection 
           faqs={faqs} 

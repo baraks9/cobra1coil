@@ -11,23 +11,9 @@ export default function InternalLinksSection({ section, className }: Props) {
 
   if (section.variant === 'breadcrumbs') {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://cobra1.co.il';
-    const schema = {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": section.links.map((link, idx) => ({
-        "@type": "ListItem",
-        "position": idx + 1,
-        "name": link.label,
-        "item": link.href.startsWith('http') ? link.href : `${baseUrl}${link.href}`,
-      })),
-    };
-
+    
     return (
       <nav aria-label={section.title} className={className}>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
         <ol className={`flex items-center gap-2 text-sm overflow-x-auto scrollbar-hide whitespace-nowrap pb-2 md:pb-0 ${className?.includes('text-white') ? 'text-white/80 justify-center md:justify-start' : 'text-gray-500'}`}>
           {section.links.map((link, idx) => {
             const isLast = idx === section.links.length - 1;

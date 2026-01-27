@@ -25,6 +25,8 @@ export interface City {
   priorityScore?: number;
   injectionPhrase?: string;
   conversionRate?: number;
+  lat?: number;
+  lng?: number;
 }
 
 export interface Problem {

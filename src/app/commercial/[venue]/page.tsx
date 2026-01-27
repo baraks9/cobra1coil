@@ -1,7 +1,7 @@
 import { getVenueBySlug, getServices } from '@/lib/data';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import LocalBusinessSchema from '@/components/LocalBusinessSchema';
+import JsonLdManager from '@/components/JsonLdManager';
 import InternalLinksSection from '@/components/InternalLinksSection';
 import { getRelatedServices, getNearbyCities } from '@/lib/internalLinks';
 import { routes } from '@/lib/routes';
@@ -31,9 +31,17 @@ export default async function CommercialVenuePage({ params }: Props) {
     notFound();
   }
 
+  const allServices = getServices();
+  const relatedServicesSection = getRelatedServices(allServices[0], undefined, 12);
+  const breadcrumbs = [
+    { label: 'בית', href: '/' },
+    { label: 'הדברה לעסקים', href: '/commercial' },
+    { label: venue.name, href: `/commercial/${venue.slug}` }
+  ];
+
   return (
     <main className="min-h-screen bg-white" dir="rtl">
-      <LocalBusinessSchema />
+      <JsonLdManager type="commercial" venue={venue} breadcrumbs={breadcrumbs} />
       {/* Hero Section */}
       <section className="bg-slate-900 text-white py-20 px-4">
         <div className="max-w-5xl mx-auto text-center">

@@ -19,7 +19,7 @@ import NearbyCities from '@/components/NearbyCities';
 import RelatedServices from '@/components/RelatedServices';
 import InternalLinksSection from '@/components/InternalLinksSection';
 import FAQSection from '@/components/FAQSection';
-import FAQSchema from '@/components/FAQSchema';
+import JsonLdManager from '@/components/JsonLdManager';
 import { createComprehensiveInternalLinks } from '@/lib/internalLinks';
 
 interface PageProps {
@@ -278,7 +278,12 @@ export default async function ServicePage({ params }: PageProps) {
 
   return (
     <main className="min-h-screen bg-gray-50 pb-24 md:pb-12" dir="rtl">
-      <FAQSchema faqs={faqs} />
+      <JsonLdManager 
+        type="service" 
+        service={service} 
+        faqs={faqs} 
+        breadcrumbs={breadcrumbs?.links} 
+      />
       <UrgencyBanner urgency={service.urgency as any} cityName="כל הארץ" />
       
       <HeroSection 

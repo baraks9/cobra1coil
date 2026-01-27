@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import LocalBusinessSchema from '@/components/LocalBusinessSchema';
+import JsonLdManager from '@/components/JsonLdManager';
 import { getServices, getCities } from '@/lib/data';
 import HeroSection from '@/components/HeroSection';
 import { routes } from '@/lib/routes';
@@ -11,31 +11,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gray-50 pb-12" dir="rtl">
-      <LocalBusinessSchema />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            "name": process.env.NEXT_PUBLIC_BUSINESS_NAME || "קוברה הדברה",
-            "url": process.env.NEXT_PUBLIC_BASE_URL || "https://cobra1.co.il",
-            "logo": process.env.NEXT_PUBLIC_LOGO_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://cobra1.co.il"}/logo.png`,
-            "contactPoint": {
-              "@type": "ContactPoint",
-              "telephone": process.env.NEXT_PUBLIC_PHONE || "050-2138028",
-              "contactType": "customer service",
-              "areaServed": "IL",
-              "availableLanguage": ["Hebrew", "English"]
-            },
-            "email": process.env.NEXT_PUBLIC_EMAIL || "office@cobra1.co.il",
-            "sameAs": [
-              process.env.NEXT_PUBLIC_FACEBOOK_URL,
-              process.env.NEXT_PUBLIC_YOUTUBE_URL
-            ].filter(Boolean) as string[]
-          })
-        }}
-      />
+      <JsonLdManager type="home" />
       <HeroSection serviceName="הדברה מקצועית" />
 
       <div className="max-w-6xl mx-auto px-4 py-16">

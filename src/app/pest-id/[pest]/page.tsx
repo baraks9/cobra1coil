@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import LocalBusinessSchema from '@/components/LocalBusinessSchema';
+import JsonLdManager from '@/components/JsonLdManager';
 import { getPestBySlug, getPests, getServiceById, getRandomSuffix } from '@/lib/data';
 import StickyMobileCTA from '@/components/StickyMobileCTA';
 import InternalLinksSection from '@/components/InternalLinksSection';
@@ -45,6 +45,8 @@ export default async function PestPage({ params }: PageProps) {
   }
 
   const relatedService = getServiceById(pest.relatedServiceId);
+  const internalLinks = createComprehensiveInternalLinks('pest', undefined, undefined, pest);
+  const breadcrumbs = internalLinks.find(s => s.variant === 'breadcrumbs');
 
   // Tone determination based on urgency
   const isAlarmist = pest.urgency === 'critical';
@@ -74,12 +76,12 @@ export default async function PestPage({ params }: PageProps) {
 
   return (
     <main className="min-h-screen bg-gray-50 pb-24 md:pb-12" dir="rtl">
-      <LocalBusinessSchema service={relatedService} />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      <JsonLdManager 
+        type="pest" 
+        pest={pest} 
+        service={relatedService} 
+        breadcrumbs={breadcrumbs?.links} 
       />
-
       {/* Hero Section */}
       <section className="bg-white border-b">
         <div className="max-w-4xl mx-auto px-4 py-12 text-center">

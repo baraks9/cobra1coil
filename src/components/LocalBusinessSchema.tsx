@@ -51,7 +51,7 @@ const LocalBusinessSchema: React.FC<LocalBusinessSchemaProps> = ({ service, city
       "name": businessName,
       "url": baseUrl,
       "telephone": phone,
-      "image": `${baseUrl}/logo.png`,
+      "image": process.env.NEXT_PUBLIC_LOGO_URL || `${baseUrl}/logo.png`,
       "priceRange": "₪₪",
       "address": {
         "@type": "PostalAddress",
@@ -109,7 +109,11 @@ const LocalBusinessSchema: React.FC<LocalBusinessSchemaProps> = ({ service, city
           "@type": "Rating",
           "ratingValue": r.reviewRating
         }
-      }))
+      })),
+      "sameAs": [
+        process.env.NEXT_PUBLIC_FACEBOOK_URL,
+        process.env.NEXT_PUBLIC_YOUTUBE_URL
+      ].filter(Boolean) as string[]
     }
   ];
 

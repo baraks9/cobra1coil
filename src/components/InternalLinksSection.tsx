@@ -18,7 +18,7 @@ export default function InternalLinksSection({ section, className }: Props) {
         "@type": "ListItem",
         "position": idx + 1,
         "name": link.label,
-        "item": `${baseUrl}${link.href}`,
+        "item": link.href.startsWith('http') ? link.href : `${baseUrl}${link.href}`,
       })),
     };
 

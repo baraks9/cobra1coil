@@ -22,6 +22,7 @@ import RelatedServices from '@/components/RelatedServices';
 import InternalLinksSection from '@/components/InternalLinksSection';
 import FAQSection from '@/components/FAQSection';
 import LocalBusinessSchema from '@/components/LocalBusinessSchema';
+import FAQSchema from '@/components/FAQSchema';
 import { createComprehensiveInternalLinks } from '@/lib/internalLinks';
 
 interface PageProps {
@@ -218,6 +219,7 @@ export default async function ServiceCityPage({ params }: PageProps) {
   return (
     <main className={`min-h-screen ${isEmergency ? 'bg-red-50' : 'bg-gray-50'} pb-24 md:pb-12`} dir="rtl">
       <LocalBusinessSchema service={service} city={city} />
+      <FAQSchema faqs={faqs} />
       <UrgencyBanner urgency={isEmergency ? 'critical' : service.urgency} cityName={city.name} />
       
       <HeroSection 

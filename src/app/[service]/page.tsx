@@ -8,7 +8,9 @@ import {
   getCities, 
   getPestsByServiceId, 
   getRandomSuffix,
-  getWhyChooseUsTitle
+  getWhyChooseUsTitle,
+  getVariedProblemsTitle,
+  getVariedServiceTitle
 } from '@/lib/data';
 import { getUniqueFAQ } from '@/lib/faqUtils';
 import HeroSection from '@/components/HeroSection';
@@ -57,42 +59,22 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   let title = "";
   if (service.id === 'silverfish') {
-    title = "הדברת דג הכסף | טיפול בחרקי לחות וספרים | אחריות מלאה";
+    title = "הדברת דג הכסף - פתרון יעיל לחרקי לחות";
   } else if (service.id === 'psocids') {
-    title = "הדברת פסוקאים | טיפול בחרקי עובש בדירות חדשות | מדביר מוסמך";
+    title = "הדברת פסוקאים - טיפול מקצועי בחרקי עובש";
+  } else if (service.id === 'cockroaches') {
+    title = "הדברת ג'וקים ותיקנים - מחירון מעודכן";
+  } else if (service.id === 'german-roach') {
+    title = "הדברת תיקן גרמני בג'ל - ללא ריסוס";
   } else {
-    title = `${service.name} מקצועי | שירות בפריסה ארצית | מחירים החל מ-${service.avgPrice.split('-')[0]} ₪`;
+    title = `${service.name} מקצועי בפריסה ארצית`;
   }
   
   let description = manualOverrides[serviceSlug];
 
   if (!description) {
-    // Intent-based description logic for generic service pages (country-wide)
-    const descriptions = {
-      safety: [
-        `זקוקים ל${service.name}? קבלו הדברה בטוחה לתינוקות ובעלי חיים (ללא ריח). שימוש בחומרים ירוקים ומאושרים בלבד. חזרה מהירה לשגרה ואחריות מלאה. הזמינו עכשיו.`,
-        `ריסוס לבית מחומרים טבעיים בלבד (רמת רעילות נמוכה). פתרון מושלם למשפחות עם ילדים וכלבים. מדביר מוסמך עם רישיון המשרד להגנת הסביבה.`,
-      ],
-      urgency: [
-        `נתקלתם במזיק? הגעה תוך 30 דקות! שירות חירום 24/7 ללכידת חולדות, עכברים וטיפול בקני צרעות. אל תחכו שהבעיה תחמיר - חייגו למדביר תורן.`,
-        `שירותי הדברה אקספרס. אנו זמינים כעת לטיפול מיידי בבעיה. התחייבות לפתרון הבעיה או כספכם בחזרה. עבודה נקייה, מהירה ושקטה.`,
-      ],
-      trust: [
-        `מחפשים מדביר במחיר הוגן? אל תשלמו סתם. אצלנו תקבלו מחירון שקוף, תעודת אחריות בכתב ומדביר המופיע ב'יצאת צדיק'. ייעוץ טלפוני חינם.`,
-        `הדברה מקצועית עם 100% אחריות. אלפי לקוחות מרוצים לא טועים. טיפול יסודי בכל סוגי המזיקים במחירים משתלמים וללא הפתעות.`,
-      ]
-    };
-
-    // Use service.name.length % 2 for deterministic rotation on generic pages
-    const variant = service.name.length % 2;
-    
-    if (['rat-catcher', 'mouse-catcher', 'wasps', 'carcass-removal', 'snakes'].includes(service.id)) {
-      description = descriptions.urgency[variant];
-    } else if (['ants', 'cockroaches', 'fleas', 'home-spraying', 'bed-bugs'].includes(service.id)) {
-      description = descriptions.safety[variant];
-    } else {
-      description = descriptions.trust[variant];
-    }
+    // Broad, informative intent for national pages
+    description = `מדריך מקיף לשירותי ${service.name} בפריסה ארצית. כמה עולה הטיפול? איך מתכוננים? ומהן שיטות ההדברה הבטוחות ביותר? כל המידע המקצועי והמלצות על ${service.name} במקום אחד.`;
   }
 
   return {
@@ -272,9 +254,13 @@ export default async function ServicePage({ params }: PageProps) {
     h1Title = 'הדברת פסוקאים (חרקי עובש) בדירות חדשות - טיפול יסודי';
   } else if (service.id === 'silverfish') {
     h1Title = 'הדברת דג הכסף - פתרון סופי לחרקי ספרים ולחות';
+  } else if (service.id === 'cockroaches') {
+    h1Title = "הדברת ג'וקים - ריסוס בטוח לבית וטיפול בבורות ביוב";
+  } else if (service.id === 'german-roach') {
+    h1Title = "הדברת תיקן גרמני בשיטת הג'ל (ללא ריח)";
   } else {
     const benefit = service.description ? ` - ${service.description.slice(0, 30)}...` : getRandomSuffix(service.urgency);
-    h1Title = `${service.name}${benefit}`;
+    h1Title = (service as any).seoFocus ? `${service.name} - ${(service as any).seoFocus}` : `${service.name}${benefit}`;
   }
 
   return (
@@ -322,7 +308,7 @@ export default async function ServicePage({ params }: PageProps) {
 
             <section className="bg-white p-8 rounded-2xl shadow-sm">
               <h2 className="text-3xl font-bold mb-6 text-blue-900">
-                שירותי {service.name} בפריסה ארצית
+                {getVariedServiceTitle(service.name, "בפריסה ארצית", false)}
               </h2>
               <p className="text-lg text-gray-700 leading-relaxed mb-6">
                 אנו מספקים שירותי {service.name} מקצועיים בכל רחבי הארץ. המדבירים שלנו מוסמכים, מנוסים ומצוידים בציוד המתקדם ביותר כדי להבטיח תוצאות מעולות. אנו שמים דגש על בטיחות הלקוחות ואיכות הסביבה.
@@ -393,15 +379,7 @@ export default async function ServicePage({ params }: PageProps) {
             {relatedPests.length > 0 && (
               <section className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
                 <h2 className="text-2xl font-bold mb-6 text-blue-900">
-                  {service.id === 'rat-catcher'
-                    ? "סוגי חולדות נפוצים בישראל"
-                    : service.id === 'mouse-catcher'
-                    ? "סוגי עכברים נפוצים בישראל"
-                    : service.id === 'rodents' 
-                    ? "סוגי מכרסמים נפוצים בישראל" 
-                    : service.id === 'cockroaches' || service.id === 'german-roach'
-                    ? "סוגי תיקנים נפוצים בישראל"
-                    : `סוגי ${service.name} נפוצים בישראל`}
+                  {getVariedProblemsTitle(service.name, "ישראל")}
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {relatedPests.map((pest) => (

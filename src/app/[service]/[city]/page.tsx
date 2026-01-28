@@ -11,6 +11,15 @@ import {
   getRotationSuffix,
   getPestsByServiceId,
   getWhyChooseUsTitle,
+  getVariedHook,
+  getVariedDescription,
+  getVariedWhyChooseUs,
+  getStructuralShuffle,
+  getVariedBulletPoints,
+  getVariedProblemsTitle,
+  getVariedServiceTitle,
+  getNeighborhoodsSentence,
+  getDistrictContext,
   Service,
   City
 } from '@/lib/data';
@@ -67,65 +76,38 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const suffix = getRotationSuffix(city.name);
   
   let title = "";
+  const titleVariations = [
+    `${service.name} ב${city.name}${suffix}`,
+    `${service.name} ב${city.name} - מדביר מוסמך`,
+    `צריכים ${service.name} ב${city.name}?`,
+    `הדברה ב${city.name}: ${service.name} עם אחריות`,
+    `מומחה ${service.name} ב${city.name} והסביבה`
+  ];
+
   if (service.id === 'silverfish') {
-    title = `הדברת דג הכסף ב${city.name} | פתרון לחרקי לחות וספרים`;
+    title = `הדברת דג הכסף ב${city.name} והסביבה`;
   } else if (service.id === 'psocids') {
-    title = `הדברת פסוקאים ב${city.name} | טיפול בחרקי עובש בדירות חדשות`;
+    title = `הדברת פסוקאים ב${city.name} - פתרון מקצועי`;
+  } else if (service.id === 'cockroaches') {
+    title = `הדברת ג'וקים ב${city.name} - שירות מקצועי`;
+  } else if (service.id === 'german-roach') {
+    title = `הדברת תיקן גרמני ב${city.name} ללא ריסוס`;
   } else if (isEmergency) {
-    title = `מדביר חירום ב${city.name} 24/7 | הגעה תוך 20 דקות | ${service.name}`;
+    title = `מדביר חירום ב${city.name} - זמינות גבוהה 24/7`;
   } else {
-    title = `${service.name} ב${city.name}${suffix}`;
+    const titleIndex = (city.name.length + service.id.length) % titleVariations.length;
+    title = titleVariations[titleIndex];
   }
   
-  // Intent-based description logic
-  const descriptions = {
-    safety: [
-      `גרים ב${city.name}? קבלו הדברה בטוחה לתינוקות ובעלי חיים (ללא ריח). שימוש בחומרים ירוקים ומאושרים בלבד. חזרה מהירה לשגרה ואחריות מלאה. הזמינו עכשיו.`,
-      `ריסוס לבית ב${city.name} מחומרים טבעיים בלבד (רמת רעילות נמוכה). פתרון מושלם למשפחות עם ילדים וכלבים. מדביר מוסמך עם רישיון המשרד להגנת הסביבה.`,
-    ],
-    urgency: [
-      `נתקלתם במזיק ב${city.name}? הגעה תוך ${city.arrivalTime || '30 דקות'}! שירות חירום 24/7 ללכידת חולדות, עכברים וטיפול בקני צרעות. אל תחכו שהבעיה תחמיר - חייגו למדביר תורן.`,
-      `שירותי הדברה אקספרס ב${city.name}. אנו זמינים כעת לטיפול מיידי בבעיה ב${city.neighborhoods?.[0] || city.name}. התחייבות לפתרון הבעיה או כספכם בחזרה. עבודה נקייה ומהירה.`,
-    ],
-    trust: [
-      `מחפשים מדביר ב${city.name} במחיר הוגן? אל תשלמו סתם. אצלנו תקבלו מחירון שקוף, תעודת אחריות בכתב ומדביר המופיע ב'יצאת צדיק'. ייעוץ טלפוני חינם.`,
-      `הדברה מקצועית ב${city.name} עם 100% אחריות. מעל ${city.completedJobs || '100'} עבודות בוצעו באזורכם. טיפול יסודי בכל סוגי המזיקים במחירים משתלמים וללא הפתעות.`,
-    ],
-    price: [
-      `${service.name} ב${city.name} החל מ-${service.avgPrice.split('-')[0]} ₪ בלבד. שירות מקצועי, אדיב ובטוח עם אחריות מלאה בכתב. בדקו את המחירון המעודכן שלנו לתושבי ${city.name}.`,
-      `צריכים ${service.name} ב${city.name}? קבלו הצעה משתלמת במיוחד. מחירים הוגנים, זמינות גבוהה ב${city.neighborhoods?.[1] || city.name} ותוצאות מובטחות. התקשרו עכשיו.`
-    ],
-    silverfish: [
-      `הדברת דג הכסף ב${city.name}. טיפול מקצועי בחרקי לחות המזיקים לספרים ובגדים. שימוש בחומרים בטוחים לבית עם אחריות מלאה.`,
-      `סובלים מדג הכסף ב${city.name}? אנחנו כאן כדי לעזור. פתרון סופי לחרקי לחות בארונות ובחדרי רחצה. מדביר מוסמך זמין כעת.`
-    ],
-    psocids: [
-      `הדברת פסוקאים ב${city.name}. מומחים לטיפול בחרקי עובש המופיעים על קירות רטובים בדירות חדשות. פתרון יסודי המונע את חזרת החרקים.`,
-      `חרקים לבנים קטנים ב${city.name}? אלו כנראה פסוקאים. אנו מספקים טיפול ייעודי לחרקי עובש בדירות חדשות ב${city.name} עם התחייבות לתוצאות.`
-    ],
-    fleas: [
-      `הדברת פרעושים ב${city.name} בשיטה ירוקה ובטוחה. טיפול יסודי הכולל השמדת פרעושים בוגרים ומניעת בקיעת ביצים. פתרון מושלם לבתים עם כלבים וחתולים.`,
-      `סובלים מפרעושים ב${city.name}? אנו מציעים ריסוס מקצועי לחצר ולבית עם אחריות מלאה. חומרים בטוחים לילדים וחיות מחמד המאפשרים חזרה מהירה לשגרה.`
-    ]
-  };
-
-  let description = "";
-  // Use a combination of city and service to rotate between 4 main strategies
-  const strategyIndex = (city.name.length + service.id.length) % 4;
-  const variant = city.name.length % 2;
-
-  if (service.id === 'silverfish') {
-    description = descriptions.silverfish[variant];
-  } else if (service.id === 'psocids') {
-    description = descriptions.psocids[variant];
-  } else if (service.id === 'fleas') {
-    description = descriptions.fleas[variant];
-  } else {
-    // Rotate between safety, urgency, trust, and price
-    const strategies = ['safety', 'urgency', 'trust', 'price'];
-    const selectedStrategy = strategies[strategyIndex] as keyof typeof descriptions;
-    description = (descriptions[selectedStrategy] as string[])[variant];
-  }
+  // High-intent, hyper-local description for city pages
+  const descriptionVariations = [
+    `זקוקים ל${service.name} ב${city.name}? המדבירים שלנו מגיעים לכל שכונות ${city.name} והסביבה. הדברה ירוקה ובטוחה עם אחריות מלאה בכתב. התקשרו עכשיו להצעת מחיר הוגנת.`,
+    `מחפשים מדביר מוסמך ל${service.name} ב${city.name}? אנו מספקים פתרונות הדברה מתקדמים ב${city.name} עם דגש על בטיחות ויעילות. זמינות גבוהה ואחריות מלאה על כל עבודה.`,
+    `הדברה ב${city.name} של ${service.name} במחירים הוגנים. צוות המומחים שלנו ב${city.name} ערוך לכל קריאה, כולל טיפולי חירום. חומרים מאושרים ובטוחים למשפחה.`,
+    `שירותי ${service.name} מקצועיים ב${city.name} והסביבה. אנו מציעים פתרון סופי לבעיית ה${service.name} ב${city.name} עם ליווי מקצועי ואחריות ארוכת טווח. התקשרו לייעוץ חינם.`
+  ];
+  const descIndex = (city.id.length + service.slug.length) % descriptionVariations.length;
+  const description = descriptionVariations[descIndex];
 
   return {
     title,
@@ -159,17 +141,31 @@ export default async function ServiceCityPage({ params }: PageProps) {
   const servicePests = getPestsByServiceId(service.id);
   const featuredPest = servicePests[0];
   
-  // Filter and prioritize problems based on city conversion data
+  // Filter and prioritize problems based on city conversion data and characteristics
   const getPrioritizedProblems = () => {
     // Base: problems related to the current service
     const serviceProblems = allProblems.filter(p => p.serviceId === service.id);
     
-    // Define priority services based on city conversion data
+    // Define priority services based on city characteristics
     let priorityServiceIds: string[] = [];
+    
+    // 1. Manual overrides based on specific city data
     if (city.id === '1') { // Ramla
       priorityServiceIds = ['rat-catcher', 'fleas'];
-    } else if (city.id === '2' || city.slug === 'yavne') { // Yavne (User mentioned ID 2, slug is 'yavne')
-      priorityServiceIds = ['rat-catcher']; // Mice/Rat
+    } else if (city.slug === 'yavne') {
+      priorityServiceIds = ['rat-catcher'];
+    }
+
+    // 2. Coastal cities (Bat Yam, Tel Aviv, Ashdod, Netanya, Herzliya)
+    const coastalCities = ['bat-yam', 'tel-aviv', 'ashdod', 'netanya', 'herzliya'];
+    if (coastalCities.includes(city.slug)) {
+      priorityServiceIds = [...priorityServiceIds, 'german-roach', 'psocids', 'silverfish'];
+    }
+
+    // 3. Agricultural/Open areas (Rehovot, Hadera, Hod Hasharon, Gedera)
+    const agriculturalCities = ['rehovot', 'hadera', 'hod-hasharon', 'gedera', 'rosh-haayin'];
+    if (agriculturalCities.includes(city.slug)) {
+      priorityServiceIds = [...priorityServiceIds, 'fire-ants', 'wasps', 'rodents'];
     }
 
     if (priorityServiceIds.length === 0) {
@@ -206,23 +202,129 @@ export default async function ServiceCityPage({ params }: PageProps) {
 
   const h1Title = `${service.name} ב${city.name}${getDeterministicSuffix(city.name, service.id)}`;
 
-  const getOpeningHook = (serviceId: string, cityName: string) => {
-    if (['ants', 'cockroaches', 'home-spraying'].includes(serviceId)) {
-      return `תושבי ${cityName}, מחפשים הדברה שלא מסכנת את הילדים והחיות? אנו משתמשים בתכשירים ירוקים (פירטרואידים) המאושרים על ידי המשרד להגנת הסביבה, המאפשרים חזרה לשגרה תוך שעה בלבד. ללא ריח וללא סכנה.`;
-    }
-    if (serviceId === 'fleas') {
-      return `סובלים מעקיצות פרעושים ב${cityName}? הטיפול שלנו משלב חומרים להשמדת הפרעושים הבוגרים יחד עם מעכבי גדילה (IGR) המונעים בקיעה של ביצים חדשות. פתרון בטוח לילדים וחיות מחמד עם אחריות מלאה.`;
-    }
-    if (['rat-catcher', 'mouse-catcher', 'wasps', 'snakes', 'rodents'].includes(serviceId)) {
-      return `נתקלתם במזיק מסוכן ב${cityName}? אל תחכו! צוות כוננות שלנו נמצא כרגע באזור וזמין להגעה תוך 30 דקות. לכידה וטיפול במקום עם התחייבות לפתרון הבעיה.`;
-    }
-    if (['termites', 'bed-bugs'].includes(serviceId)) {
-      return `הדברה מורכבת ב${cityName} דורשת מומחים. אנו מספקים אחריות מלאה בכתב (עד 5 שנים לטרמיטים), שימוש בציוד מתקדם וליווי מלא עד לפתרון המוחלט של הבעיה.`;
-    }
-    return null;
-  };
+  const localHook = getVariedHook(service, city);
+  const localParagraph = getVariedDescription(service, city, isEmergency);
+  const neighborhoodsSentence = getNeighborhoodsSentence(city);
+  const districtContext = getDistrictContext(city, service.name);
+  const whyChooseUsDescription = getVariedWhyChooseUs(service, city);
+  const bulletPoints = getVariedBulletPoints(service.id, city.name);
+  const structuralOrder = getStructuralShuffle(city.id);
 
-  const openingHook = getOpeningHook(service.id, city.name);
+  const localParagraphWithNeighborhoods = localParagraph.replace(
+    /ב\${city\.name}/g, 
+    `ב${city.name}`
+  );
+
+  const renderSection = (type: string) => {
+    switch (type) {
+      case 'pricing':
+        return !isEmergency && (
+          <DynamicPricingCard 
+            key="pricing"
+            serviceName={service.name} 
+            cityName={city.name} 
+            priceRange={service.avgPrice} 
+            warranty={service.warranty}
+            safety={service.safety}
+            duration={service.duration}
+          />
+        );
+      case 'faq':
+        return (
+          <FAQSection 
+            key="faq"
+            faqs={faqs} 
+            serviceName={service.name} 
+            cityName={city.name} 
+          />
+        );
+      case 'pests':
+        return !isEmergency && relatedProblems.length > 0 && (
+          <section key="pests" className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+            <h2 className="text-2xl font-bold mb-6 text-blue-900">
+              {getVariedProblemsTitle(service.id, city.name)}
+            </h2>
+            <div className="space-y-6">
+              {relatedProblems.map((problem) => (
+                <div 
+                  key={problem.id} 
+                  className="border border-gray-100 rounded-xl p-6 hover:border-blue-200 transition-all"
+                >
+                  <div className="flex flex-col md:flex-row gap-4">
+                    {problem.imageUrl && (
+                      <div className="relative w-full md:w-48 h-48 flex-shrink-0 rounded-lg overflow-hidden bg-gray-100">
+                        <Image 
+                          src={problem.imageUrl} 
+                          alt={problem.title} 
+                          fill 
+                          className="object-cover" 
+                        />
+                      </div>
+                    )}
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold text-blue-900 mb-3">{problem.title}</h3>
+                      <p className="text-gray-700 leading-relaxed mb-3">
+                        {problem.description}
+                      </p>
+                      <p className="text-gray-600 text-sm">
+                        {problem.injectionPhrase}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        );
+      case 'content':
+        return (
+          <section key="content" className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+            <h2 className={`text-3xl font-bold mb-6 ${isEmergency ? 'text-red-900' : 'text-blue-900'}`}>
+              {getVariedServiceTitle(service.name, city.name, isEmergency)}
+            </h2>
+            <p className="text-lg text-gray-700 leading-relaxed mb-4">
+              {localParagraphWithNeighborhoods}
+            </p>
+            <p className="text-lg text-gray-700 leading-relaxed mb-6">
+              {districtContext} {neighborhoodsSentence}
+            </p>
+            {city.injectionPhrase && (
+              <p className="text-lg text-blue-800 font-medium mb-6 italic">
+                {city.injectionPhrase}
+              </p>
+            )}
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {bulletPoints.map((point, i) => (
+                <li key={i} className="flex items-start">
+                  <span className="text-green-500 ml-2 font-bold text-xl">✓</span>
+                  <span className="font-medium">{point}</span>
+                </li>
+              ))}
+            </ul>
+
+            {service.preparation && service.preparation.length > 0 && (
+              <div className="bg-orange-50 p-6 rounded-xl border border-orange-200 mt-8">
+                <h3 className="text-xl font-bold text-orange-900 mb-4 flex items-center gap-2">
+                  📋 איך להתכונן להדברה ב{city.name}?
+                </h3>
+                <ul className="space-y-3">
+                  {service.preparation.map((step: string, i: number) => (
+                    <li key={i} className="flex items-start gap-3 text-orange-800">
+                      <span className="flex-shrink-0 w-6 h-6 bg-orange-200 text-orange-700 rounded-full flex items-center justify-center text-sm font-bold">
+                        {i + 1}
+                      </span>
+                      <span className="font-medium">{step}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </section>
+        );
+      default:
+        return null;
+    }
+  };
 
   return (
     <main className={`min-h-screen ${isEmergency ? 'bg-red-50' : 'bg-gray-50'} pb-24 md:pb-12`} dir="rtl">
@@ -263,139 +365,25 @@ export default async function ServiceCityPage({ params }: PageProps) {
             </div>
           </div>
         ) : null}
-        {service.url && !featuredPest?.imageUrl && (
-          <div className="relative w-full h-64 md:h-96 mb-8 rounded-2xl overflow-hidden shadow-lg border border-gray-200">
-            <Image
-              src={service.url}
-              alt={`${service.name} ב${city.name}`}
-              fill
-              className="object-cover"
-              priority
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
-            />
-          </div>
-        )}
-        {openingHook && (
-          <div className="mb-8 p-6 bg-blue-50 border-r-4 border-blue-500 rounded-l-xl">
-            <p className="text-xl text-blue-900 font-medium leading-relaxed">
-              {openingHook}
-            </p>
-          </div>
-        )}
+        
+        <div className="mb-8 p-6 bg-blue-50 border-r-4 border-blue-500 rounded-l-xl">
+          <p className="text-xl text-blue-900 font-medium leading-relaxed">
+            {localHook}
+          </p>
+        </div>
         
         <LocalContext city={city} service={service} />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="md:col-span-2 space-y-8">
+            {structuralOrder.map(type => renderSection(type))}
+
             <section className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-              <h2 className={`text-3xl font-bold mb-6 ${isEmergency ? 'text-red-900' : 'text-blue-900'}`}>
-                {isEmergency ? `שירות חירום: ${service.name} ב${city.name}` : `שירותי ${service.name} מקצועיים ב${city.name}`}
-              </h2>
-              <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                {isEmergency 
-                  ? `זקוקים ל${service.name} ב${city.name} עכשיו? אנחנו מבינים את הדחיפות. צוותי החירום שלנו פרוסים ב${city.name} ומוכנים להגיע אליכם תוך דקות ספורות לטיפול מיידי ומקצועי.`
-                  : `זקוקים ל${service.name} ב${city.name}? אתם במקום הנכון. אנו מספקים שירותי הדברה מתקדמים ומקצועיים, עם דגש על בטיחות, יעילות ושירות ללא פשרות. הצוות שלנו מכיר היטב את אזור ${city.name} ויודע לתת מענה מהיר ומדויק לכל בעיה.`
-                }
-              </p>
-              <ul className="space-y-4">
-                <li className="flex items-start">
-                  <span className="text-green-500 ml-2">✓</span>
-                  <span>מדבירים מוסמכים עם רישיון בתוקף</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-green-500 ml-2">✓</span>
-                  <span>שימוש בחומרי הדברה ירוקים ובטוחים</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-green-500 ml-2">✓</span>
-                  <span>אחריות מלאה על כל עבודה</span>
-                </li>
-              </ul>
-
-              {service.preparation && service.preparation.length > 0 && (
-                <div className="bg-orange-50 p-6 rounded-xl border border-orange-200 mt-8">
-                  <h3 className="text-xl font-bold text-orange-900 mb-4 flex items-center gap-2">
-                    📋 איך להתכונן להדברה ב{city.name}?
-                  </h3>
-                  <ul className="space-y-3">
-                    {service.preparation.map((step: string, i: number) => (
-                      <li key={i} className="flex items-start gap-3 text-orange-800">
-                        <span className="flex-shrink-0 w-6 h-6 bg-orange-200 text-orange-700 rounded-full flex items-center justify-center text-sm font-bold">
-                          {i + 1}
-                        </span>
-                        <span className="font-medium">{step}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </section>
-
-            {!isEmergency && relatedProblems.length > 0 && (
-              <section className="bg-white p-8 rounded-2xl shadow-sm">
-                <h2 className="text-2xl font-bold mb-6 text-blue-900">
-                  {service.id === 'rat-catcher' 
-                    ? `בעיות חולדות נפוצות ב${city.name}`
-                    : service.id === 'mouse-catcher'
-                    ? `בעיות עכברים נפוצות ב${city.name}`
-                    : service.id === 'rodents' 
-                    ? `בעיות מכרסמים נפוצות ב${city.name}` 
-                    : service.id === 'cockroaches' || service.id === 'german-roach'
-                    ? `סוגי תיקנים נפוצים ב${city.name}`
-                    : service.id === 'home-spraying'
-                    ? `מזיקים נפוצים המצריכים ריסוס ב${city.name}`
-                    : `אתגרי ${service.name} נפוצים ופתרונות ב${city.name}`}
-                </h2>
-                <div className="space-y-6">
-                  {relatedProblems.map((problem) => (
-                    <div 
-                      key={problem.slug} 
-                      className="border border-gray-100 rounded-xl p-6 hover:border-blue-200 transition-all"
-                    >
-                      <div className="flex flex-col md:flex-row gap-4">
-                        {problem.url && (
-                          <div className="relative w-full md:w-48 h-48 flex-shrink-0 rounded-lg overflow-hidden bg-gray-100">
-                            <Image 
-                              src={problem.url} 
-                              alt={problem.title} 
-                              fill 
-                              className="object-cover" 
-                            />
-                          </div>
-                        )}
-                        <div className="flex-1">
-                          <h3 className="text-xl font-bold text-blue-900 mb-3">{problem.title}</h3>
-                          <p className="text-gray-700 leading-relaxed mb-3">
-                            {problem.description}
-                          </p>
-                          <p className="text-gray-600 text-sm">
-                            {problem.injectionPhrase}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </section>
-            )}
-
-            {!isEmergency && (
-              <DynamicPricingCard 
-                serviceName={service.name} 
-                cityName={city.name} 
-                priceRange={service.avgPrice} 
-                warranty={service.warranty}
-                safety={service.safety}
-                duration={service.duration}
-              />
-            )}
-
-            <section className="bg-white p-8 rounded-2xl shadow-sm">
               <h2 className={`text-2xl font-bold mb-4 ${isEmergency ? 'text-red-900' : 'text-blue-900'}`}>
                 {getWhyChooseUsTitle(service, city.name)}
               </h2>
-              <p className="text-gray-700 mb-6">
-                אנו מבינים שנוכחות של מזיקים בבית או בעסק יכולה להיות מטרידה מאוד. לכן, אנו מציעים שירות מהיר, דיסקרטי ומקצועי. אנו לא רק מטפלים בבעיה הקיימת, אלא גם נותנים ייעוץ למניעת חזרת המזיקים בעתיד.
+              <p className="text-gray-700 mb-6 leading-relaxed">
+                {whyChooseUsDescription}
               </p>
               
               {city.neighborhoods && city.neighborhoods.length > 0 && (
@@ -449,11 +437,7 @@ export default async function ServiceCityPage({ params }: PageProps) {
         
         <ReviewsSection serviceId={service.id} cityName={city.name} />
         
-        <FAQSection 
-          faqs={faqs} 
-          serviceName={service.name} 
-          cityName={city.name} 
-        />
+        {/* FAQ Section is now part of structural shuffle */}
       </div>
 
       {/* קישורים פנימיים ל-SEO */}

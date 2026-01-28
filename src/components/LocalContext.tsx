@@ -13,7 +13,9 @@ export default function LocalContext({ city, service }: LocalContextProps) {
   const textVariants = [
     `תושבי ${city.name} והסביבה, אנו מבינים שנוכחות של ${service.name} מצריכה מענה מהיר. בין אם אתם גרים ב${mainNeighborhood || 'מרכז העיר'} או ב${secondaryNeighborhood || 'שכונות הסמוכות'}, צוות המדבירים שלנו זמין להגעה תוך פחות מ-${city.arrivalTime || 'שעה'}.`,
     `מחפשים ${service.name} ב${city.name}? המדבירים שלנו כבר ביצעו מעל ${city.completedJobs || '150'} עבודות באזורכם השנה. אנו מכירים היטב את אתגרי המזיקים הייחודיים ל${city.name}, במיוחד בשכונות כמו ${mainNeighborhood || city.name}.`,
-    `שירותי ה${service.name} שלנו ב${city.name} מותאמים אישית לסוג המבנה שלכם. הגענו לאחרונה לטיפולים מוצלחים ב${mainNeighborhood || 'אזור'} וגם ב${secondaryNeighborhood || 'סביבה'}, ואנו מצוידים בחומרים הבטוחים ביותר למשפחה שלכם.`
+    `שירותי ה${service.name} שלנו ב${city.name} מותאמים אישית לסוג המבנה שלכם. הגענו לאחרונה לטיפולים מוצלחים ב${mainNeighborhood || 'אזור'} וגם ב${secondaryNeighborhood || 'סביבה'}, ואנו מצוידים בחומרים הבטוחים ביותר למשפחה שלכם.`,
+    `גרים ב${city.name}? אל תתנו למזיקים להפריע לשגרת היום. אנחנו מכירים את כל הפינות ב${city.name} ומספקים מענה מהיר ב${mainNeighborhood || 'כל השכונות'} עם אחריות מלאה בכתב.`,
+    `הדברה מקצועית ב${city.name} היא המומחיות שלנו. עם ניסיון רב במחוז ${city.district}, אנו יודעים בדיוק אילו מזיקים נפוצים ב${city.name} ואיך לטפל בהם בצורה היסודית ביותר.`
   ];
 
   const selectedText = textVariants[parseInt(city.id) % textVariants.length];

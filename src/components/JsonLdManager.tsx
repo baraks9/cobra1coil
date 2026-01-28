@@ -119,28 +119,20 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
       "addressRegion": city?.district || "ישראל",
       "addressCountry": "IL"
     },
-    "description": city ? `שירותי הדברה מקצועיים ב${city.name} והסביבה. הגעה תוך ${city.arrivalTime || '60 דקות'}.` : process.env.NEXT_PUBLIC_EXPERT_DESCRIPTION,
-    "areaServed": type === 'home' ? (citiesData as City[]).map(c => ({
+    "description": type === 'city' && city && service 
+      ? `שירותי ${service.name} מקצועיים ב${city.name} והסביבה. הגעה מהירה ל${city.neighborhoods?.[0] || city.name} תוך ${city.arrivalTime || '30 דקות'}.` 
+      : process.env.NEXT_PUBLIC_EXPERT_DESCRIPTION,
+    "areaServed": type === 'city' && city ? {
+      "@type": "City",
+      "name": city.name,
+      "sameAs": city.wikidata
+    } : type === 'home' ? (citiesData as City[]).map(c => ({
       "@type": "City",
       "name": c.name,
-      "sameAs": c.wikidata,
-      "geo": {
-        "@type": "GeoCircle",
-        "geoMidpoint": {
-          "@type": "GeoCoordinates",
-          "latitude": c.lat,
-          "longitude": c.lng
-        },
-        "geoRadius": "15000"
-      }
+      "sameAs": c.wikidata
     })) : {
-      "@type": "GeoCircle",
-      "geoMidpoint": {
-        "@type": "GeoCoordinates",
-        "latitude": city?.lat || "32.0853",
-        "longitude": city?.lng || "34.7818"
-      },
-      "geoRadius": city ? "15000" : "100000"
+      "@type": "Country",
+      "name": "Israel"
     },
     "openingHoursSpecification": [
       {
@@ -292,9 +284,11 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
     "name": type === 'home' ? businessName : service ? `${service.name} ב${city?.name || 'כל הארץ'}` : businessName,
     "isPartOf": { "@id": `${baseUrl}/#website` },
     "publisher": { "@id": organizationId },
-    "description": process.env.NEXT_PUBLIC_EXPERT_DESCRIPTION,
+    "description": type === 'city' && city && service 
+      ? `שירותי ${service.name} מקצועיים ב${city.name}. מדביר מוסמך זמין כעת להגעה מהירה.` 
+      : process.env.NEXT_PUBLIC_EXPERT_DESCRIPTION,
     "breadcrumb": { "@id": `${baseUrl}/#breadcrumb` },
-    "mainEntity": service ? { "@id": `${currentUrl}/#service` } : { "@id": organizationId },
+    "mainEntity": type === 'city' ? { "@id": organizationId } : service ? { "@id": `${currentUrl}/#service` } : { "@id": organizationId },
     "reviewedBy": { "@id": expertId },
     "lastReviewed": today,
     "author": { "@id": expertId },
@@ -351,14 +345,13 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
       "provider": { "@id": organizationId },
       "brand": { "@id": brandId },
       "additionalType": service.wikidata,
-      "areaServed": {
-        "@type": "GeoCircle",
-        "geoMidpoint": {
-          "@type": "GeoCoordinates",
-          "latitude": city?.lat || "32.0853",
-          "longitude": city?.lng || "34.7818"
-        },
-        "geoRadius": city ? "15000" : "100000"
+      "areaServed": type === 'city' && city ? {
+        "@type": "City",
+        "name": city.name,
+        "sameAs": city.wikidata
+      } : {
+        "@type": "Country",
+        "name": "Israel"
       },
       "hoursAvailable": isEmergencyService ? [
         {
@@ -466,7 +459,7 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
     graph.push({
       "@type": "Article",
       "@id": `${baseUrl}/pest-id/${pest.slug}/#article`,
-      "headline": `זיהוי ${pest.name} (${pest.scientificName})`,
+      "headline": `איך מזהים ${pest.name}? מדריך זיהוי ותמונות`,
       "description": pest.description,
       "image": {
         "@type": "ImageObject",

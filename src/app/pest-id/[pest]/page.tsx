@@ -29,8 +29,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!pest) return {};
 
   return {
-    title: `זיהוי ${pest.name} (${pest.scientificName}) - מדריך זיהוי וטיפול`,
-    description: `איך מזהים ${pest.name}? סימני זיהוי, סכנות ודרכי טיפול. ${pest.description.substring(0, 100)}...`,
+    title: `איך מזהים ${pest.name}? מדריך זיהוי, תמונות וסימנים נפוצים`,
+    description: `מדריך מקצועי לזיהוי ${pest.name} (${pest.scientificName}). איך הם נראים? מהם סימני הזיהוי בבית? ומה ההבדל בינם לבין מזיקים דומים?`,
     alternates: {
       canonical: `/pest-id/${pest.slug}`,
     },
@@ -90,7 +90,7 @@ export default async function PestPage({ params }: PageProps) {
             מגדיר מזיקים: {pest.category}
           </div>
           <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${toneClass}`}>
-            זיהוי {pest.name}: סימנים, סכנות ודרכי טיפול
+            מגדיר המזיקים: זיהוי ומידע על {pest.name}
           </h1>
           <p className="text-xl text-gray-500 italic mb-6">
             {pest.scientificName}
@@ -127,7 +127,7 @@ export default async function PestPage({ params }: PageProps) {
             
             <div className="bg-blue-50 p-6 rounded-2xl border border-blue-100">
               <h3 className="text-xl font-bold mb-4 text-blue-900 flex items-center gap-2">
-                🔍 איך מזהים?
+                🔍 איך מזהים {pest.name}?
               </h3>
               <p className="text-gray-700 leading-relaxed">
                 {pest.identificationSigns}
@@ -154,7 +154,7 @@ export default async function PestPage({ params }: PageProps) {
           {/* Educational Content */}
           <div className="space-y-8">
             <section>
-              <h2 className="text-2xl font-bold mb-4 text-gray-900">תיאור המזיק</h2>
+              <h2 className="text-2xl font-bold mb-4 text-gray-900">מידע כללי על {pest.name}</h2>
               <p className="text-lg text-gray-700 leading-relaxed">
                 {pest.description}
               </p>
@@ -170,10 +170,10 @@ export default async function PestPage({ params }: PageProps) {
               <div className="bg-red-50 border-r-4 border-red-500 p-6 rounded-l-xl">
                 <div className="flex items-center gap-3 mb-2">
                   <span className="text-2xl">⚠️</span>
-                  <h3 className="text-lg font-bold text-red-800">טיפול דחוף נדרש</h3>
+                  <h3 className="text-lg font-bold text-red-800">זיהיתם {pest.name}?</h3>
                 </div>
                 <p className="text-red-700">
-                  מזיק זה מוגדר כבעל דחיפות קריטית. מומלץ לא להמתין ולהזמין טיפול מקצועי באופן מיידי למניעת התפשטות.
+                  מזיק זה מוגדר כבעל דחיפות קריטית. זיהוי נכון הוא הצעד הראשון למניעת נזק משמעותי. מומלץ לא להמתין ולהזמין טיפול מקצועי באופן מיידי.
                 </p>
               </div>
             )}
@@ -183,13 +183,13 @@ export default async function PestPage({ params }: PageProps) {
               <div className="absolute top-0 left-0 w-full h-1 bg-blue-600"></div>
               <div className="flex items-center gap-2 mb-3">
                 <span className="text-2xl">🔗</span>
-                <span className="text-sm font-medium text-blue-600 uppercase tracking-wide">פתרון מקצועי</span>
+                <span className="text-sm font-medium text-blue-600 uppercase tracking-wide">איך נפטרים מהם?</span>
               </div>
               <h2 className="text-2xl font-bold mb-4 text-blue-900">
                 זיהיתם {pest.name} בבית?
               </h2>
               <p className="text-gray-700 mb-6 leading-relaxed">
-                דף זה מיועד לזיהוי ומידע בלבד. כדי להיפטר מהמפגע לצמיתות, אנו מספקים שירותי {relatedService?.name || 'הדברה'} מקצועיים עם התחייבות לתוצאות ואחריות מלאה בכתב.
+                דף זה מיועד לזיהוי ומידע בלבד. זיהוי הוא רק השלב הראשון בפתרון הבעיה. כדי להיפטר מהמפגע לצמיתות, אנו מספקים שירותי {relatedService?.name || 'הדברה'} מקצועיים עם התחייבות לתוצאות ואחריות מלאה בכתב.
               </p>
               {relatedService && (
                 <div className="space-y-4">
@@ -197,7 +197,7 @@ export default async function PestPage({ params }: PageProps) {
                     href={`/${relatedService.slug}`}
                     className="block w-full py-4 bg-blue-600 text-white text-center rounded-xl font-bold text-lg hover:bg-blue-700 transition-all shadow-md hover:shadow-lg transform hover:scale-105"
                   >
-                    להזמנת {relatedService.name} עכשיו ←
+                    להזמנת הדברת {pest.name} עכשיו ←
                   </Link>
                   
                   {relatedService.preparation && relatedService.preparation.length > 0 && (

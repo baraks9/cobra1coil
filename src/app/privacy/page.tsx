@@ -3,6 +3,9 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'מדיניות פרטיות | קוברה הדברה',
   description: 'מדיניות הפרטיות של אתר קוברה הדברה. אנו מחויבים לשמירה על פרטיות המשתמשים שלנו.',
+  alternates: {
+    canonical: '/privacy',
+  },
 };
 
 export default function PrivacyPage() {

@@ -5,6 +5,9 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'אודות קוברה הדברה | שמואל יחזקאל - מדביר מוסמך',
   description: 'הכירו את קוברה הדברה בניהולו של שמואל יחזקאל. ניסיון רב שנים, רישיון מדביר בתוקף ושירות ללא פשרות.',
+  alternates: {
+    canonical: '/about',
+  },
 };
 
 export default function AboutPage() {

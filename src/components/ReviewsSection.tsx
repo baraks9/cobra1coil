@@ -22,23 +22,40 @@ interface ReviewsSectionProps {
 }
 
 export default function ReviewsSection({ serviceId, cityName, limit = 6 }: ReviewsSectionProps) {
-  // Filter reviews based on serviceId if provided
+  // Filter reviews based on serviceId and cityName if provided
   const allReviews = reviewsData as Review[];
-  const filteredReviews = serviceId 
-    ? allReviews.filter(r => r.serviceId === serviceId)
-    : allReviews;
+  
+  // Scoring system for reviews
+  const scoredReviews = allReviews.map(review => {
+    let score = 0;
+    
+    // Priority 1: Matching service AND matching city
+    if (serviceId && review.serviceId === serviceId && cityName && review.cityId === cityName) {
+      score += 100;
+    }
+    // Priority 2: Matching city only (any service)
+    else if (cityName && review.cityId === cityName) {
+      score += 50;
+    }
+    // Priority 3: Matching service only
+    else if (serviceId && review.serviceId === serviceId) {
+      score += 30;
+    }
+    
+    return { ...review, score };
+  });
 
-  // If we have filtered reviews, use them, otherwise use all reviews
-  const reviewsToDisplay = filteredReviews.length > 0 
-    ? filteredReviews.slice(0, limit) 
-    : allReviews.slice(0, limit);
+  // Sort by score (descending) and then by date (not implemented here but could be)
+  const sortedReviews = scoredReviews.sort((a, b) => b.score - a.score);
+  
+  const reviewsToDisplay = sortedReviews.slice(0, limit);
 
   return (
     <section className="py-12 bg-white rounded-3xl shadow-sm border border-gray-100 my-12 overflow-hidden">
       <div className="px-6 md:px-12">
         <div className="text-center mb-10">
           <h2 className="text-3xl font-bold text-blue-900 mb-4">
-            {serviceId && filteredReviews.length > 0 ? `לקוחות ממליצים על השירות` : `מה הלקוחות שלנו אומרים`}
+            {cityName ? `מה לקוחות ב${cityName} אומרים עלינו` : `מה הלקוחות שלנו אומרים`}
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             אלפי לקוחות מרוצים כבר נהנו משירותי הדברה מקצועיים, אמינים ובטוחים. הנה חלק מהביקורות האחרונות שלנו מ-Google Maps.

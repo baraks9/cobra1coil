@@ -3,6 +3,9 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'תנאי שימוש | קוברה הדברה',
   description: 'תנאי השימוש באתר קוברה הדברה. מידע על אחריות, שירותים ושימוש בתוכן האתר.',
+  alternates: {
+    canonical: '/terms',
+  },
 };
 
 export default function TermsPage() {

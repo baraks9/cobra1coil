@@ -36,7 +36,7 @@ export function createBreadcrumbs(
   pest?: Pest
 ): InternalLinkSection {
   const links: InternalLink[] = [
-    { href: routes.home(), label: 'דף הבית', isPrimary: true },
+    { href: routes.home(), label: 'קוברה הדברה', isPrimary: true },
   ];
 
   if (type === 'service' && service) {
@@ -166,8 +166,8 @@ export function getHubLinks(): InternalLinkSection {
     links: [
       {
         href: routes.home(),
-        label: 'דף הבית',
-        description: 'כל השירותים שלנו',
+        label: 'קוברה הדברה',
+        description: 'כל שירותי ההדברה שלנו',
         isPrimary: true,
       },
       {
@@ -236,7 +236,18 @@ export function createComprehensiveInternalLinks(
       sections.push(relatedPests);
     }
 
-    // 4. שירותי חירום (תמיד טוב לקישוריות)
+    // 4. קישור לדף השירות הארצי (לחיזוק הסמכות של דף השירות)
+    sections.push({
+      title: 'מידע מקצועי נוסף',
+      links: [{
+        href: routes.service(service.slug),
+        label: `מדריך מקצועי ל${service.name}`,
+        description: `מחירון והמלצות על ${service.name} בפריסה ארצית`
+      }],
+      variant: 'default'
+    });
+
+    // 5. שירותי חירום (תמיד טוב לקישוריות)
     sections.push(getServiceCategoryLinks(service, 6));
 
   } else if (type === 'service' && service) {

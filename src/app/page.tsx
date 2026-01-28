@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import JsonLdManager from '@/components/JsonLdManager';
@@ -6,9 +7,24 @@ import HeroSection from '@/components/HeroSection';
 import { routes } from '@/lib/routes';
 import ReviewsSection from '@/components/ReviewsSection';
 
+export const metadata: Metadata = {
+  alternates: {
+    canonical: '/',
+  },
+};
+
 export default function Home() {
   const services = getServices();
   const cities = getCities();
+
+  // Smart logic to distribute services across cities for better internal linking
+  const getSmartServiceForCity = (index: number) => {
+    // We exclude very specific services to keep links relevant
+    const generalServices = services.filter(s => 
+      !['commercial', 'emergency'].includes(s.id)
+    );
+    return generalServices[index % generalServices.length];
+  };
 
   return (
     <main className="min-h-screen bg-gray-50 pb-12" dir="rtl">
@@ -50,17 +66,20 @@ export default function Home() {
         <ReviewsSection />
 
         <section>
-          <h2 className="text-3xl font-bold mb-8 text-center text-blue-900">אזורי שירות מרכזיים</h2>
-          <div className="flex flex-wrap justify-center gap-4">
-            {cities.map((city) => (
-              <Link
-                key={city.id}
-                href={routes.serviceCity('risus-labayit', city.slug)}
-                className="bg-white px-6 py-3 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:text-blue-600 transition-all text-sm font-medium"
-              >
-                הדברה ב{city.name}
-              </Link>
-            ))}
+          <h2 className="text-3xl font-bold mb-8 text-center text-blue-900">שירותי הדברה נפוצים בערים</h2>
+          <div className="flex flex-wrap justify-center gap-3">
+            {cities.slice(0, 60).map((city, index) => {
+              const smartService = getSmartServiceForCity(index);
+              return (
+                <Link
+                  key={`${city.id}-${smartService.id}`}
+                  href={routes.serviceCity(smartService.slug, city.slug)}
+                  className="bg-white px-5 py-2.5 rounded-full shadow-sm hover:shadow-md border border-gray-100 hover:border-blue-400 hover:text-blue-600 transition-all text-sm font-medium"
+                >
+                  {smartService.name} ב{city.name}
+                </Link>
+              );
+            })}
           </div>
         </section>
       </div>

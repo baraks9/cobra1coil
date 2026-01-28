@@ -1,183 +1,165 @@
 [
   {
     "id": "p_worms_ceiling",
-    "slug": "white-worms-ceiling",
     "title": "תולעים לבנות על התקרה",
     "serviceId": "moths",
     "urgency": "high",
     "description": "זחלי עש המזון המטפסים לתקרה לפני התגלמות.",
     "injectionPhrase": "חיסול מוקד התולעים הלבנות בתקרה (זחלי עש) במטבח.",
-    "url": "/problems/white-worms-ceiling.webp"
+    "imageUrl": "/problems/white-worms-ceiling.webp"
   },
   {
     "id": "p_ants_car",
-    "slug": "ants-in-car",
     "title": "נמלים ברכב",
     "serviceId": "ants",
     "urgency": "medium",
     "description": "נמלים שהקימו קן בתוך רכב פרטי.",
     "injectionPhrase": "ריסוס ושאיבה של נמלים מתוך ריפודים ודשבורד הרכב.",
-    "url": "/problems/ants-in-car.webp"
+    "imageUrl": "/problems/ants-in-car.webp"
   },
   {
     "id": "p_tami4",
-    "slug": "roaches-in-tami4",
     "title": "ג'וקים בבר מים (תמי 4)",
     "serviceId": "german-roach",
     "urgency": "critical",
     "description": "תיקנים קטנים בתוך המכשיר. דורש טיפול עדין בג'ל.",
     "injectionPhrase": "טיפול בג'ל מיוחד לתיקן גרמני בתוך בר המים (ללא רעילות למים).",
-    "url": "/problems/roaches-in-tami4.webp"
+    "imageUrl": "/problems/roaches-in-tami4.webp"
   },
   {
     "id": "p_mouse_ac",
-    "slug": "mouse-in-ac",
     "title": "עכבר במזגן",
     "serviceId": "rat-catcher",
     "urgency": "critical",
     "description": "עכבר או חולדה שנכנסו לתעלות המזגן.",
     "injectionPhrase": "חילוץ עכבר מהמזגן וחיטוי התעלות מריחות רעים.",
-    "url": "/problems/mouse-in-ac.webp"
+    "imageUrl": "/problems/mouse-in-ac.webp"
   },
   {
     "id": "p_dead_pigeon",
-    "slug": "pinuy-yona-meta",
     "title": "פינוי יונה מתה",
     "serviceId": "carcass-removal",
     "urgency": "critical",
     "description": "פינוי פגר יונה ממסתור כביסה או מרפסת.",
     "injectionPhrase": "פינוי יונה מתה (כולל חיטוי מקום הפגר) - הגעה מידית",
-    "url": "/problems/pinuy-yona-meta.webp"
+    "imageUrl": "/problems/pinuy-yona-meta.webp"
   },
   {
     "id": "p2",
-    "slug": "rat-in-toilet",
     "title": "חולדה באסלה",
     "serviceId": "rat-catcher",
     "urgency": "critical",
     "description": "חילוץ וטיפול בחולדות המגיעות דרך צנרת הביוב והאסלה.",
     "injectionPhrase": "טיפול חירום לחולדה שיצאה מהאסלה - כולל חסימת גישה בצנרת (אל-חוזר).",
-    "url": "/problems/rat-in-toilet.webp"
+    "imageUrl": "/problems/rat-in-toilet.webp"
   },
   {
     "id": "p3",
-    "slug": "roaches-in-ac",
     "title": "ג'וקים במזגן",
     "serviceId": "cockroaches",
     "urgency": "high",
     "description": "הדברה ייעודית לתיקנים המסתתרים בתוך המזגן ומערכת המיזוג.",
     "injectionPhrase": "הדברה ייעודית לתיקנים המקננים בתוך המזגן ללא פגיעה במכשיר.",
-    "url": "/problems/roaches-in-ac.webp"
+    "imageUrl": "/problems/roaches-in-ac.webp"
   },
   {
     "id": "p5",
-    "slug": "wasp-nest-shutter",
     "title": "קן צרעות בארגז תריס",
     "serviceId": "wasps",
     "urgency": "critical",
     "description": "פינוי והדברת קן צרעות שהוקם בתוך ארגז התריס או החלון.",
     "injectionPhrase": "הסרה בטוחה של קן צרעות מארגז התריס ללא סיכון לדיירי הבית.",
-    "url": "/problems/wasp-nest-shutter.webp"
+    "imageUrl": "/problems/wasp-nest-shutter.webp"
   },
   {
     "id": "p6",
-    "slug": "fire-ants-bed",
     "title": "נמלי אש במיטה",
     "serviceId": "fire-ants",
     "urgency": "critical",
     "description": "טיפול מיידי בנמלי אש עוקצות בחדר השינה ובמיטות.",
     "injectionPhrase": "הדברת נמלי אש בחדר השינה בחומרים בטוחים - הגעה תוך שעה.",
-    "url": "/problems/fire-ants-bed.webp"
+    "imageUrl": "/problems/fire-ants-bed.webp"
   },
   {
     "id": "p7",
-    "slug": "mice-in-walls",
     "title": "עכברים בקירות גבס",
     "serviceId": "rat-catcher",
     "urgency": "high",
     "description": "איתור ולכידת מכרסמים הרצים בתוך קירות גבס ותקרות אקוסטיות.",
     "injectionPhrase": "מומחים בשליפת עכברים וחולדות מתוך קירות גבס ותקרות צפות.",
-    "url": "/problems/mice-in-walls.webp"
+    "imageUrl": "/problems/mice-in-walls.webp"
   },
   {
     "id": "p8",
-    "slug": "fleas-sofa",
     "title": "פרעושים בספה",
     "serviceId": "fleas",
     "urgency": "high",
     "description": "הדברת פרעושים שהתבססו בספות, שטיחים וריהוט בד.",
     "injectionPhrase": "ניקוי והדברה של פרעושים מספות וריהוט בד - חזרה לשגרה עוד באותו היום.",
-    "url": "/problems/fleas-sofa.webp"
+    "imageUrl": "/problems/fleas-sofa.webp"
   },
   {
     "id": "p9",
-    "slug": "booklice-new-house",
     "title": "חרקים לבנים קטנים (פסוקאים)",
     "serviceId": "psocids",
     "urgency": "medium",
     "description": "טיפול בפסוקאים (חרקי עובש/אבק) האופייניים לדירות חדשות.",
     "injectionPhrase": "פתרון לחרקי עובש ופסוקאים (חרקים לבנים קטנים) בקירות ופאנלים.",
-    "url": "/problems/booklice-new-house.webp"
+    "imageUrl": "/problems/booklice-new-house.webp"
   },
  
   {
     "id": "p12",
-    "slug": "maggots-kitchen",
     "title": "רימות במטבח",
     "serviceId": "flies",
     "urgency": "high",
     "description": "טיפול בהתפרצות רימות זבובים בפחי אשפה ומקומות מסתור במטבח.",
     "injectionPhrase": "חיסול מיידי של רימות ותולעים במטבח ומניעת התפתחות זבובים.",
-    "url": "/problems/maggots-kitchen.webp"
+    "imageUrl": "/problems/maggots-kitchen.webp"
   },
   {
     "id": "p13",
-    "slug": "german-roach-kitchen",
     "title": "ג'וקים קטנים במטבח (תיקן גרמני)",
     "serviceId": "cockroaches",
     "urgency": "high",
     "description": "הדברת ג'וקים קטנים במכונת הקפה, תמי 4, ומנועי מקרר.",
     "injectionPhrase": "הדברת תיקן גרמני (ג'וקים קטנים) במכשירי חשמל ומטבחים באמצעות ג'ל וריסוס.",
-    "url": "/problems/german-roach-kitchen.webp"
+    "imageUrl": "/problems/german-roach-kitchen.webp"
   },
   {
     "id": "p15",
-    "slug": "roaches-coffee-machine",
     "title": "ג'וקים במכונת קפה",
     "serviceId": "cockroaches",
     "urgency": "high",
     "description": "טיפול בג'וקים שהתנחלו במכונת הקפה ללא פגיעה במכשיר.",
     "injectionPhrase": "טיפול בג'וקים שהתנחלו במכונת הקפה ללא פגיעה במכשיר.",
-    "url": "/problems/roaches-coffee-machine.webp"
+    "imageUrl": "/problems/roaches-coffee-machine.webp"
   },
   {
     "id": "p_mosquitoes_garden",
-    "slug": "mosquitoes-in-garden",
     "title": "מתקפת יתושים בגינה",
     "serviceId": "mosquitoes",
     "urgency": "high",
     "description": "להקות יתושים בחצר שמונעות ישיבה בחוץ. כולל יתוש הנמר האסייתי.",
     "injectionPhrase": "ריסוס מקצועי לחצר נגד יתושים המחזיק מעמד.",
-    "url": "/problems/mosquitoes-in-garden.webp"
+    "imageUrl": "/problems/mosquitoes-in-garden.webp"
   },
   {
     "id": "p_moths_kitchen",
-    "slug": "moths-in-pantry",
     "title": "פרפרים בארון המטבח (עש המזון)",
     "serviceId": "moths",
     "urgency": "medium",
     "description": "פרפרים קטנים וקורים בתוך אריזות מזון יבש.",
     "injectionPhrase": "חיסול מוקד עש המזון במזווה ללא רעלים על האוכל.",
-    "url": "/problems/moths-in-pantry.webp"
+    "imageUrl": "/problems/moths-in-pantry.webp"
   },
   {
     "id": "p_safety_baby",
-    "slug": "safe-pest-control-baby",
     "title": "הדברה בטוחה לתינוקות ובעלי חיים",
     "serviceId": "cockroaches",
     "urgency": "high",
     "description": "דף מידע ושירות להורים מודאגים - ריסוס ללא ריח ועם כניסה מהירה הביתה.",
     "injectionPhrase": "הדברה ירוקה המאושרת לסביבת תינוקות וכלבים.",
-    "url": "/problems/safe-pest-control-baby.webp"
+    "imageUrl": "/problems/safe-pest-control-baby.webp"
   }
 ]

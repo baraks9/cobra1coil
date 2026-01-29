@@ -120,12 +120,13 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
     "@type": "HomeAndConstructionBusiness",
     "@id": organizationId,
     "name": businessName,
+    "legalName": businessName,
     "url": baseUrl,
     "telephone": phone,
     "email": email,
     "logo": logoUrl,
-    "image": process.env.NEXT_PUBLIC_LOGO_URL || `${baseUrl}/logo.png`,
-    "priceRange": "₪₪",
+    "image": logoUrl,
+    "priceRange": "ILS",
     "brand": { "@id": brandId },
     "sameAs": sameAs,
     "founder": { "@id": expertId },
@@ -395,27 +396,32 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
       } : undefined,
       "aggregateRating": {
         "@type": "AggregateRating",
-        "ratingValue": ratingValue,
-        "reviewCount": reviewCount,
-        "bestRating": "5",
-        "worstRating": "1"
+        "ratingValue": parseFloat(ratingValue),
+        "reviewCount": parseInt(reviewCount),
+        "bestRating": 5,
+        "worstRating": 1,
+        "itemReviewed": {
+          "@type": "Service",
+          "name": service.name,
+          "description": service.description || `שירותי ${service.name} מקצועיים.`,
+          "image": service.url ? (service.url.startsWith('http') ? service.url : `${baseUrl}${service.url}`) : logoUrl
+        }
       },
       "review": relevantReviews.map((r: any, idx: number) => ({
         "@type": "Review",
         "@id": `${serviceUrl}/#review-${idx}`,
+        "itemReviewed": {
+          "@type": "Service",
+          "name": service.name
+        },
         "author": { "@type": "Person", "name": sanitize(r.author) },
         "datePublished": r.datePublished,
         "reviewBody": sanitize(r.reviewBody),
         "reviewRating": { 
           "@type": "Rating", 
-          "ratingValue": String(r.reviewRating),
-          "bestRating": "5",
-          "worstRating": "1"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": sanitize(r.sourceName || "Google Maps"),
-          "url": r.sourceUrl || googleMapsUrl
+          "ratingValue": r.reviewRating,
+          "bestRating": 5,
+          "worstRating": 1
         }
       }))
     });

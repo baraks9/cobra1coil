@@ -202,27 +202,6 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
         "description": "ראש השנה - שירות חירום בלבד"
       }
     ],
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": ratingValue,
-      "reviewCount": reviewCount,
-      "bestRating": "5",
-      "worstRating": "1",
-      "itemReviewed": {
-        "@type": "HomeAndConstructionBusiness",
-        "name": businessName,
-        "image": logoUrl,
-        "telephone": phone,
-        "priceRange": "₪₪",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": city ? `אזור ${city.name}` : "פריסה ארצית",
-          "addressLocality": city?.name || "ישראל",
-          "addressRegion": city?.district || "ישראל",
-          "addressCountry": "IL"
-        }
-      }
-    },
     "potentialAction": [
       {
         "@type": "CommunicateAction",
@@ -419,10 +398,7 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
         "ratingValue": ratingValue,
         "reviewCount": reviewCount,
         "bestRating": "5",
-        "worstRating": "1",
-        "itemReviewed": {
-          "@id": `${serviceUrl}/#service`
-        }
+        "worstRating": "1"
       },
       "review": relevantReviews.map((r: any, idx: number) => ({
         "@type": "Review",

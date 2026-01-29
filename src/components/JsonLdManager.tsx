@@ -223,26 +223,6 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
         }
       }
     },
-    "review": relevantReviews.map((r: any) => ({
-      "@type": "Review",
-      "author": { 
-        "@type": "Person", 
-        "name": sanitize(r.author)
-      },
-      "datePublished": r.datePublished,
-      "reviewBody": sanitize(r.reviewBody),
-      "reviewRating": { 
-        "@type": "Rating", 
-        "ratingValue": String(r.reviewRating),
-        "bestRating": "5",
-        "worstRating": "1"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": sanitize(r.sourceName || "Google Maps"),
-        "url": r.sourceUrl || googleMapsUrl
-      }
-    })),
     "potentialAction": [
       {
         "@type": "CommunicateAction",
@@ -444,8 +424,9 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
           "@id": `${serviceUrl}/#service`
         }
       },
-      "review": relevantReviews.map((r: any) => ({
+      "review": relevantReviews.map((r: any, idx: number) => ({
         "@type": "Review",
+        "@id": `${serviceUrl}/#review-${idx}`,
         "author": { "@type": "Person", "name": sanitize(r.author) },
         "datePublished": r.datePublished,
         "reviewBody": sanitize(r.reviewBody),

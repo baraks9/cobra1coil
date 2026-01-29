@@ -384,9 +384,12 @@ export function getVariedBulletPoints(serviceId: string, cityName: string): stri
   return [...base.slice(0, 2), selected[mixIndex], selected[(mixIndex + 1) % selected.length]];
 }
 
-export function getVariedProblemsTitle(serviceId: string, cityName: string): string {
+export function getVariedProblemsTitle(serviceId: string, city: City): string {
   const service = getServiceById(serviceId);
   const name = service ? service.name : serviceId;
+  const cityName = city.name;
+  const neighborhood = city.neighborhoods?.[0];
+  const district = city.district;
   
   const variations = [
     `בעיות ${name} נפוצות ב${cityName}`,
@@ -396,13 +399,19 @@ export function getVariedProblemsTitle(serviceId: string, cityName: string): str
     `אתגרי ה${name} הייחודיים ל${cityName}`,
     `מה חשוב לדעת על ${name} ב${cityName}?`,
     `איך מזהים ${name} בבתים ב${cityName}?`,
-    `סוגי ה${name} שאנו פוגשים ב${cityName}`
+    `סוגי ה${name} שאנו פוגשים ב${cityName}`,
+    `מפגעי ${name} בשכונת ${neighborhood || cityName}`,
+    `אתגרי הדברה במחוז ${district}: ${name}`
   ];
   const index = (cityName.length + serviceId.length) % variations.length;
   return variations[index];
 }
 
-export function getVariedServiceTitle(serviceName: string, cityName: string, isEmergency: boolean): string {
+export function getVariedServiceTitle(serviceName: string, city: City, isEmergency: boolean): string {
+  const cityName = city.name;
+  const neighborhood = city.neighborhoods?.[0];
+  const district = city.district;
+
   const variations = isEmergency ? [
     `שירות חירום: ${serviceName} ב${cityName}`,
     `צריכים ${serviceName} ב${cityName} עכשיו?`,
@@ -411,7 +420,9 @@ export function getVariedServiceTitle(serviceName: string, cityName: string, isE
     `טיפול דחוף ב${serviceName} ב${cityName} 24/7`,
     `הדברה דחופה של ${serviceName} ב${cityName}`,
     `לוכד ${serviceName.replace('הדברת ', '')} זמין ב${cityName}`,
-    `${serviceName} ב${cityName} - הגעה תוך שעה`
+    `${serviceName} ב${cityName} - הגעה תוך שעה`,
+    `${serviceName} דחוף לתושבי ${neighborhood || cityName}`,
+    `מדביר ב${cityName} זמין כעת ב${district}`
   ] : [
     `שירותי ${serviceName} מקצועיים ב${cityName}`,
     `איך אנחנו מדבירים ${serviceName} ב${cityName}?`,
@@ -421,8 +432,10 @@ export function getVariedServiceTitle(serviceName: string, cityName: string, isE
     `השיטות שלנו ל${serviceName} ב${cityName}`,
     `הדברה בטוחה של ${serviceName} ב${cityName}`,
     `מומחי ${serviceName} ב${cityName} לשירותכם`,
-    `טיפול יסודי ב${serviceName} לתושבי ${cityName}`,
-    `הדברה ירוקה: ${serviceName} ב${cityName}`
+    `טיפול יסודי ב${serviceName} לתושבי ${neighborhood || cityName}`,
+    `הדברה ירוקה: ${serviceName} ב${cityName}`,
+    `שירות ${serviceName} במחוז ${district}`,
+    `${serviceName} ב${cityName}: דגשים לשכונת ${neighborhood || 'מרכז העיר'}`
   ];
   const index = (cityName.length + serviceName.length) % variations.length;
   return variations[index];
@@ -430,6 +443,19 @@ export function getVariedServiceTitle(serviceName: string, cityName: string, isE
 
 export function getVenueBySlug(slug: string): Venue | undefined {
   return (venues as Venue[]).find((v) => v.slug === slug);
+}
+
+export function getVariedFAQTitle(serviceName: string, cityName: string): string {
+  const variations = [
+    `שאלות ותשובות על ${serviceName} ב${cityName}`,
+    `כל מה שחשוב לדעת על ${serviceName} ב${cityName}`,
+    `שאלות נפוצות: ${serviceName} לתושבי ${cityName}`,
+    `מידע מקצועי על ${serviceName} ב${cityName}`,
+    `בירורים נפוצים לגבי ${serviceName} באזור ${cityName}`,
+    `מדריך שאלות ותשובות: ${serviceName} ב${cityName}`
+  ];
+  const index = (cityName.length + serviceName.length) % variations.length;
+  return variations[index];
 }
 
 export function getNeighborhoodsSentence(city: City): string {

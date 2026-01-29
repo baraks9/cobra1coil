@@ -11,9 +11,10 @@ interface FAQSectionProps {
   faqs: FAQItem[];
   serviceName: string;
   cityName: string;
+  title?: string;
 }
 
-export default function FAQSection({ faqs, serviceName, cityName }: FAQSectionProps) {
+export default function FAQSection({ faqs, serviceName, cityName, title }: FAQSectionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const schema = {
@@ -37,7 +38,7 @@ export default function FAQSection({ faqs, serviceName, cityName }: FAQSectionPr
       />
       
       <h2 className="text-3xl font-bold mb-8 text-blue-900 text-center">
-        שאלות ותשובות על {serviceName} ב{cityName}
+        {title || `שאלות ותשובות על ${serviceName} ב${cityName}`}
       </h2>
 
       <div className="space-y-4 max-w-3xl mx-auto">

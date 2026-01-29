@@ -18,6 +18,7 @@ import {
   getVariedBulletPoints,
   getVariedProblemsTitle,
   getVariedServiceTitle,
+  getVariedFAQTitle,
   getNeighborhoodsSentence,
   getDistrictContext,
   Service,
@@ -240,13 +241,14 @@ export default async function ServiceCityPage({ params }: PageProps) {
             faqs={faqs} 
             serviceName={service.name} 
             cityName={city.name} 
+            title={getVariedFAQTitle(service.name, city.name)}
           />
         );
       case 'pests':
         return !isEmergency && relatedProblems.length > 0 && (
           <section key="pests" className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
             <h2 className="text-2xl font-bold mb-6 text-blue-900">
-              {getVariedProblemsTitle(service.id, city.name)}
+              {getVariedProblemsTitle(service.id, city)}
             </h2>
             <div className="space-y-6">
               {relatedProblems.map((problem) => (
@@ -284,7 +286,7 @@ export default async function ServiceCityPage({ params }: PageProps) {
         return (
           <section key="content" className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
             <h2 className={`text-3xl font-bold mb-6 ${isEmergency ? 'text-red-900' : 'text-blue-900'}`}>
-              {getVariedServiceTitle(service.name, city.name, isEmergency)}
+              {getVariedServiceTitle(service.name, city, isEmergency)}
             </h2>
             <p className="text-lg text-gray-700 leading-relaxed mb-4">
               {localParagraphWithNeighborhoods}

@@ -177,7 +177,21 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
       "ratingValue": ratingValue,
       "reviewCount": reviewCount,
       "bestRating": "5",
-      "worstRating": "1"
+      "worstRating": "1",
+      "itemReviewed": {
+        "@type": "HomeAndConstructionBusiness",
+        "name": businessName,
+        "image": logoUrl,
+        "telephone": phone,
+        "priceRange": "₪₪",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": city ? `אזור ${city.name}` : "פריסה ארצית",
+          "addressLocality": city?.name || "ישראל",
+          "addressRegion": city?.district || "ישראל",
+          "addressCountry": "IL"
+        }
+      }
     },
     "review": getRelevantReviews(service, 5).map((r: any) => ({
       "@type": "Review",
@@ -373,7 +387,8 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
         },
         "availability": "https://schema.org/InStock",
         "url": serviceUrl,
-        "warranty": service.warranty
+        "warranty": service.warranty,
+        "seller": { "@id": organizationId }
       },
       "description": service.description || `שירותי ${service.name} מקצועיים עם אחריות.`,
       "serviceOutput": "סביבה נקייה ממזיקים עם אחריות בכתב",
@@ -389,7 +404,10 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
         "ratingValue": ratingValue,
         "reviewCount": reviewCount,
         "bestRating": "5",
-        "worstRating": "1"
+        "worstRating": "1",
+        "itemReviewed": {
+          "@id": `${serviceUrl}/#service`
+        }
       },
       "review": getRelevantReviews(service, 3).map((r: any) => ({
         "@type": "Review",

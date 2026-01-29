@@ -10,7 +10,8 @@ import {
   getRandomSuffix,
   getWhyChooseUsTitle,
   getVariedProblemsTitle,
-  getVariedServiceTitle
+  getVariedServiceTitle,
+  getVariedFAQTitle
 } from '@/lib/data';
 import { getUniqueFAQ } from '@/lib/faqUtils';
 import HeroSection from '@/components/HeroSection';
@@ -308,7 +309,7 @@ export default async function ServicePage({ params }: PageProps) {
 
             <section className="bg-white p-8 rounded-2xl shadow-sm">
               <h2 className="text-3xl font-bold mb-6 text-blue-900">
-                {getVariedServiceTitle(service.name, "בפריסה ארצית", false)}
+                {getVariedServiceTitle(service.name, { name: "בפריסה ארצית", district: "ישראל" } as any, false)}
               </h2>
               <p className="text-lg text-gray-700 leading-relaxed mb-6">
                 אנו מספקים שירותי {service.name} מקצועיים בכל רחבי הארץ. המדבירים שלנו מוסמכים, מנוסים ומצוידים בציוד המתקדם ביותר כדי להבטיח תוצאות מעולות. אנו שמים דגש על בטיחות הלקוחות ואיכות הסביבה.
@@ -379,7 +380,7 @@ export default async function ServicePage({ params }: PageProps) {
             {relatedPests.length > 0 && (
               <section className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
                 <h2 className="text-2xl font-bold mb-6 text-blue-900">
-                  {getVariedProblemsTitle(service.name, "ישראל")}
+                  {getVariedProblemsTitle(service.name, { name: "ישראל", district: "ארצי" } as any)}
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {relatedPests.map((pest) => (
@@ -470,6 +471,7 @@ export default async function ServicePage({ params }: PageProps) {
           faqs={faqs} 
           serviceName={service.name} 
           cityName="כל הארץ" 
+          title={getVariedFAQTitle(service.name, "כל הארץ")}
         />
       </div>
 

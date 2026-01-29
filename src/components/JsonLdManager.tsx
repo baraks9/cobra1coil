@@ -203,6 +203,36 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
         "description": "ראש השנה - שירות חירום בלבד"
       }
     ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": parseFloat(ratingValue),
+      "reviewCount": parseInt(reviewCount),
+      "bestRating": 5,
+      "worstRating": 1,
+      "itemReviewed": {
+        "@type": "LocalBusiness",
+        "name": businessName,
+        "url": baseUrl
+      }
+    },
+    "review": relevantReviews.map((r: any, idx: number) => ({
+      "@type": "Review",
+      "@id": `${baseUrl}/#review-${idx}`,
+      "itemReviewed": {
+        "@type": "LocalBusiness",
+        "name": businessName,
+        "url": baseUrl
+      },
+      "author": { "@type": "Person", "name": sanitize(r.author) },
+      "datePublished": r.datePublished,
+      "reviewBody": sanitize(r.reviewBody),
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": r.reviewRating,
+        "bestRating": 5,
+        "worstRating": 1
+      }
+    })),
     "potentialAction": [
       {
         "@type": "CommunicateAction",
@@ -394,36 +424,6 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
         "license": "https://cobra1.co.il/terms",
         "acquireLicensePage": "https://cobra1.co.il/contact"
       } : undefined,
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": parseFloat(ratingValue),
-        "reviewCount": parseInt(reviewCount),
-        "bestRating": 5,
-        "worstRating": 1,
-        "itemReviewed": {
-          "@type": "Service",
-          "name": service.name,
-          "description": service.description || `שירותי ${service.name} מקצועיים.`,
-          "image": service.url ? (service.url.startsWith('http') ? service.url : `${baseUrl}${service.url}`) : logoUrl
-        }
-      },
-      "review": relevantReviews.map((r: any, idx: number) => ({
-        "@type": "Review",
-        "@id": `${serviceUrl}/#review-${idx}`,
-        "itemReviewed": {
-          "@type": "Service",
-          "name": service.name
-        },
-        "author": { "@type": "Person", "name": sanitize(r.author) },
-        "datePublished": r.datePublished,
-        "reviewBody": sanitize(r.reviewBody),
-        "reviewRating": { 
-          "@type": "Rating", 
-          "ratingValue": r.reviewRating,
-          "bestRating": 5,
-          "worstRating": 1
-        }
-      }))
     });
   }
 

@@ -138,6 +138,7 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
       "streetAddress": city ? `אזור ${city.name}` : "פריסה ארצית",
       "addressLocality": city?.name || "ישראל",
       "addressRegion": city?.district || "ישראל",
+      "postalCode": process.env.NEXT_PUBLIC_POSTAL_CODE || "00000",
       "addressCountry": "IL"
     },
     "description": type === 'city' && city && service 

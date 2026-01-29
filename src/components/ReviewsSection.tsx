@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { useRef } from 'react';
 import reviewsData from '@/data/reviews.json';
 
 interface Review {
@@ -49,6 +50,19 @@ export default function ReviewsSection({ serviceId, cityName, limit = 6 }: Revie
   const sortedReviews = scoredReviews.sort((a, b) => b.score - a.score);
   
   const reviewsToDisplay = sortedReviews.slice(0, limit);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -320, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 320, behavior: 'smooth' });
+    }
+  };
 
   return (
     <section className="py-12 bg-white rounded-3xl shadow-sm border border-gray-100 my-12 overflow-hidden">
@@ -62,11 +76,28 @@ export default function ReviewsSection({ serviceId, cityName, limit = 6 }: Revie
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="relative">
+          <button
+            onClick={scrollLeft}
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white shadow-lg rounded-full w-10 h-10 flex items-center justify-center text-gray-600 hover:text-gray-800 hover:bg-gray-50 transition-colors border border-gray-200"
+            aria-label="גלול שמאלה"
+          >
+            ‹
+          </button>
+
+          <button
+            onClick={scrollRight}
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white shadow-lg rounded-full w-10 h-10 flex items-center justify-center text-gray-600 hover:text-gray-800 hover:bg-gray-50 transition-colors border border-gray-200"
+            aria-label="גלול ימינה"
+          >
+            ›
+          </button>
+
+          <div ref={scrollRef} className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide pl-12 pr-12">
           {reviewsToDisplay.map((review, index) => (
             <div 
               key={index} 
-              className="bg-gray-50 p-6 rounded-2xl border border-gray-100 flex flex-col h-full hover:shadow-md transition-shadow"
+              className="bg-gray-50 p-6 rounded-2xl border border-gray-100 flex flex-col h-full hover:shadow-md transition-shadow flex-shrink-0 w-80"
             >
               <div className="flex items-center gap-4 mb-4">
                 <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-sm bg-blue-600 flex items-center justify-center text-white font-bold text-lg">
@@ -101,6 +132,7 @@ export default function ReviewsSection({ serviceId, cityName, limit = 6 }: Revie
               </div>
             </div>
           ))}
+          </div>
         </div>
 
         {reviewsToDisplay.length === 0 && (

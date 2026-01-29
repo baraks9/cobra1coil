@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { getServices } from '@/lib/data';
+import Image from 'next/image';
 
 export default function Header() {
   const services = getServices().slice(0, 5);
@@ -9,9 +10,15 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           <div className="flex items-center">
-            <Link href="/" className="flex items-center gap-2">
-              <span className="text-2xl">🛡️</span>
-              <span className="text-xl font-bold text-blue-900 hidden sm:block">הדברה מקצועית</span>
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/logo.svg"
+                alt="קוברה הדברה"
+                width={160}
+                height={60}
+                className="h-14 w-auto"
+                priority
+              />
             </Link>
           </div>
           

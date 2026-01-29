@@ -107,6 +107,7 @@ export default function Footer() {
           <Link href="/about" className="hover:text-white transition-colors">אודות</Link>
           <Link href="/privacy" className="hover:text-white transition-colors">מדיניות פרטיות</Link>
           <Link href="/terms" className="hover:text-white transition-colors">תנאי שימוש</Link>
+          <Link href="/site-map" className="hover:text-white transition-colors">מפת האתר</Link>
         </div>
       </div>
     </footer>

@@ -1,0 +1,57 @@
+<svg width="420" height="80" viewBox="0 0 420 80" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="קוברה הדברה">
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.3" />
+    </filter>
+  </defs>
+
+  <!-- Badge Style Icon (Right) -->
+  <g transform="translate(340, 5)" filter="url(#shadow)">
+    <!-- Red Hexagon Shield -->
+    <path d="M35 2 L65 15 L65 55 L35 68 L5 55 L5 15 Z" fill="white" stroke="#d91e18" stroke-width="4" />
+    
+    <!-- Cockroach (Juk) Illustration -->
+    <g transform="translate(35, 35) scale(0.8)">
+      <!-- Antennae -->
+      <path d="M-5 -25 C-15 -45 -25 -35 -30 -40" stroke="#4b2c20" stroke-width="1.5" fill="none" />
+      <path d="M5 -25 C15 -45 25 -35 30 -40" stroke="#4b2c20" stroke-width="1.5" fill="none" />
+      
+      <!-- Legs -->
+      <!-- Left side -->
+      <path d="M-10 -10 L-25 -15" stroke="#4b2c20" stroke-width="2" fill="none" stroke-linecap="round" />
+      <path d="M-12 0 L-28 5" stroke="#4b2c20" stroke-width="2" fill="none" stroke-linecap="round" />
+      <path d="M-10 10 L-25 25" stroke="#4b2c20" stroke-width="2" fill="none" stroke-linecap="round" />
+      <!-- Right side -->
+      <path d="M10 -10 L25 -15" stroke="#4b2c20" stroke-width="2" fill="none" stroke-linecap="round" />
+      <path d="M12 0 L28 5" stroke="#4b2c20" stroke-width="2" fill="none" stroke-linecap="round" />
+      <path d="M10 10 L25 25" stroke="#4b2c20" stroke-width="2" fill="none" stroke-linecap="round" />
+
+      <!-- Main Body (Oval) -->
+      <ellipse cx="0" cy="0" rx="12" ry="22" fill="#333333" stroke="#1a1a1a" stroke-width="1" />
+      <!-- Wing/Back details -->
+      <path d="M0 -22 L0 22" stroke="#1a1a1a" stroke-width="1" opacity="0.5" />
+      <path d="M-12 0 C-12 15 0 22 0 22 C0 22 12 15 12 0" fill="#4d4d4d" opacity="0.6" />
+      
+      <!-- Thorax/Head -->
+      <path d="M-10 -15 C-10 -28 10 -28 10 -15 Z" fill="#1a1a1a" />
+      <circle cx="0" cy="-24" r="5" fill="#000000" />
+    </g>
+
+    <!-- Prohibited Line across shield (ON TOP of cockroach) -->
+    <line x1="5" y1="15" x2="65" y2="55" stroke="#d91e18" stroke-width="5" stroke-linecap="round" />
+  </g>
+
+  <!-- Main Text (Left) -->
+  <text
+    x="330"
+    y="50"
+    text-anchor="end"
+    font-family="Heebo, sans-serif"
+    font-size="44"
+    font-weight="900"
+    fill="#d91e18"
+    letter-spacing="0"
+  >
+    קוברה הדברה
+  </text>
+</svg>

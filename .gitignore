@@ -1,2 +1,5 @@
 # Ignore problematic directory
 src/app/problem/
+node_modules
+.next/
+tsconfig.tsbuildinfo

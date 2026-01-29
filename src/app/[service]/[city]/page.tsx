@@ -104,16 +104,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     `זקוקים ל${service.name} ב${city.name}? המדבירים שלנו מגיעים לכל שכונות ${city.name} והסביבה. הדברה ירוקה ובטוחה עם אחריות מלאה בכתב. התקשרו עכשיו להצעת מחיר הוגנת.`,
     `מחפשים מדביר מוסמך ל${service.name} ב${city.name}? אנו מספקים פתרונות הדברה מתקדמים ב${city.name} עם דגש על בטיחות ויעילות. זמינות גבוהה ואחריות מלאה על כל עבודה.`,
     `הדברה ב${city.name} של ${service.name} במחירים הוגנים. צוות המומחים שלנו ב${city.name} ערוך לכל קריאה, כולל טיפולי חירום. חומרים מאושרים ובטוחים למשפחה.`,
-    `שירותי ${service.name} מקצועיים ב${city.name} והסביבה. אנו מציעים פתרון סופי לבעיית ה${service.name} ב${city.name} עם ליווי מקצועי ואחריות ארוכת טווח. התקשרו לייעוץ חינם.`
+    `שירותי ${service.name} מקצועיים ב${city.name} והסביבה. אנו מציעים פתרון סופי לבעיית ה${service.name} ב${city.name} עם ליווי מקצועי ואחריות ארוכת טווח. התקשרו לייעוץ חינם.`,
+    `איך להיפטר מ${service.name} ב${city.name}? המומחים של קוברה הדברה ב${city.name} מבצעים טיפול יסודי ובטוח. שירות מהיר לתושבי ${city.district} עם 100% הצלחה ואחריות.`,
+    `צריכים ${service.name} דחוף ב${city.name}? מדביר מוסמך מהאזור זמין כעת להגעה מהירה. פתרונות הדברה ירוקה ב${city.name} לדירות, בתים פרטיים ועסקים.`,
+    `הדברת ${service.name} ב${city.name} והסביבה. אנו משתמשים בחומרים הבטוחים ביותר למשפחה ולחיות המחמד. שירות מקצועי ב${city.name} עם המלצות רבות.`,
+    `סובלים מ${service.name} ב${city.name}? אל תחכו שהבעיה תחמיר. אנו מציעים אבחון וטיפול מהיר ב${city.name} על ידי מדבירים מורשים. התקשרו להצעה משתלמת.`
   ];
-  const descIndex = (city.id.length + service.slug.length) % descriptionVariations.length;
+  const descIndex = (city.id.length + service.slug.length + city.name.length) % descriptionVariations.length;
   const description = descriptionVariations[descIndex];
 
   return {
     title,
     description,
     alternates: {
-      canonical: `/${service.slug}/${city.slug}`,
+      canonical: `/${serviceSlug}/${citySlug}`,
     },
   };
 }

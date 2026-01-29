@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `איך מזהים ${pest.name}? מדריך זיהוי, תמונות וסימנים נפוצים`,
     description: `מדריך מקצועי לזיהוי ${pest.name} (${pest.scientificName}). איך הם נראים? מהם סימני הזיהוי בבית? ומה ההבדל בינם לבין מזיקים דומים?`,
     alternates: {
-      canonical: `/pest-id/${pest.slug}`,
+      canonical: `/pest-id/${slug}`,
     },
   };
 }

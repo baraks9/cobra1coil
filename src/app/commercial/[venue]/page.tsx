@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: Props) {
     title: titles[venue.id] || `הדברה ל${venue.name} | שירות לעסקים ומוסדות | הדברה מקצועית`,
     description: descriptions[venue.id] || `שירותי הדברה מותאמים אישית ל${venue.name}. ${venue.focus.join(', ')}. עמידה בתקנים, רישיון משרד הבריאות ואחריות מלאה.`,
     alternates: {
-      canonical: `/commercial/${venue.slug}`,
+      canonical: `/commercial/${venueSlug}`,
     },
   };
 }

@@ -256,48 +256,78 @@ export function getWhyChooseUsTitle(service: Service, cityName?: string): string
 }
 
 export function getVariedHook(service: Service, city: City): string {
-  const variations = [
-    `סובלים מ${service.name} ב${city.name}? המדבירים שלנו כבר בדרך אליכם.`,
-    `מחפשים פתרון בטוח ויעיל ל${service.name} ב${city.name}? אתם במקום הנכון.`,
-    `אל תתנו ל${service.name} להרוס לכם את השלווה ב${city.name}. אנחנו כאן כדי לעזור.`,
-    `הדברה מקצועית ומהירה ב${city.name}: שירות אישי לכל תושבי ${city.neighborhoods?.[0] || 'האזור'}.`,
-    `צריכים ${service.name} ב${city.name} עכשיו? צוות המומחים שלנו זמין לקריאה.`,
-    `פתרון סופי לבעיית ה${service.name} ב${city.name} - באחריות מלאה.`,
-    `מומחי ההדברה שלנו ב${city.name} מצוידים בחומרים המתקדמים ביותר לטיפול ב${service.name}.`,
-    `השקט שלכם ב${city.name} חשוב לנו. טיפול מקצועי ב${service.name} מתחיל כאן.`,
-    `זיהיתם ${service.name} בבית ב${city.name}? אל תחכו שהבעיה תחמיר.`,
-    `שירותי ${service.name} ב${city.name} עם דגש על בטיחות הילדים וחיות המחמד.`
+  const openers = [
+    `סובלים מ${service.name} ב${city.name}?`,
+    `מחפשים פתרון בטוח ויעיל ל${service.name} ב${city.name}?`,
+    `אל תתנו ל${service.name} להרוס לכם את השלווה ב${city.name}.`,
+    `צריכים ${service.name} ב${city.name} עכשיו?`,
+    `זיהיתם ${service.name} בבית ב${city.name}?`,
+    `הדברה מקצועית ומהירה ב${city.name}:`
   ];
-  const index = (city.id.length + service.id.length) % variations.length;
-  return variations[index];
+
+  const middle = [
+    `המדבירים שלנו כבר בדרך אליכם.`,
+    `אתם במקום הנכון.`,
+    `אנחנו כאן כדי לעזור.`,
+    `צוות המומחים שלנו זמין לקריאה.`,
+    `אל תחכו שהבעיה תחמיר.`,
+    `שירות אישי לכל תושבי ${city.neighborhoods?.[0] || city.name}.`
+  ];
+
+  const closers = [
+    `פתרון סופי לבעיית ה${service.name} ב${city.name} - באחריות מלאה.`,
+    `מומחי ההדברה שלנו ב${city.name} מצוידים בחומרים המתקדמים ביותר.`,
+    `השקט שלכם ב${city.name} חשוב לנו. טיפול מקצועי מתחיל כאן.`,
+    `שירותי ${service.name} ב${city.name} עם דגש על בטיחות הילדים.`,
+    `אנו מבטיחים 100% הצלחה בכל עבודת הדברה ב${city.name}.`,
+    `התקשרו עכשיו לייעוץ מקצועי ללא התחייבות.`
+  ];
+
+  const hash = city.name.length + service.id.length;
+  const oIdx = hash % openers.length;
+  const mIdx = (hash + 1) % middle.length;
+  const cIdx = (hash + 2) % closers.length;
+
+  return `${openers[oIdx]} ${middle[mIdx]} ${closers[cIdx]}`;
 }
 
 export function getVariedDescription(service: Service, city: City, isEmergency: boolean): string {
+  const districtInfo = {
+    'מרכז': `באזור גוש דן והמרכז, צפיפות המבנים דורשת מיומנות מיוחדת.`,
+    'דרום': `האקלים החם בדרום הארץ מעודד התרבות מהירה של מזיקים.`,
+    'צפון': `הצמחייה העשירה באזור הצפון מביאה איתה אתגרים ייחודיים.`,
+    'ירושלים': `הבנייה הירושלמית העתיקה דורשת פתרונות איטום והדברה ספציפיים.`
+  }[city.district] || '';
+
   const variations = isEmergency ? [
-    `זקוקים ל${service.name} ב${city.name} עכשיו? אנחנו מבינים את הדחיפות. צוותי החירום שלנו פרוסים ב${city.name} וזמינים להגעה תוך זמן קצר לכל שכונה, כולל ${city.neighborhoods?.[0] || 'מרכז העיר'}.`,
-    `מצב חירום של ${service.name} ב${city.name}? אל תחכו. המדבירים המוסמכים שלנו זמינים 24/7 ב${city.name} והסביבה עם ציוד מקצועי ופתרון מהיר במקום.`,
-    `צריכים ${service.name} דחוף ב${city.name}? אנו מספקים מענה מיידי לתושבי מחוז ${city.district}, עם דגש על בטיחות ומהירות ללא פשרות ב${city.name}.`,
-    `קריאת חירום ל${service.name} ב${city.name}: אנו מגיעים במהירות לכל נקודה ב${city.name} כדי לפתור את הבעיה באופן מיידי ומקצועי.`,
-    `טיפול דחוף ב${service.name} ב${city.name} - צוות המדבירים שלנו ב${city.name} ערוך למתן מענה מהיר בכל שעה.`
+    `זקוקים ל${service.name} ב${city.name} עכשיו? אנחנו מבינים את הדחיפות. ${districtInfo} צוותי החירום שלנו פרוסים ב${city.name} וזמינים להגעה תוך זמן קצר לכל שכונה, כולל ${city.neighborhoods?.[0] || 'מרכז העיר'}.`,
+    `מצב חירום של ${service.name} ב${city.name}? אל תחכו. המדבירים המוסמכים שלנו זמינים 24/7 ב${city.name} והסביבה עם ציוד מקצועי ופתרון מהיר במקום. ${districtInfo}`,
+    `צריכים ${service.name} דחוף ב${city.name}? אנו מספקים מענה מיידי לתושבי מחוז ${city.district}, עם דגש על בטיחות ומהירות ללא פשרות ב${city.name}. ${city.neighborhoods?.[1] ? `אנו מגיעים גם ל${city.neighborhoods[1]} ולכל האזור.` : ''}`,
+    `קריאת חירום ל${service.name} ב${city.name}: אנו מגיעים במהירות לכל נקודה ב${city.name} כדי לפתור את הבעיה באופן מיידי ומקצועי. ${districtInfo}`,
+    `טיפול דחוף ב${service.name} ב${city.name} - צוות המדבירים שלנו ב${city.name} ערוך למתן מענה מהיר בכל שעה. ${city.neighborhoods?.[0] ? `שירות מהיר במיוחד באזור ${city.neighborhoods[0]}.` : ''}`
   ] : [
-    `זקוקים ל${service.name} ב${city.name}? אתם במקום הנכון. אנו מספקים שירותי הדברה מתקדמים ומקצועיים במחוז ${city.district}, עם דגש על בטיחות ויעילות. הצוות שלנו מכיר היטב את ${city.name} ויודע לתת מענה מדויק לכל בעיה.`,
-    `הדברה ירוקה ובטוחה ל${service.name} ב${city.name}. אנו משרתים את כל תושבי ${city.name}, משכונת ${city.neighborhoods?.[0] || 'המרכז'} ועד ${city.neighborhoods?.[1] || 'הקצוות'}, עם אחריות מלאה וליווי מקצועי.`,
-    `מחפשים מדביר מוסמך ל${service.name} ב${city.name}? אנו מציעים פתרונות הדברה מותאמים אישית לצרכים שלכם ב${city.name}, תוך שימוש בחומרים המאושרים על ידי המשרד להגנת הסביבה ובטיחות מקסימלית.`,
-    `שירותי ${service.name} ב${city.name} ניתנים על ידי צוות מיומן המכיר את סוגי המבנים והמזיקים האופייניים לאזור ${city.name}. אנו מתחייבים לתוצאות מעולות.`,
-    `כשמדובר ב${service.name} ב${city.name}, חשוב לבחור במומחים שמכירים את השטח. אנו פועלים ב${city.name} שנים רבות ומספקים שירות אמין לכלל התושבים.`
+    `זקוקים ל${service.name} ב${city.name}? אתם במקום הנכון. אנו מספקים שירותי הדברה מתקדמים ומקצועיים במחוז ${city.district}, עם דגש על בטיחות ויעילות. ${districtInfo} הצוות שלנו מכיר היטב את ${city.name} ויודע לתת מענה מדויק לכל בעיה.`,
+    `הדברה ירוקה ובטוחה ל${service.name} ב${city.name}. אנו משרתים את כל תושבי ${city.name}, משכונת ${city.neighborhoods?.[0] || 'המרכז'} ועד ${city.neighborhoods?.[1] || 'הקצוות'}, עם אחריות מלאה וליווי מקצועי. ${districtInfo}`,
+    `מחפשים מדביר מוסמך ל${service.name} ב${city.name}? אנו מציעים פתרונות הדברה מותאמים אישית לצרכים שלכם ב${city.name}, תוך שימוש בחומרים המאושרים על ידי המשרד להגנת הסביבה. ${districtInfo}`,
+    `שירותי ${service.name} ב${city.name} ניתנים על ידי צוות מיומן המכיר את סוגי המבנים והמזיקים האופייניים לאזור ${city.name}. ${city.neighborhoods?.[0] ? `אנו פועלים רבות ב${city.neighborhoods[0]} ובכל העיר.` : ''} אנו מתחייבים לתוצאות מעולות.`,
+    `כשמדובר ב${service.name} ב${city.name}, חשוב לבחור במומחים שמכירים את השטח. אנו פועלים ב${city.name} שנים רבות ומספקים שירות אמין לכלל התושבים. ${districtInfo}`
   ];
   const index = (city.name.length + service.slug.length) % variations.length;
   return variations[index];
 }
 
 export function getVariedWhyChooseUs(service: Service, city: City): string {
+  const localContext = city.neighborhoods?.length 
+    ? `כחברה שפועלת רבות ב${city.name} ובשכונות כמו ${city.neighborhoods.slice(0, 2).join(' ו')}, אנו מכירים את סוגי המבנים והאתגרים המקומיים.`
+    : `אנו מכירים היטב את אזור ${city.name} ואת סוגי המזיקים האופייניים למחוז ${city.district}.`;
+
   const variations = [
-    `אנו מבינים שנוכחות של ${service.name} בבית או בעסק ב${city.name} יכולה להיות מטרידה מאוד. לכן, אנו מציעים שירות מהיר, דיסקרטי ומקצועי המותאם בדיוק לאופי המבנים ב${city.name}.`,
-    `המומחיות שלנו ב${service.name} מאפשרת לנו לתת פתרון ארוך טווח ב${city.name}. אנו משלבים ידע מקצועי רב עם היכרות עמוקה של אזור ${city.district}, מה שמבטיח לכם שקט נפשי.`,
-    `כשאתם בוחרים בנו ל${service.name} ב${city.name}, אתם מקבלים יותר מהדברה - אתם מקבלים ליווי מלא, ייעוץ למניעה עתידית ואחריות בכתב על כל עבודה שבוצעה ב${city.name}.`,
-    `בטיחות היא הערך העליון שלנו. בכל עבודת ${service.name} ב${city.name}, אנו מקפידים על שימוש בחומרים בטוחים למשפחה ולחיות מחמד, תוך שמירה על סטנדרטים גבוהים של מקצועיות.`,
-    `הניסיון שלנו ב${city.name} מלמד אותנו שכל מקרה של ${service.name} הוא ייחודי. לכן אנו מבצעים אבחון מדויק לפני תחילת העבודה ב${city.name} כדי להבטיח את הצלחת הטיפול.`,
-    `תושבי ${city.name} יודעים שעל איכות לא מתפשרים. אנו גאים לספק שירותי ${service.name} ב${city.name} ברמה הגבוהה ביותר, עם אלפי לקוחות מרוצים במחוז ${city.district}.`
+    `אנו מבינים שנוכחות של ${service.name} בבית או בעסק ב${city.name} יכולה להיות מטרידה מאוד. ${localContext} לכן, אנו מציעים שירות מהיר, דיסקרטי ומקצועי המותאם בדיוק לאופי המבנים ב${city.name}.`,
+    `המומחיות שלנו ב${service.name} מאפשרת לנו לתת פתרון ארוך טווח ב${city.name}. אנו משלבים ידע מקצועי רב עם היכרות עמוקה של אזור ${city.district}, מה שמבטיח לכם שקט נפשי. ${localContext}`,
+    `כשאתם בוחרים בנו ל${service.name} ב${city.name}, אתם מקבלים יותר מהדברה - אתם מקבלים ליווי מלא, ייעוץ למניעה עתידית ואחריות בכתב על כל עבודה שבוצעה ב${city.name}. ${localContext}`,
+    `בטיחות היא הערך העליון שלנו. בכל עבודת ${service.name} ב${city.name}, אנו מקפידים על שימוש בחומרים בטוחים למשפחה ולחיות מחמד, תוך שמירה על סטנדרטים גבוהים של מקצועיות. ${localContext}`,
+    `${localContext} הניסיון שלנו ב${city.name} מלמד אותנו שכל מקרה של ${service.name} הוא ייחודי. לכן אנו מבצעים אבחון מדויק לפני תחילת העבודה ב${city.name} כדי להבטיח את הצלחת הטיפול.`,
+    `תושבי ${city.name} יודעים שעל איכות לא מתפשרים. אנו גאים לספק שירותי ${service.name} ב${city.name} ברמה הגבוהה ביותר, עם אלפי לקוחות מרוצים במחוז ${city.district}. ${localContext}`
   ];
   const index = (city.completedJobs || 7 + service.name.length) % variations.length;
   return variations[index];
@@ -378,7 +408,10 @@ export function getVariedServiceTitle(serviceName: string, cityName: string, isE
     `צריכים ${serviceName} ב${cityName} עכשיו?`,
     `מענה מיידי ל${serviceName} ב${cityName}`,
     `מדביר חירום ל${serviceName} ב${cityName}`,
-    `טיפול דחוף ב${serviceName} ב${cityName} 24/7`
+    `טיפול דחוף ב${serviceName} ב${cityName} 24/7`,
+    `הדברה דחופה של ${serviceName} ב${cityName}`,
+    `לוכד ${serviceName.replace('הדברת ', '')} זמין ב${cityName}`,
+    `${serviceName} ב${cityName} - הגעה תוך שעה`
   ] : [
     `שירותי ${serviceName} מקצועיים ב${cityName}`,
     `איך אנחנו מדבירים ${serviceName} ב${cityName}?`,
@@ -387,7 +420,9 @@ export function getVariedServiceTitle(serviceName: string, cityName: string, isE
     `כל מה שצריך לדעת על ${serviceName} ב${cityName}`,
     `השיטות שלנו ל${serviceName} ב${cityName}`,
     `הדברה בטוחה של ${serviceName} ב${cityName}`,
-    `מומחי ${serviceName} ב${cityName} לשירותכם`
+    `מומחי ${serviceName} ב${cityName} לשירותכם`,
+    `טיפול יסודי ב${serviceName} לתושבי ${cityName}`,
+    `הדברה ירוקה: ${serviceName} ב${cityName}`
   ];
   const index = (cityName.length + serviceName.length) % variations.length;
   return variations[index];

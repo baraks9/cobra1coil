@@ -37,15 +37,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const cityRoutes: MetadataRoute.Sitemap = [];
   allServices.forEach((service) => {
-    // Only generate city-service pages for important cities or high-priority services
-    // to manage crawl budget and avoid thin content issues.
-    const importantCities = allCities.filter(city => 
-      (city.priorityScore && city.priorityScore > 50) || 
-      (city.conversionRate && city.conversionRate > 0.2) ||
-      ['tel-aviv', 'jerusalem', 'haifa', 'rishon-lezion', 'petah-tikva', 'ashdod', 'netanya', 'beer-sheva'].includes(city.slug)
-    );
-
-    importantCities.forEach((city) => {
+    allCities.forEach((city) => {
       cityRoutes.push({
         url: `${baseUrl}/${service.slug}/${city.slug}`,
         lastModified: new Date(),

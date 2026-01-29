@@ -17,26 +17,8 @@ interface FAQSectionProps {
 export default function FAQSection({ faqs, serviceName, cityName, title }: FAQSectionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": faqs.map((faq) => ({
-      "@type": "Question",
-      "name": faq.question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.answer,
-      },
-    })),
-  };
-
   return (
     <section className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 my-12" dir="rtl">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-      />
-      
       <h2 className="text-3xl font-bold mb-8 text-blue-900 text-center">
         {title || `שאלות ותשובות על ${serviceName} ב${cityName}`}
       </h2>

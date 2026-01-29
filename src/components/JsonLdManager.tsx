@@ -103,6 +103,8 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
       .slice(0, limit);
   };
 
+  const relevantReviews = getRelevantReviews(service, 3);
+
   // 1. Brand Entity
   graph.push({
     "@type": "Brand",
@@ -221,7 +223,7 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
         }
       }
     },
-    "review": getRelevantReviews(service, 3).map((r: any) => ({
+    "review": relevantReviews.map((r: any) => ({
       "@type": "Review",
       "author": { 
         "@type": "Person", 
@@ -442,7 +444,7 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
           "@id": `${serviceUrl}/#service`
         }
       },
-      "review": getRelevantReviews(service, 3).map((r: any) => ({
+      "review": relevantReviews.map((r: any) => ({
         "@type": "Review",
         "author": { "@type": "Person", "name": sanitize(r.author) },
         "datePublished": r.datePublished,

@@ -105,19 +105,10 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
 
   const relevantReviews = getRelevantReviews(service, 3);
 
-  // 1. Brand Entity
-  graph.push({
-    "@type": "Brand",
-    "@id": brandId,
-    "name": businessName,
-    "logo": logoUrl,
-    "slogan": process.env.NEXT_PUBLIC_SLOGAN || "הדברה ירוקה ובטוחה בפריסה ארצית"
-  });
-
-  // 2. Organization & LocalBusiness
+  // 1. Organization & LocalBusiness (single source of truth)
   const organizationId = `${baseUrl}/#organization`;
   const localBusiness: any = {
-    "@type": "HomeAndConstructionBusiness",
+    "@type": ["Organization", "HomeAndConstructionBusiness"],
     "@id": organizationId,
     "name": businessName,
     "legalName": businessName,
@@ -127,7 +118,6 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
     "logo": logoUrl,
     "image": logoUrl,
     "priceRange": "ILS",
-    "brand": { "@id": brandId },
     "sameAs": sameAs,
     "founder": { "@id": expertId },
     "employee": { "@id": expertId },

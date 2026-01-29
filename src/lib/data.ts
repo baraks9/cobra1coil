@@ -135,6 +135,120 @@ export function getRotationSuffix(cityName: string): string {
   return titleSuffixes[cityName.length % titleSuffixes.length];
 }
 
+const getStableIndex = (seed: string, length: number): number => {
+  let hash = 0;
+  for (let i = 0; i < seed.length; i += 1) {
+    hash = (hash * 31 + seed.charCodeAt(i)) % 2147483647;
+  }
+  return Math.abs(hash) % length;
+};
+
+const getCityDetailSnippet = (city: City, seed: string): string => {
+  const options = [
+    city.arrivalTime ? `הגעה תוך ${city.arrivalTime}` : `הגעה מהירה`,
+    city.neighborhoods?.[0] ? `כולל ${city.neighborhoods[0]}` : `שירות בכל העיר`,
+    city.completedJobs ? `${city.completedJobs}+ עבודות באזור` : `ניסיון מקומי רב`,
+    `שירות במחוז ${city.district}`
+  ];
+  return options[getStableIndex(seed, options.length)];
+};
+
+const getCityDetailSentence = (city: City, seed: string): string => {
+  const options = [
+    city.arrivalTime
+      ? `הגעה מהירה תוך ${city.arrivalTime} לכל שכונות ${city.name}.`
+      : `זמינות גבוהה לכל שכונות ${city.name}.`,
+    city.neighborhoods?.[1]
+      ? `מכירים היטב את ${city.neighborhoods[0]} וגם את ${city.neighborhoods[1]}.`
+      : `שירות מלא בכל אזורי ${city.name}.`,
+    city.completedJobs
+      ? `ביצענו מעל ${city.completedJobs} עבודות בעיר ובסביבה.`
+      : `ניסיון מקומי מוכח במחוז ${city.district}.`,
+    `התאמה מלאה לאופי המבנים ב${city.name} ובמחוז ${city.district}.`
+  ];
+  return options[getStableIndex(seed, options.length)];
+};
+
+export function getVariedMetaTitle(service: Service, city: City, isEmergency: boolean): string {
+  const seed = `${service.slug}:${city.slug}:title`;
+  const detail = getCityDetailSnippet(city, seed);
+  const baseVariations = isEmergency ? [
+    `מדביר חירום ב${city.name} - ${service.name}`,
+    `חירום ${service.name} ב${city.name} | ${detail}`,
+    `${service.name} דחוף ב${city.name} - זמינות מיידית`,
+    `מענה חירום ל${service.name} ב${city.name} - ${detail}`,
+    `קריאת חירום ב${city.name}: ${service.name} עכשיו`
+  ] : [
+    `${service.name} ב${city.name} | ${detail}`,
+    `מדביר מוסמך ל${service.name} ב${city.name} - ${detail}`,
+    `צריכים ${service.name} ב${city.name}? ${detail}`,
+    `הדברה ב${city.name}: ${service.name} עם אחריות`,
+    `${service.name} ב${city.name} והסביבה - ${detail}`,
+    `שירותי ${service.name} ב${city.name} | ${detail}`
+  ];
+
+  if (service.id === 'silverfish') {
+    return `הדברת דג הכסף ב${city.name} - ${detail}`;
+  }
+  if (service.id === 'psocids') {
+    return `הדברת פסוקאים ב${city.name} | ${detail}`;
+  }
+  if (service.id === 'cockroaches') {
+    return `הדברת ג'וקים ב${city.name} - ${detail}`;
+  }
+  if (service.id === 'german-roach') {
+    return `הדברת תיקן גרמני ב${city.name} | ${detail}`;
+  }
+
+  return baseVariations[getStableIndex(seed, baseVariations.length)];
+}
+
+export function getVariedMetaDescription(service: Service, city: City, isEmergency: boolean): string {
+  const seed = `${service.slug}:${city.slug}:description`;
+  const detailSentence = getCityDetailSentence(city, seed);
+  const detailSnippet = getCityDetailSnippet(city, `${seed}:snippet`);
+  const extraOptions = [
+    "",
+    ` שירות באזור ${city.district} עם היכרות מקומית.`,
+    city.neighborhoods?.[2]
+      ? ` צוות שמכיר גם את ${city.neighborhoods[2]}.`
+      : ` זמינות גבוהה לתושבי ${city.name}.`
+  ];
+  const extra = extraOptions[getStableIndex(`${seed}:extra`, extraOptions.length)];
+  const variations = isEmergency ? [
+    `זקוקים ל${service.name} ב${city.name} עכשיו? צוות החירום שלנו מגיע במהירות לכל שכונה. ${detailSentence} התקשרו מיד לקבלת מענה דחוף.${extra}`,
+    `קריאת חירום ל${service.name} ב${city.name}. זמינות 24/7, טיפול מהיר ובטוח, ואחריות מלאה בכתב. ${detailSentence}${extra}`,
+    `מדביר חירום ל${service.name} ב${city.name} בהגעה מיידית. ${detailSentence} פתרון מקצועי עם חומרים מאושרים למשפחה.${extra}`,
+    `צריכים ${service.name} דחוף ב${city.name}? אנחנו זמינים בכל שעה, עם הגעה מהירה ושירות אמין. ${detailSentence}${extra}`
+  ] : [
+    `זקוקים ל${service.name} ב${city.name}? אנו מספקים הדברה מקצועית ובטוחה עם אחריות מלאה. ${detailSentence} התקשרו להצעת מחיר הוגנת.${extra}`,
+    `מחפשים מדביר מוסמך ל${service.name} ב${city.name}? שירות מתקדם, חומרים מאושרים וליווי מלא עד פתרון הבעיה. ${detailSentence}${extra}`,
+    `הדברה ב${city.name} של ${service.name} במחירים הוגנים. צוות מומחים מקומי מעניק שירות אישי עם זמינות גבוהה. ${detailSentence}${extra}`,
+    `שירותי ${service.name} מקצועיים ב${city.name} והסביבה. פתרון יסודי, בטוח לחיות מחמד, ושקיפות מלאה במחיר. ${detailSentence}${extra}`,
+    `איך להיפטר מ${service.name} ב${city.name}? מומחים מקומיים עם אחריות בכתב ושירות אמין לאורך זמן. ${detailSentence}${extra}`,
+    `צריכים ${service.name} ב${city.name}? ${detailSnippet}. הדברה ירוקה, בטוחה ומהירה לדירות, בתים פרטיים ועסקים.${extra}`
+  ];
+  return variations[getStableIndex(seed, variations.length)];
+}
+
+export function getVariedH1Title(service: Service, city: City, isEmergency: boolean): string {
+  const seed = `${service.slug}:${city.slug}:h1`;
+  const detail = getCityDetailSnippet(city, seed);
+  const variations = isEmergency ? [
+    `חירום: ${service.name} ב${city.name}`,
+    `${service.name} דחוף ב${city.name} - ${detail}`,
+    `מענה מיידי ל${service.name} ב${city.name}`,
+    `מדביר חירום ל${service.name} ב${city.name}`
+  ] : [
+    `${service.name} ב${city.name} - ${detail}`,
+    `שירותי ${service.name} ב${city.name}`,
+    `מומחים ל${service.name} ב${city.name} והסביבה`,
+    `הדברה בטוחה של ${service.name} ב${city.name}`,
+    `${service.name} ב${city.name} | ${detail}`
+  ];
+  return variations[getStableIndex(seed, variations.length)];
+}
+
 export function getDeterministicSuffix(cityName: string, serviceId: string): string {
   const suffixes = {
     urgent: [ // For rodents, wasps, fleas
@@ -227,7 +341,7 @@ export function getWhyChooseUsTitle(service: Service, cityName?: string): string
     ];
     
     // Deterministic selection based on city name and service id
-    const index = (cityName.length + service.id.length) % variations.length;
+    const index = getStableIndex(`${service.id}:${cityName}:why`, variations.length);
     return variations[index];
   }
 
@@ -283,7 +397,7 @@ export function getVariedHook(service: Service, city: City): string {
     `התקשרו עכשיו לייעוץ מקצועי ללא התחייבות.`
   ];
 
-  const hash = city.name.length + service.id.length;
+  const hash = getStableIndex(`${service.id}:${city.slug}:hook`, openers.length * middle.length * closers.length);
   const oIdx = hash % openers.length;
   const mIdx = (hash + 1) % middle.length;
   const cIdx = (hash + 2) % closers.length;
@@ -312,7 +426,7 @@ export function getVariedDescription(service: Service, city: City, isEmergency: 
     `שירותי ${service.name} ב${city.name} ניתנים על ידי צוות מיומן המכיר את סוגי המבנים והמזיקים האופייניים לאזור ${city.name}. ${city.neighborhoods?.[0] ? `אנו פועלים רבות ב${city.neighborhoods[0]} ובכל העיר.` : ''} אנו מתחייבים לתוצאות מעולות.`,
     `כשמדובר ב${service.name} ב${city.name}, חשוב לבחור במומחים שמכירים את השטח. אנו פועלים ב${city.name} שנים רבות ומספקים שירות אמין לכלל התושבים. ${districtInfo}`
   ];
-  const index = (city.name.length + service.slug.length) % variations.length;
+  const index = getStableIndex(`${service.slug}:${city.slug}:desc`, variations.length);
   return variations[index];
 }
 
@@ -329,13 +443,13 @@ export function getVariedWhyChooseUs(service: Service, city: City): string {
     `${localContext} הניסיון שלנו ב${city.name} מלמד אותנו שכל מקרה של ${service.name} הוא ייחודי. לכן אנו מבצעים אבחון מדויק לפני תחילת העבודה ב${city.name} כדי להבטיח את הצלחת הטיפול.`,
     `תושבי ${city.name} יודעים שעל איכות לא מתפשרים. אנו גאים לספק שירותי ${service.name} ב${city.name} ברמה הגבוהה ביותר, עם אלפי לקוחות מרוצים במחוז ${city.district}. ${localContext}`
   ];
-  const index = (city.completedJobs || 7 + service.name.length) % variations.length;
+  const index = getStableIndex(`${service.id}:${city.slug}:why-choose`, variations.length);
   return variations[index];
 }
 
 export function getStructuralShuffle(cityId: string): ('pricing' | 'faq' | 'pests' | 'content')[] {
   const baseOrder: ('pricing' | 'faq' | 'pests' | 'content')[] = ['content', 'pests', 'pricing', 'faq'];
-  const hash = cityId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  const hash = getStableIndex(`structure:${cityId}`, 1000);
   
   if (hash % 4 === 0) return ['content', 'pricing', 'faq', 'pests'];
   if (hash % 4 === 1) return ['pests', 'content', 'faq', 'pricing'];
@@ -380,7 +494,7 @@ export function getVariedBulletPoints(serviceId: string, cityName: string): stri
   }
 
   // Shuffle or mix
-  const mixIndex = cityName.length % selected.length;
+  const mixIndex = getStableIndex(`${serviceId}:${cityName}:bullets`, selected.length);
   return [...base.slice(0, 2), selected[mixIndex], selected[(mixIndex + 1) % selected.length]];
 }
 
@@ -403,7 +517,7 @@ export function getVariedProblemsTitle(serviceId: string, city: City): string {
     `מפגעי ${name} בשכונת ${neighborhood || cityName}`,
     `אתגרי הדברה במחוז ${district}: ${name}`
   ];
-  const index = (cityName.length + serviceId.length) % variations.length;
+  const index = getStableIndex(`${serviceId}:${city.slug}:problems`, variations.length);
   return variations[index];
 }
 
@@ -437,7 +551,7 @@ export function getVariedServiceTitle(serviceName: string, city: City, isEmergen
     `שירות ${serviceName} במחוז ${district}`,
     `${serviceName} ב${cityName}: דגשים לשכונת ${neighborhood || 'מרכז העיר'}`
   ];
-  const index = (cityName.length + serviceName.length) % variations.length;
+  const index = getStableIndex(`${serviceName}:${city.slug}:service-title`, variations.length);
   return variations[index];
 }
 
@@ -454,7 +568,7 @@ export function getVariedFAQTitle(serviceName: string, cityName: string): string
     `בירורים נפוצים לגבי ${serviceName} באזור ${cityName}`,
     `מדריך שאלות ותשובות: ${serviceName} ב${cityName}`
   ];
-  const index = (cityName.length + serviceName.length) % variations.length;
+  const index = getStableIndex(`${serviceName}:${cityName}:faq-title`, variations.length);
   return variations[index];
 }
 
@@ -470,7 +584,7 @@ export function getNeighborhoodsSentence(city: City): string {
     `השירות שלנו ב${city.name} מקיף את כל חלקי העיר, עם דגש על הגעה מהירה ל${city.neighborhoods.join(' ול')}.`
   ];
 
-  const index = city.name.length % variations.length;
+  const index = getStableIndex(`${city.slug}:neighborhoods`, variations.length);
   return variations[index];
 }
 
@@ -499,6 +613,6 @@ export function getDistrictContext(city: City, serviceName: string): string {
   };
 
   const options = districtVariations[city.district] || districtVariations['מרכז'];
-  const index = (city.name.length + serviceName.length) % options.length;
+  const index = getStableIndex(`${serviceName}:${city.slug}:district`, options.length);
   return options[index];
 }

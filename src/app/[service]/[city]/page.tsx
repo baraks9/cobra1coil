@@ -7,8 +7,8 @@ import {
   getServices, 
   getCities, 
   getProblems, 
-  getDeterministicSuffix,
-  getRotationSuffix,
+  getVariedMetaTitle,
+  getVariedMetaDescription,
   getPestsByServiceId,
   getWhyChooseUsTitle,
   getVariedHook,
@@ -19,6 +19,7 @@ import {
   getVariedProblemsTitle,
   getVariedServiceTitle,
   getVariedFAQTitle,
+  getVariedH1Title,
   getNeighborhoodsSentence,
   getDistrictContext,
   Service,
@@ -74,45 +75,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const isEmergency = serviceSlug.includes('24-hours') || serviceSlug.includes('emergency') || serviceSlug.includes('24-7');
   
-  const suffix = getRotationSuffix(city.name);
-  
-  let title = "";
-  const titleVariations = [
-    `${service.name} ב${city.name}${suffix}`,
-    `${service.name} ב${city.name} - מדביר מוסמך`,
-    `צריכים ${service.name} ב${city.name}?`,
-    `הדברה ב${city.name}: ${service.name} עם אחריות`,
-    `מומחה ${service.name} ב${city.name} והסביבה`
-  ];
-
-  if (service.id === 'silverfish') {
-    title = `הדברת דג הכסף ב${city.name} והסביבה`;
-  } else if (service.id === 'psocids') {
-    title = `הדברת פסוקאים ב${city.name} - פתרון מקצועי`;
-  } else if (service.id === 'cockroaches') {
-    title = `הדברת ג'וקים ב${city.name} - שירות מקצועי`;
-  } else if (service.id === 'german-roach') {
-    title = `הדברת תיקן גרמני ב${city.name} ללא ריסוס`;
-  } else if (isEmergency) {
-    title = `מדביר חירום ב${city.name} - זמינות גבוהה 24/7`;
-  } else {
-    const titleIndex = (city.name.length + service.id.length) % titleVariations.length;
-    title = titleVariations[titleIndex];
-  }
-  
-  // High-intent, hyper-local description for city pages
-  const descriptionVariations = [
-    `זקוקים ל${service.name} ב${city.name}? המדבירים שלנו מגיעים לכל שכונות ${city.name} והסביבה. הדברה ירוקה ובטוחה עם אחריות מלאה בכתב. התקשרו עכשיו להצעת מחיר הוגנת.`,
-    `מחפשים מדביר מוסמך ל${service.name} ב${city.name}? אנו מספקים פתרונות הדברה מתקדמים ב${city.name} עם דגש על בטיחות ויעילות. זמינות גבוהה ואחריות מלאה על כל עבודה.`,
-    `הדברה ב${city.name} של ${service.name} במחירים הוגנים. צוות המומחים שלנו ב${city.name} ערוך לכל קריאה, כולל טיפולי חירום. חומרים מאושרים ובטוחים למשפחה.`,
-    `שירותי ${service.name} מקצועיים ב${city.name} והסביבה. אנו מציעים פתרון סופי לבעיית ה${service.name} ב${city.name} עם ליווי מקצועי ואחריות ארוכת טווח. התקשרו לייעוץ חינם.`,
-    `איך להיפטר מ${service.name} ב${city.name}? המומחים של קוברה הדברה ב${city.name} מבצעים טיפול יסודי ובטוח. שירות מהיר לתושבי ${city.district} עם 100% הצלחה ואחריות.`,
-    `צריכים ${service.name} דחוף ב${city.name}? מדביר מוסמך מהאזור זמין כעת להגעה מהירה. פתרונות הדברה ירוקה ב${city.name} לדירות, בתים פרטיים ועסקים.`,
-    `הדברת ${service.name} ב${city.name} והסביבה. אנו משתמשים בחומרים הבטוחים ביותר למשפחה ולחיות המחמד. שירות מקצועי ב${city.name} עם המלצות רבות.`,
-    `סובלים מ${service.name} ב${city.name}? אל תחכו שהבעיה תחמיר. אנו מציעים אבחון וטיפול מהיר ב${city.name} על ידי מדבירים מורשים. התקשרו להצעה משתלמת.`
-  ];
-  const descIndex = (city.id.length + service.slug.length + city.name.length) % descriptionVariations.length;
-  const description = descriptionVariations[descIndex];
+  const title = getVariedMetaTitle(service, city, isEmergency);
+  const description = getVariedMetaDescription(service, city, isEmergency);
 
   return {
     title,
@@ -205,7 +169,7 @@ export default async function ServiceCityPage({ params }: PageProps) {
   const relatedProblems = getPrioritizedProblems();
   const faqs = getUniqueFAQ(service, city);
 
-  const h1Title = `${service.name} ב${city.name}${getDeterministicSuffix(city.name, service.id)}`;
+  const h1Title = getVariedH1Title(service, city, isEmergency);
 
   const localHook = getVariedHook(service, city);
   const localParagraph = getVariedDescription(service, city, isEmergency);

@@ -54,7 +54,7 @@ export default function FAQSection({ faqs, serviceName, cityName, title }: FAQSe
               <span className="font-bold text-lg text-blue-900">{faq.question}</span>
               <span className={`transform transition-transform duration-200 text-blue-600 ${openIndex === index ? 'rotate-180' : ''}`}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="19 9l-7 7-7-7" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </span>
             </button>

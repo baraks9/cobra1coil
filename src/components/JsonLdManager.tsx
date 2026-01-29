@@ -55,43 +55,52 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
 
   const graph: any[] = [];
 
+  // Helper to sanitize text for JSON-LD
+  const sanitize = (text: string) => {
+    if (!text) return "";
+    return text
+      .replace(/[\u0000-\u001F\u007F-\u009F]/g, "") // Remove control characters
+      .replace(/"/g, "'") // Replace double quotes with single quotes
+      .replace(/\\/g, "\\\\") // Escape backslashes
+      .replace(/\n/g, " ") // Replace newlines with spaces
+      .replace(/\s+/g, " ") // Replace multiple spaces with single space
+      .trim();
+  };
+
   // Function to filter reviews by relevance and ensure mandatory fields
-  const getRelevantReviews = (currentService?: Service, limit: number = 5) => {
+  const getRelevantReviews = (currentService?: Service, limit: number = 3) => {
     // 1. Filter reviews that have all mandatory fields for Google Schema
     const validReviews = reviews.filter(r => 
       r.author && 
       r.datePublished && 
       r.reviewBody && 
       r.reviewRating &&
-      r.reviewBody.length > 5 // Ensure content is not too short
+      r.reviewBody.length > 10 // Ensure content is meaningful
     );
 
-    if (!currentService) return validReviews.slice(0, limit);
-    
-    const serviceKeywords = [
-      currentService.name,
-      currentService.id.replace(/-/g, ' '),
-      ...(currentService.id === 'rat-catcher' ? ['חולדה', 'חולדות', 'מכרסמים'] : []),
-      ...(currentService.id === 'mouse-catcher' ? ['עכבר', 'עכברים'] : []),
-      ...(currentService.id === 'termites' ? ['טרמיטים', 'עץ'] : []),
-      ...(currentService.id === 'bed-bugs' ? ['פשפש', 'עקיצות'] : [])
-    ];
+    let filtered = validReviews;
+    if (currentService) {
+      const serviceKeywords = [
+        currentService.name,
+        currentService.id.replace(/-/g, ' '),
+        ...(currentService.id === 'rat-catcher' ? ['חולדה', 'חולדות', 'מכרסמים', 'לוכד'] : []),
+        ...(currentService.id === 'mouse-catcher' ? ['עכבר', 'עכברים', 'לוכד'] : []),
+        ...(currentService.id === 'termites' ? ['טרמיטים', 'עץ', 'הזרקה'] : []),
+        ...(currentService.id === 'bed-bugs' ? ['פשפש', 'עקיצות', 'חום'] : [])
+      ];
 
-    const relevant = validReviews.filter(r => 
-      serviceKeywords.some(keyword => r.reviewBody.includes(keyword))
-    );
+      filtered = validReviews.filter(r => 
+        serviceKeywords.some(keyword => r.reviewBody.includes(keyword))
+      );
+      
+      // If no specific reviews, fall back to general but still valid ones
+      if (filtered.length === 0) filtered = validReviews;
+    }
 
-    return relevant.length > 0 ? relevant.slice(0, limit) : validReviews.slice(0, limit);
-  };
-
-  // Helper to sanitize text for JSON-LD
-  const sanitize = (text: string) => {
-    if (!text) return "";
-    return text
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&apos;')
-      .replace(/\n/g, ' ')
-      .trim();
+    // Sort by date (newest first) and take the limit
+    return filtered
+      .sort((a, b) => new Date(b.datePublished).getTime() - new Date(a.datePublished).getTime())
+      .slice(0, limit);
   };
 
   // 1. Brand Entity
@@ -212,7 +221,7 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
         }
       }
     },
-    "review": getRelevantReviews(service, 5).map((r: any) => ({
+    "review": getRelevantReviews(service, 3).map((r: any) => ({
       "@type": "Review",
       "author": { 
         "@type": "Person", 
@@ -222,7 +231,7 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
       "reviewBody": sanitize(r.reviewBody),
       "reviewRating": { 
         "@type": "Rating", 
-        "ratingValue": r.reviewRating,
+        "ratingValue": String(r.reviewRating),
         "bestRating": "5",
         "worstRating": "1"
       },
@@ -440,7 +449,7 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
         "reviewBody": sanitize(r.reviewBody),
         "reviewRating": { 
           "@type": "Rating", 
-          "ratingValue": r.reviewRating,
+          "ratingValue": String(r.reviewRating),
           "bestRating": "5",
           "worstRating": "1"
         },

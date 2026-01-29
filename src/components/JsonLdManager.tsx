@@ -55,9 +55,18 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
 
   const graph: any[] = [];
 
-  // Function to filter reviews by relevance
+  // Function to filter reviews by relevance and ensure mandatory fields
   const getRelevantReviews = (currentService?: Service, limit: number = 5) => {
-    if (!currentService) return reviews.slice(0, limit);
+    // 1. Filter reviews that have all mandatory fields for Google Schema
+    const validReviews = reviews.filter(r => 
+      r.author && 
+      r.datePublished && 
+      r.reviewBody && 
+      r.reviewRating &&
+      r.reviewBody.length > 5 // Ensure content is not too short
+    );
+
+    if (!currentService) return validReviews.slice(0, limit);
     
     const serviceKeywords = [
       currentService.name,
@@ -68,11 +77,21 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
       ...(currentService.id === 'bed-bugs' ? ['פשפש', 'עקיצות'] : [])
     ];
 
-    const relevant = reviews.filter(r => 
+    const relevant = validReviews.filter(r => 
       serviceKeywords.some(keyword => r.reviewBody.includes(keyword))
     );
 
-    return relevant.length > 0 ? relevant.slice(0, limit) : reviews.slice(0, limit);
+    return relevant.length > 0 ? relevant.slice(0, limit) : validReviews.slice(0, limit);
+  };
+
+  // Helper to sanitize text for JSON-LD
+  const sanitize = (text: string) => {
+    if (!text) return "";
+    return text
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&apos;')
+      .replace(/\n/g, ' ')
+      .trim();
   };
 
   // 1. Brand Entity
@@ -120,8 +139,8 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
       "addressCountry": "IL"
     },
     "description": type === 'city' && city && service 
-      ? `שירותי ${service.name} מקצועיים ב${city.name} והסביבה. הגעה מהירה ל${city.neighborhoods?.[0] || city.name} תוך ${city.arrivalTime || '30 דקות'}.` 
-      : process.env.NEXT_PUBLIC_EXPERT_DESCRIPTION,
+      ? sanitize(`שירותי ${service.name} מקצועיים ב${city.name} והסביבה. הגעה מהירה ל${city.neighborhoods?.[0] || city.name} תוך ${city.arrivalTime || '30 דקות'}.`)
+      : sanitize(process.env.NEXT_PUBLIC_EXPERT_DESCRIPTION || ""),
     "areaServed": type === 'city' && city ? {
       "@type": "City",
       "name": city.name,
@@ -197,14 +216,19 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
       "@type": "Review",
       "author": { 
         "@type": "Person", 
-        "name": r.author
+        "name": sanitize(r.author)
       },
       "datePublished": r.datePublished,
-      "reviewBody": r.reviewBody,
-      "reviewRating": { "@type": "Rating", "ratingValue": r.reviewRating },
+      "reviewBody": sanitize(r.reviewBody),
+      "reviewRating": { 
+        "@type": "Rating", 
+        "ratingValue": r.reviewRating,
+        "bestRating": "5",
+        "worstRating": "1"
+      },
       "publisher": {
         "@type": "Organization",
-        "name": r.sourceName || "Google Maps",
+        "name": sanitize(r.sourceName || "Google Maps"),
         "url": r.sourceUrl || googleMapsUrl
       }
     })),
@@ -301,7 +325,7 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
     "description": type === 'city' && city && service 
       ? `שירותי ${service.name} מקצועיים ב${city.name}. מדביר מוסמך זמין כעת להגעה מהירה.` 
       : process.env.NEXT_PUBLIC_EXPERT_DESCRIPTION,
-    "breadcrumb": { "@id": `${baseUrl}/#breadcrumb` },
+    "breadcrumb": (breadcrumbs && breadcrumbs.length > 0) ? { "@id": `${baseUrl}/#breadcrumb` } : undefined,
     "mainEntity": type === 'city' ? { "@id": organizationId } : service ? { "@id": `${currentUrl}/#service` } : { "@id": organizationId },
     "reviewedBy": { "@id": expertId },
     "lastReviewed": today,
@@ -411,13 +435,18 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
       },
       "review": getRelevantReviews(service, 3).map((r: any) => ({
         "@type": "Review",
-        "author": { "@type": "Person", "name": r.author },
+        "author": { "@type": "Person", "name": sanitize(r.author) },
         "datePublished": r.datePublished,
-        "reviewBody": r.reviewBody,
-        "reviewRating": { "@type": "Rating", "ratingValue": r.reviewRating },
+        "reviewBody": sanitize(r.reviewBody),
+        "reviewRating": { 
+          "@type": "Rating", 
+          "ratingValue": r.reviewRating,
+          "bestRating": "5",
+          "worstRating": "1"
+        },
         "publisher": {
           "@type": "Organization",
-          "name": r.sourceName || "Google Maps",
+          "name": sanitize(r.sourceName || "Google Maps"),
           "url": r.sourceUrl || googleMapsUrl
         }
       }))
@@ -448,12 +477,12 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
       "@type": "FAQPage",
       "@id": `${baseUrl}/${service?.slug || ''}/${city?.slug || ''}/#faq`,
       "mainEntity": allFaqs.map(faq => ({
-        "@type": "Question",
-        "name": faq.question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faq.answer
-        }
+      "@type": "Question",
+      "name": sanitize(faq.question),
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": sanitize(faq.answer)
+      }
       }))
     });
   }

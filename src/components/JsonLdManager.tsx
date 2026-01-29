@@ -404,6 +404,13 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
         "@type": "ImageObject",
         "url": service.url.startsWith('http') ? service.url : `${baseUrl}${service.url}`,
         "caption": `${service.name} ב${city?.name || 'פריסה ארצית'} - ${businessName}`,
+        "creditText": `צילום: ${businessName}`,
+        "creator": {
+          "@type": "Organization",
+          "name": businessName,
+          "url": baseUrl
+        },
+        "copyrightNotice": `© ${businessName}`,
         "license": "https://cobra1.co.il/terms",
         "acquireLicensePage": "https://cobra1.co.il/contact"
       } : undefined,
@@ -469,6 +476,13 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
         "@type": "ImageObject",
         "url": pest.imageUrl.startsWith('http') ? pest.imageUrl : `${baseUrl}${pest.imageUrl}`,
         "caption": `זיהוי ${pest.name} - ${pest.scientificName}`,
+        "creditText": `צילום: ${businessName}`,
+        "creator": {
+          "@type": "Organization",
+          "name": businessName,
+          "url": baseUrl
+        },
+        "copyrightNotice": `© ${businessName}`,
         "license": "https://cobra1.co.il/terms",
         "acquireLicensePage": "https://cobra1.co.il/contact"
       },

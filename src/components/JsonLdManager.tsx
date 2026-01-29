@@ -199,20 +199,12 @@ const JsonLdManager: React.FC<JsonLdManagerProps> = ({
       "reviewCount": parseInt(reviewCount),
       "bestRating": 5,
       "worstRating": 1,
-      "itemReviewed": {
-        "@type": "LocalBusiness",
-        "name": businessName,
-        "url": baseUrl
-      }
+      "itemReviewed": { "@id": organizationId }
     },
     "review": relevantReviews.map((r: any, idx: number) => ({
       "@type": "Review",
       "@id": `${baseUrl}/#review-${idx}`,
-      "itemReviewed": {
-        "@type": "LocalBusiness",
-        "name": businessName,
-        "url": baseUrl
-      },
+      "itemReviewed": { "@id": organizationId },
       "author": { "@type": "Person", "name": sanitize(r.author) },
       "datePublished": r.datePublished,
       "reviewBody": sanitize(r.reviewBody),

@@ -72,7 +72,7 @@ export default function HeroSection({
           )}
         </h1>
         <p className="text-xl mb-8 opacity-90">
-          {subtitle || `הצטרפו ל-${conversionCount.toLocaleString()}+ לקוחות מרוצים שקיבלו שירות מקצועי`}
+          {subtitle || "לא מרססים סתם. פותרים את הבעיה מהשורש, בבטיחות מלאה ובזמינות מהירה."}
         </p>
         <button className="bg-yellow-400 text-blue-900 font-bold py-4 px-8 rounded-full text-xl hover:bg-yellow-300 transition-colors shadow-lg">
           הזמינו {serviceName} עכשיו

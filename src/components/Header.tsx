@@ -22,12 +22,12 @@ export default function Header() {
             </Link>
           </div>
           
-          <nav className="hidden md:flex space-x-8 space-x-reverse">
+          <nav className="hidden md:flex items-center justify-center gap-8 px-4">
             {services.map((service) => (
               <Link
                 key={service.id}
                 href={`/${service.slug}`}
-                className="text-gray-600 hover:text-blue-600 font-medium transition-colors"
+                className="text-gray-600 hover:text-blue-600 font-medium transition-colors whitespace-nowrap"
               >
                 {service.name}
               </Link>

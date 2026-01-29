@@ -351,17 +351,17 @@ export default async function ServiceCityPage({ params }: PageProps) {
       />
 
       <div className="max-w-4xl mx-auto px-4 py-12">
-        {featuredPest && featuredPest.imageUrl ? (
+        {(featuredPest?.imageUrl || service.url) ? (
           <div className="relative w-full h-64 md:h-96 mb-8 rounded-2xl overflow-hidden shadow-lg border border-gray-200">
             <Image
-              src={featuredPest.imageUrl}
+              src={featuredPest?.imageUrl || service.url || ''}
               alt={`זיהוי ${service.name} ב${city.name} - תמונה להמחשה`}
               fill
               className="object-cover"
               priority
             />
             <div className="absolute bottom-0 right-0 bg-black/50 text-white px-4 py-1 text-sm backdrop-blur-sm">
-              תמונה להמחשה: {featuredPest.name}
+              תמונה להמחשה: {featuredPest?.name || service.name}
             </div>
           </div>
         ) : null}

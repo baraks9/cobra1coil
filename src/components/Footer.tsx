@@ -102,7 +102,18 @@ export default function Footer() {
       </div>
 
       <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
-        <p>© {new Date().getFullYear()} קוברה הדברה. כל הזכויות שמורות. הדברה באישור המשרד להגנת הסביבה (רישיון מס' 3042).</p>
+        <p>
+          © {new Date().getFullYear()} קוברה הדברה. כל הזכויות שמורות. הדברה באישור המשרד להגנת הסביבה (
+          <a
+            href="https://www.gov.il/he/departments/dynamiccollectors/madbirim?skip=0&LicenseNumber=3042"
+            className="hover:text-white transition-colors"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            רישיון מס' 3042
+          </a>
+          ).
+        </p>
         <div className="flex gap-6">
           <Link href="/about" className="hover:text-white transition-colors">אודות</Link>
           <Link href="/privacy" className="hover:text-white transition-colors">מדיניות פרטיות</Link>

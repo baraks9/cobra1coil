@@ -1,21 +1,18 @@
 import Link from 'next/link';
-import { getServices, getCities, getPests, getVenues } from '@/lib/data';
+import { getServices, getCities, getVenues } from '@/lib/data';
 import { routes } from '@/lib/routes';
 
-export default function Footer() {
+export default function FooterAlt() {
   const services = getServices();
   const allCities = getCities();
   const cities = allCities.slice(0, 12);
   const venues = getVenues();
 
-  // Group cities by district for better organization
-  const districts = Array.from(new Set(allCities.map(c => c.district)));
-
   return (
     <footer className="bg-gray-900 text-gray-300 py-16 px-4 border-t border-gray-800" dir="rtl">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-        <div>
-          <h4 className="text-white font-bold text-lg mb-6">שירותי הדברה נפוצים</h4>
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+        <div className="space-y-6">
+          <h4 className="text-white font-bold text-lg">שירותי הדברה נפוצים</h4>
           <ul className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
             {services.map((service) => (
               <li key={service.id}>
@@ -25,16 +22,10 @@ export default function Footer() {
               </li>
             ))}
           </ul>
-          <div className="pt-6">
-            <h4 className="text-white font-bold mb-4">זיהוי מזיקים</h4>
-            <Link href={routes.pestHub()} className="text-sm bg-gray-800 hover:bg-blue-900 text-blue-400 px-4 py-2 rounded-lg transition-colors inline-block">
-              למדריך המלא לזיהוי מזיקים
-            </Link>
-          </div>
         </div>
 
-        <div>
-          <h4 className="text-white font-bold text-lg mb-6">הדברה לעסקים ומוסדות</h4>
+        <div className="space-y-6">
+          <h4 className="text-white font-bold text-lg">הדברה לעסקים ומוסדות</h4>
           <ul className="space-y-3 text-sm">
             {venues.map((venue) => (
               <li key={venue.id}>
@@ -44,7 +35,10 @@ export default function Footer() {
               </li>
             ))}
           </ul>
-          <h4 className="text-white font-bold text-lg mt-8 mb-6">אזורי שירות מרכזיים</h4>
+        </div>
+
+        <div className="space-y-6">
+          <h4 className="text-white font-bold text-lg">אזורי שירות מרכזיים</h4>
           <ul className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
             {cities.map((city) => (
               <li key={city.id}>
@@ -56,38 +50,55 @@ export default function Footer() {
           </ul>
         </div>
 
+        <div className="space-y-6">
+          <h4 className="text-white font-bold text-lg">זיהוי מזיקים</h4>
+          <div className="bg-gray-800/70 border border-gray-700 rounded-xl p-4">
+            <p className="text-sm text-gray-300 mb-4">
+              מדריך מלא לזיהוי מזיקים נפוצים עם תמונות והסברים.
+            </p>
+            <Link
+              href={routes.pestHub()}
+              className="text-sm bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors inline-block"
+            >
+              למדריך המלא
+            </Link>
+          </div>
+        </div>
+
         <div>
-          <h4 className="text-white font-bold text-lg mb-6">צור קשר</h4>
-          <ul className="space-y-5 text-sm">
-            <li className="flex items-start gap-3">
+          <div className="grid grid-rows-4 gap-4 text-sm min-h-[260px]">
+            <div className="flex items-center">
+              <h4 className="text-white font-bold text-lg">צור קשר</h4>
+            </div>
+            <div className="flex items-start gap-3">
               <span className="bg-gray-800 p-2 rounded-lg">📍</span>
               <div>
                 <p className="font-bold text-white">פריסה ארצית</p>
-                <p className="text-gray-400">זמינות ב{districts.join(', ')}</p>
+                <p className="text-gray-400">זמינות במרכז, דרום, שפלה, בקעת אונו, שרון</p>
               </div>
-            </li>
-            <li className="flex items-center gap-3 group">
+            </div>
+            <div className="flex items-start gap-3 group">
               <span className="bg-blue-600 p-2 rounded-lg group-hover:scale-110 transition-transform">📞</span>
               <div className="flex flex-col">
                 <span className="text-xs text-gray-400">התקשרו עכשיו:</span>
-                <a 
-                  href={`tel:${process.env.NEXT_PUBLIC_PHONE?.replace(/-/g, '') || '0502138028'}`} 
-                  className="text-xl font-black text-white hover:text-blue-400 tracking-wider"
+                <a
+                  href={`tel:${process.env.NEXT_PUBLIC_PHONE?.replace(/-/g, '') || '0502138028'}`}
+                  className="text-lg font-black text-white hover:text-blue-400 tracking-wider"
                 >
                   {process.env.NEXT_PUBLIC_PHONE || '050-2138028'}
                 </a>
               </div>
-            </li>
-            <li className="flex items-center gap-3">
+            </div>
+            <div className="flex items-start gap-3">
               <span className="bg-gray-800 p-2 rounded-lg">✉️</span>
-              <a 
-                href={`mailto:${process.env.NEXT_PUBLIC_EMAIL || 'office@cobra1.co.il'}`} 
+              <a
+                href={`mailto:${process.env.NEXT_PUBLIC_EMAIL || 'office@cobra1.co.il'}`}
                 className="hover:text-blue-400 transition-colors"
               >
                 {process.env.NEXT_PUBLIC_EMAIL || 'office@cobra1.co.il'}
               </a>
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
       </div>
 

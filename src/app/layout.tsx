@@ -3,7 +3,7 @@ import Script from "next/script";
 import { Heebo, Assistant } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import FooterAlt from "@/components/FooterAlt";
 
 const heebo = Heebo({
   variable: "--font-heebo",
@@ -35,6 +35,7 @@ export default function RootLayout({
   return (
     <html lang="he" dir="rtl">
       <head>
+        <link rel="stylesheet" href="/fontello-035754a4/css/cobrr2.css" />
         <Script id="gtm-init" strategy="afterInteractive">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -58,7 +59,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <div className="flex-grow">
           {children}
         </div>
-        <Footer />
+        <FooterAlt />
       </body>
     </html>
   );

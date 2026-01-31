@@ -1,5 +1,6 @@
 import { InternalLinkSection } from '@/lib/internalLinks';
 import InternalLinksSection from './InternalLinksSection';
+import WhatsAppCTAButton from './WhatsAppContactInput';
 
 interface HeroSectionProps {
   serviceName: string;
@@ -74,9 +75,9 @@ export default function HeroSection({
         <p className="text-xl mb-8 opacity-90">
           {subtitle || "לא מרססים סתם. פותרים את הבעיה מהשורש, בבטיחות מלאה ובזמינות מהירה."}
         </p>
-        <button className="bg-yellow-400 text-blue-900 font-bold py-4 px-8 rounded-full text-xl hover:bg-yellow-300 transition-colors shadow-lg">
-          הזמינו {serviceName} עכשיו
-        </button>
+        <div className="mx-auto max-w-2xl">
+          <WhatsAppCTAButton />
+        </div>
       </div>
     </section>
   );
